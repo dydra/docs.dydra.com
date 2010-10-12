@@ -1,7 +1,7 @@
 Custom Error Pages
 ===================
 
-The custom error pages add-on allows you to specify external URL to static HTML pages to be served when your app encounters an error or while in maintenance mode.
+The custom error pages add-on allows you to specify external URL to static HTML pages to be served when your app encounters any HTTP error or while in maintenance mode.  See also [the full error code listing](/error-codes).
 
 Upload your custom pages
 ------------------------
