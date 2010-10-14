@@ -460,7 +460,7 @@ Now let's browse to our application [http://apps.facebook.com/faceboku](http://a
 In Conclusion
 -------------
 
-As you can see, building facebook applications with Ruby is simple and hosting with Heroku makes it even easier. However, if you're building a large application you may want to consult a more robust Web framework, other then Sinatra.  The most obvious choice here would be [Rails 3](http://rubyonrails.org/).
+As you can see, building facebook applications with Ruby is simple and hosting with Heroku makes it even easier. However, if you're building a large application you may want to consult a more robust Web framework, other than Sinatra.  The most obvious choice here would be [Rails 3](http://rubyonrails.org/).
 
 ###Rails 3 and Facebook integration
 
