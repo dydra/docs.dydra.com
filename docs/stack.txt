@@ -1,4 +1,4 @@
-Platform Stacks (Beta)
+Platform Stacks
 ===============
 
 Stacks overview
