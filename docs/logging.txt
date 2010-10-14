@@ -20,7 +20,7 @@ Add the add-on to your app:
 Writing to your log
 -------------------
 
-Anything written to standard out (stdout) or standard error (stderr) is captured into your Logplex logs.  This means that you can log from anywhere in your application code with a simple puts statement:
+Anything written to standard out (stdout) or standard error (stderr) is captured into your logs.  This means that you can log from anywhere in your application code with a simple puts statement:
 
     :::ruby
     puts "Hello, logs!"
@@ -54,7 +54,7 @@ In this example, the output includes line from one of the app's web dynos, the H
 * **Process** - The name of the process or component that wrote this log line.  For example, worker #3 will be worker.3, and the Heroku HTTP router will be router.
 * **Message** - The content of the log line.
 
-The Logplex plugin fetches 20 lines of logs by default.  You can fetch up to 500 lines using the `--num` (or `-n`) option:
+The logs command fetches 20 lines of logs by default.  You can fetch up to 500 lines using the `--num` (or `-n`) option:
 
     :::term
     $ heroku logs -n 100
