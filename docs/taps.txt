@@ -16,6 +16,16 @@ described below:
     :::term
     $ sudo gem install taps
 
+
+Upgrading Taps
+-------------
+
+Taps is under active development.  Many bugs are fixed in the latest version.  Always make sure you are running the latest version by running:
+
+    :::term
+    $ sudo gem update taps heroku
+
+
 Import: Push to Heroku
 ----------------------
 
@@ -104,3 +114,16 @@ downloading a captured bundle.  But if you don't mind the longer transfer
 time, having it in a SQL database format of your choice may be superior,
 since you can quickly query the backed-up data in cases such as recovery of
 a few accidentally-deleted records.
+
+Constraints
+-----------
+
+### Foreign Keys
+
+Taps does not support pulling or pushing foreign keys.  If you need foreign keys you will need to manually recreate these.
+
+### Postgres bigint
+
+Taps doesn't supprot datasets with the Postgres bigint datatype.  If you need a primary key this large, you can convert your primary key to a sting.  Postgres will index the string field correctly, providing equivalent performance.
+
+
