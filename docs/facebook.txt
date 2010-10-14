@@ -1,4 +1,4 @@
-**Building a Facebook application with Ruby and hosting it in Heroku**
+Building a Facebook application with Ruby and hosting it in Heroku
 =======================================================================
 
 
