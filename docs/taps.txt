@@ -124,6 +124,6 @@ Taps does not support pulling or pushing foreign keys.  If you need foreign keys
 
 ### Postgres bigint
 
-Taps doesn't supprot datasets with the Postgres bigint datatype.  If you need a primary key this large, you can convert your primary key to a sting.  Postgres will index the string field correctly, providing equivalent performance.
+Taps doesn't support datasets with the Postgres bigint datatype.  If you need a primary key this large, you can convert your primary key to a sting.  Postgres will index the string field correctly, providing equivalent performance.
 
 

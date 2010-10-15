@@ -48,7 +48,7 @@ In case you're not using it with Rails, it must be configured like:
       :authentication => :plain,
       :user_name      => ENV['SENDGRID_USERNAME'],
       :password       => ENV['SENDGRID_PASSWORD'],
-      :domain         => ENV['SENDGRID_DOMAIN'],
+      :domain         => ENV['SENDGRID_DOMAIN']
     }
 
 ### Other frameworks
