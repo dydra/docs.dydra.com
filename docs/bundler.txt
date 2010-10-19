@@ -57,7 +57,9 @@ The recommended use of gem bundler is to bundle absolutely every gem your app de
 
 Bundling Rails and other dependencies does increase your slug size by a few megabytes.  Increased slug size is a worthwhile tradeoff for vastly simplified dependency management, as well as the flexibility of being able to use any version of Rails you wish.
 
-Heroku does not specify any groups during bundle installation, so all gems from all groups will be bundled with your application.  We are working with the bundler team to implement a way to restrict groups on deploy as part of Bundler 1.1.
+You can exclude certain groups from being installed by bundler using the BUNDLE_WITHOUT config var.
+
+    heroku config:add BUNDLE_WITHOUT="development test"
 
 Using Bundler from Rails 3
 --------------------------
