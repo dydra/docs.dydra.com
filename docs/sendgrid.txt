@@ -48,7 +48,7 @@ In case you're not using it with Rails, it must be configured like:
       :authentication => :plain,
       :user_name      => ENV['SENDGRID_USERNAME'],
       :password       => ENV['SENDGRID_PASSWORD'],
-      :domain         => ENV['SENDGRID_DOMAIN'],
+      :domain         => ENV['SENDGRID_DOMAIN']
     }
 
 ### Other frameworks
@@ -58,3 +58,7 @@ Any email framework supporting SMTP and plain authentication can be used with Se
 In fact we encourage developers to take a look at [Pony](http://github.com/benprew/pony) for something simpler than ActionMailer, yet more convenient than net/smtp.
 
 Either way, configure your email framework to use the server smtp.sendgrid.net, port 25. The SMTP username, password and domain are stored in the ENV vars, as you can see in the ActionMailer example above.
+
+### Community Resources
+
+* [Heroku Client Plugin](http://github.com/hone/heroku-sendgrid-stats) - get stats on your sendgrid usage.
