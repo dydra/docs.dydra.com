@@ -34,29 +34,17 @@ We then autoconfigure your newrelic.yml file with the proper access keys.
 Using New Relic from a Rack App
 -------------------------------
 
-When using New Relic with a non-rails app, you need to manually install the plugin into your code repo.  Heroku will automatically configure your newrelic.yml file in config/newrelic.yml.  Here is an example of using New Relic with Sinatra.
-
-    :::term
-    $ mkdir -p vendor/plugins
-    $ cd vendor/plugins
-    $ git clone git://github.com/newrelic/rpm.git
-    $ find newrelic_rpm -name \.git -type d -exec rm -rf {} \;
-    $ git add .
-
-And then add the following code to your app:
+When using New Relic with a non-rails app, you need to manually install the plugin into your code repo.  Heroku will automatically configure your newrelic.yml file in config/newrelic.yml.  Simply add the newrelic gem to your Gemfile, and then add the following code to your app:
 
     :::ruby
-	configure :production do
-	    ENV['APP_ROOT'] ||= File.dirname(__FILE__)
-	    $:.unshift "#{ENV['APP_ROOT']}/vendor/plugins/newrelic_rpm/lib"
+    configure :production do
 	    require 'newrelic_rpm'
-	end
+    end
     
-And finally check it all in and push it up to heroku:
+Finally check it all in and push it up to heroku:
 
     :::term
-    $ git add vendor/plugins/newrelic_rpm
- 	$ git commit -m "Added New Relic Plugin"
+    $ git commit -m "Added New Relic Plugin"
     $ git push heroku master
     
 See the <a href="http://github.com/heroku/heroku-docs">source to our docs app</a> for an example of a Sinatra app using New Relic
