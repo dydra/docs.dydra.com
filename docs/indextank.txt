@@ -1,4 +1,4 @@
-HerokuTank
+IndexTank
 ==========
 This add-on allows you to use the (Indextank)[http://indextank.com] service from your Heroku account.
 
@@ -12,9 +12,9 @@ extends your ActiveRecord models.
 
 Deploying to Heroku
 -------------------
-To use HerokuTank on Heroku, install the herokutank add-on::
+To use IndexTank on Heroku, install the indextank add-on::
  
-    $ heroku addons:add herokutank
+    $ heroku addons:add indextank
 
 Local setup
 -----------
