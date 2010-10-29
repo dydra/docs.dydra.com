@@ -6,8 +6,8 @@ IndexTank allows you to index and search your data in real-time with very litle 
 
 Client libraries
 ----------------
-You can use the regular ruby library (found (here)[http://indextank.com/documentation/ruby-client]) or
-use the ThinkingTank plugin (found (here)[http://indextank.com/documentation/thinkingtank]) that
+You can use the regular [ruby library](http://indextank.com/documentation/ruby-client) or
+use the [ThinkingTank plugin](http://indextank.com/documentation/thinkingtank) that
 extends your ActiveRecord models.
 
 Deploying to Heroku
@@ -25,4 +25,4 @@ variables from heroku using the following command:
     
 Further reading
 ---------------
-You can find more documentation on the service on the main (documentation page)[http://indextank.com/documentation].
+You can find more documentation on the service on the main [documentation page](http://indextank.com/documentation).
