@@ -1,0 +1,28 @@
+HerokuTank
+==========
+This add-on allows you to use the (Indextank)[http://indextank.com] service from your Heroku account.
+
+IndexTank allows you to index and search your data in real-time with very litle effort.
+
+Client libraries
+----------------
+You can use the regular ruby library (found (here)[http://indextank.com/documentation/ruby-client]) or
+use the ThinkingTank plugin (found (here)[http://indextank.com/documentation/thinkingtank]) that
+extends your ActiveRecord models.
+
+Deploying to Heroku
+-------------------
+To use HerokuTank on Heroku, install the herokutank add-on::
+ 
+    $ heroku addons:add herokutank
+
+Local setup
+-----------
+To test the service locally you'll need to retrieve the environment 
+variables from heroku using the following command:
+ 
+    $ heroku config --long
+    
+Further reading
+---------------
+You can find more documentation on the service on the main (documentation page)[http://indextank.com/documentation].
