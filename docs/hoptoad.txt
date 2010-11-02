@@ -6,9 +6,8 @@ Send your application errors to our hosted service and reclaim your inbox.
 ----------------------------
 To use Hoptoad on Heroku, install the Hoptoad add-on:
 
-    $ heroku addons:add hoptoad:basic 
-    # This adds the the basic plan.
-    # If you'd like another plan, specify that instead.
+    $ heroku addons:add hoptoad:basic # This adds the the basic plan.
+                                      # If you'd like another plan, specify that instead.
 
 2. Including the Hoptoad notifier in your application
 --------------------------------------------------
@@ -19,9 +18,10 @@ application in `ENV['HOPTOAD_API_KEY']`, so installation should be a snap!
 
 ### Rails 3.x
 
-Add the hoptoad_notifier gem to your Gemfile.  In Gemfile:
+Add the hoptoad_notifier and heroku gems to your Gemfile.  In Gemfile:
 
     gem 'hoptoad_notifier'
+    gem 'heroku'
 
 Then from your project's RAILS_ROOT, run:
 
@@ -29,6 +29,10 @@ Then from your project's RAILS_ROOT, run:
     $ script/rails generate hoptoad --heroku
 
 ### Rails 2.x
+
+Install the heroku gem if you haven't already:
+
+    gem install heroku
 
 Add the hoptoad_notifier gem to your app. In config/environment.rb:
 
@@ -65,7 +69,7 @@ In order to use hoptoad_notifier in a non-Rails rack app, just load the hoptoad_
 For Rails 1.x, visit the [Hoptoad notifier's README on GitHub](http://github.com/thoughtbot/hoptoad_notifier),
 and be sure to use `ENV['HOPTOAD_API_KEY']` where your API key is required in configuration code.
 
-3. Configuration your notification settings
+3. Configure your notification settings
 -------------------------------------------
 
 Once you have included and configured the notifier in your application,
