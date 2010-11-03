@@ -80,7 +80,7 @@ Frequently Asked Questions
 
 ### What database does Heroku use?
 
-PostgreSQL 8.3.
+Our shared database uses PostgreSQL 8.3. Our dedicated database uses PostgreSQL 8.4.
 
 ### I have an app built against MySQL. Is it going to work with Heroku?
 

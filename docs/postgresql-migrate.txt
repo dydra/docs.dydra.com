@@ -1,0 +1,66 @@
+Migrating to Heroku PostgreSQL
+=====================================
+
+If you already have a data stored in your Heroku app's default shared PostgreSQL database and wish to migrate this data into your dedicated Heroku PostgreSQL, follow these instructions.
+
+Overview
+--------
+
+Migrating between databases is a substantial operation. Please review the full process before proceeding. This procedure will work if you are migrating from a shared database, legacy-dedicated database, or between Heroku PostgreSQL databases.
+
+
+Installation
+------------
+
+If you haven't already done so, install [Heroku PostgreSQL](/heroku-postgresql#installation) and [Heroku PG Backups](/heroku-postgresql#install)
+
+Migration
+---------
+
+It is important that no new data is written to your application during the migration process, or else it may not be transferred to the new database. To accomplish this, place your app into [maintenance mode](/maintenance-mode):
+
+    $ heroku maintenance:on
+
+NOTE: The backup and restore commands will, by default, operate on your current database. Additionally the restore command will default to using your most recent backup.
+
+Capture a backup of your current database:
+
+    $ heroku pgbackups:capture 
+
+    HEROKU_SHARED_DATABASE_URL  ----backup--->  b001
+    
+    Dump ... 424.7MB, done
+    Upload ... 424.7MB, done
+
+Set your new database to be the primary database for your application:
+
+    $ heroku pg:promote
+    Setting DATABASE_URL to point to HEROKU_POSTGRESQL_URL... done
+
+Restore the backup to your new db:
+
+    $ heroku pg:restore 
+    
+    HEROKU_POSTGRESQL_URL  <---restore---  b001 (most recent)
+                                           HEROKU_SHARED_DATABASE_URL
+                                           2010/10/26 17:33.38
+                                           424.7MB
+    
+
+Once finished, you can confirm that your data was migrated properly using your app's Heroku console.  For example, if you have a model named Post:
+
+    $ heroku console
+    Ruby console for myapp.heroku.com
+    >> Post.count
+    => 57
+
+When you're satisfied that your database is ready for use, take your app out of maintenance mode:
+
+    $ heroku maintenance:off
+
+You can review the commands available to Heroku Postgresql on it's [documentation page](/heroku-postgresql).
+
+Migration (non-Heroku DB)
+-------------------------
+
+You can migrate data from non-heroku PostgreSQL databases. The 'heroku pg:backups restore' command will also work with any compressed pg_dump file that is available on a readable URL. Follow the instructions above, substituting the backup and restore commands for the [import instructions in the pgbackups documentation](/pgbackups#importing).

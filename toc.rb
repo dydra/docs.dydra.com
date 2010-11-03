@@ -33,10 +33,12 @@ section 'management', "Application Management" do
 	topic 'console',            'Using the console'
 	topic 'rake',               'Running rake tasks'
 	topic 'config-vars',        'Config vars'
-	topic 'backups',            'Backups'
+	topic 'pgbackups',            'Backups'
+	topic 'bundles',            'Bundles'
 	topic 'maintenance-mode',   'Maintenance mode'
 	topic 'rails3',             'Rails 3'
 	topic 'ps',                 'Processes'
+	topic 'postgresql-migrate', 'Database Migration'
 end
 
 section 'features', "Platform Features" do
@@ -56,6 +58,8 @@ section 'add-ons', "Add-ons" do
 	topic 'cloudant',         'Cloudant'
 	topic 'cron',              'Cron'
 	topic 'deploy-hooks',      'Deploy Hooks'
+	topic 'heroku-postgresql',     'Heroku PostgreSQL'
+	topic 'pgbackups',     'Heroku PG Backups'
 	topic 'hoptoad',           'Hoptoad'
 	topic 'indextank',           'IndexTank'
 	topic 'memcache',         'Memcached'
