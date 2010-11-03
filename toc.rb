@@ -57,6 +57,7 @@ section 'add-ons', "Add-ons" do
 	topic 'cron',              'Cron'
 	topic 'deploy-hooks',      'Deploy Hooks'
 	topic 'hoptoad',           'Hoptoad'
+	topic 'indextank',           'IndexTank'
 	topic 'memcache',         'Memcached'
 	topic 'moonshadosms',      'Moonshado SMS'
 	topic 'newrelic',          'New Relic RPM'
