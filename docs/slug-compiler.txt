@@ -22,7 +22,7 @@ If your repository contains files not necessary to run your app, you may wish to
 * Unit tests or specs
 * Art sources (like .psd files)
 * Design documents (like .pdf files)
-* Test data (for example, the feedtools gem has 11 megs of XML sample files for its unit tests)
+* Test data
 
 The format is roughly similar to .gitignore.  Here's an example .slugignore:
 
