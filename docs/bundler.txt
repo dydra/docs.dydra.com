@@ -1,15 +1,9 @@
 Gem Bundler
 ===========
 
-Gem Bundler is the default gem manager for Rails 3, and can be used with any Ruby project as it has no dependency on framework.  
+Gem Bundler is the default gem manager for Rails 3, and can be used with any Ruby project as it has no dependency on framework.  Bundler is THE suggested way to manage your gems on Heroku.
 
 NOTE: Bundler can only be used on the Bamboo stack.  Using Bundler with the Aspen stack will not work.
-
-Current Bundler Version
----------------
-1.0.0
-
-Bundler is evolving quickly.  Heroku will try to stay as up-to-date as possible as Bundler releases new versions.  As this is experimental support, it is your responsibility to make sure you stay compatible with the latest version of Bundler.  Announcements of new versions will be posted to the [google group](http://groups.google.com/group/heroku/).
 
 Using Bundler
 -------------
