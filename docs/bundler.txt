@@ -53,7 +53,7 @@ Bundling Rails and other dependencies does increase your slug size by a few mega
 
 You can exclude certain groups from being installed by bundler using the BUNDLE_WITHOUT config var.
 
-    heroku config:add BUNDLE_WITHOUT="development test"
+    heroku config:add BUNDLE_WITHOUT="development:test"
 
 Using Bundler from Rails 3
 --------------------------
