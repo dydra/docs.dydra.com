@@ -18,16 +18,22 @@ A brief explanation of the Facebook application architecture
 
 First things first, we need to understand some of the underlying architecture of a Facebook app.  It'll save us a lot of time in the long run. I swear.
 
-A Facebook application is actually two applications: **A container application and a web application.**
+Now, there are actually two kinds of Facebook applications: 
 
-When we create a Facebook application in the Facebook site what we are actually creating is the container of our web app.
+* Ones that use the Facebook APIs to add features such as _Like_ and _Share_ buttons to your own website at, say, www.yourcompany.com. This is called [Facebook for Websites](http://developers.facebook.com/docs/guides/web).
 
-Let's think of our web application like if it were a painting, Facebook itself would be the stand and the container would be the canvas, now let's call the container a [Canvas Application](http://developers.facebook.com/docs/guides/canvas/).
+* Apps that "live" on Facebook. These are the apps you add to your profile and use from within Facebook.com. They're called [Canvas Applications](http://developers.facebook.com/docs/guides/canvas/).
 
-As you can see they both are actually two different things:  
+In this article, we're going to focus exclusively on showing you how to build the latter kind, the Canvas app.
 
-* The stand and the canvas are hosted in Facebook
-* Our web application, which is not different than any other application we've made before, is not hosted in any Facebook server; we're going to store it on Heroku.
+A Canvas app is actually made up of two different parts: **A container that's defined on Facebook.com, and an external web app that connects to the container, supplying the specific logic, behavior and views you define**.
+
+When we initially create a Facebook application by setting up its Canvas Page, what we are actually creating is the container of our web app. To complete the Canvas analogy, think of the external web application as if it were a painting. Facebook itself would then be the stand and the container would be the canvas.
+
+In summary, our Facebook Canvas app will be made from:  
+
+* The stand and the canvas, hosted on Facebook.
+* Our web application, which is not different than any other application we've made before, is not hosted on any Facebook server; we're going to store it on Heroku.
 
 As far as our customers know, it will look like a single application.  To get these components to work together properly it involves a process of three phases:  
 
