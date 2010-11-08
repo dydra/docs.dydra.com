@@ -16,7 +16,7 @@ All of these can be achieved with ease and in this article I'll show you how to 
 A brief explanation of the Facebook application architecture
 ------------------------------------------------------------
 
-First things first, we need to understand some of the underlying architecture of a facebook app.  It'll save us a lot of time in the long run. I swear.
+First things first, we need to understand some of the underlying architecture of a Facebook app.  It'll save us a lot of time in the long run. I swear.
 
 A Facebook application is actually two applications: **A container application and a web application.**
 
@@ -304,8 +304,11 @@ The first step will be to [create a Canvas application](http://www.facebook.com/
 These would be our application settings:
 
 **Site URL** = http://faceboku.heroku.com  
+
 **Canvas Page** => http://apps.facebook.com/faceboku/ (instead of _faceboku_ you must use a different one)  
+
 **Canvas URL** &nbsp;= http://localhost:4567 (the standard port used by Sinatra applications)  
+
 **Canvas Type** = IFrame
 
 _If you don't see the Canvas Type option, don't worry, there's a possibility Facebook has got rid of it by the time you're reading this._
@@ -439,9 +442,13 @@ Add all the files and directories to source control:
 
 Commit them to your local repository:
 
-    $ git commit -m "First version of my facebook application"
+    $ git commit -m "First version of my Facebook application"
 
-Deploy to Heroku:
+Create the Heroku application:
+
+  $ heroku create faceboku
+
+Now your app has been created, and assigned the URL http://faceboku.heroku.com. Time to deploy to Heroku:
 
 	$ git push heroku master
 	
