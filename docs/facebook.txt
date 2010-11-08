@@ -9,9 +9,9 @@ With Facebook's _Graph API_ and the creation of the _Open Graph protocol_, it is
 
 * You could turn your webpage into a fully-featured Facebook-like page, just like if you were inside Facebook.
 * You can give your users the ability to sign in with their Facebook credentials and customize their experience with parameters taken from their Facebook profiles.
-* You could add a _Like_ button to every object in your page as images, songs, articles, etc., and tell your users which friends of theirs have liked your content.
+* You could add a _Like_ button to every object in your page such as images, songs, articles, etc., and tell your users which friends of theirs have liked your content.
 
-All of these can be achieved with ease. and in this article I'll show you how to get started.
+All of these can be achieved with ease and in this article I'll show you how to get started.
 
 A brief explanation of the Facebook application architecture
 ------------------------------------------------------------
