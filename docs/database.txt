@@ -11,22 +11,40 @@ DataMapper or Sequel ORMs, the `DATABASE_URL` environment variable contains
 database connection details.
 
 There are [multiple database packages to choose from](http://heroku.com/pricing),
-and you can change plans at any time. Database redundancy and failover is fully managed by Heroku's infrastructure regardless of plan. [Migrating](/postgresql-migrate) from a shared to a dedicated database is a simple, user-managed process.
+and you can change plans at any time. Database redundancy and failover is fully managed by Heroku's infrastructure regardless of plan. [Migrating](/postgresql-migrate) from a shared to a dedicated database is a simple, user-managed process. You can have multiple databases attached to a single Heroku app, but only one database from each of our plans.
 
 Shared vs. Dedicated
 --------------------
 
-Heroku offers you the choice of running on a shared or dedicated database package.  In general, the _shared_ plan is suitable for development, staging, and small production apps, while the _dedicated_ plans are hosted on a high-performance machine that is only available to your app. 
+Heroku offers you the choice of running on a shared or [dedicated database](/heroku-postgresql) package. The _shared_ plan is suitable for development, staging, and small production apps, and runs PostgreSQL 8.3. The _dedicated_ plans are suitable to medium and large scale applications. In addition, the dedicated databases offer a number of advantages, including direct access (via psql or any native postgresql library), stored procedures, and PostgreSQL 8.4.4 support.
 
-<a name="cpu_units"></a>
-Database performance on Heroku is measured by "CPU Units".  A CPU Unit is a measure of how fast the CPU and overall IO of the underlying machine are.  Shared databases run on very high performance machines, shared among many different applications.  Dedicated databases allow you to choose the performance package that best meets your needs.
+New apps created on Heroku automatically have a shared database installed.
 
-Note that CPU unit is only a measure of database performance.  Regardless of which database you choose, each <a href="http://heroku.com/how/dynos">dyno</a> is it's own independent grid process. 
+Performance
+-----------
+
+Database performance on Heroku is measured by connections, memory, and CPU Units. Connections are the number of processes (dynos + workers + external connections) which can connect to a database simultaneously. Memory is the amount of physical RAM available to your database; loading your entire database into memory offers significant performance advantages. CPU Units are a measure of the the processor speed and overall IO performance of the underlying machine. 
+
+Note that CPU units are only a measure of database performance. Regardless of which database you choose, each <a href="http://heroku.com/how/dynos">dyno</a> is it's own independent grid process. 
 
 Regardless of which database you choose, your data is always protected, accessible only by your own application.
 
+Backups
+-------
+
+See [PG Backups](/pgbackups) for information on backing up your database.
+
+Default Database
+
+Database URLs
+-------------
+
+Each database installed on a Heroku app has a unique database URL which can be used by your app to connect to that database. The URLs are viewable and accessible through [config vars](/config-vars). The config var name for the default shared database is HEROKU_SHARED_DATABASE_URL. 
+
+In addition, each app has a config var named DATABASE_URL, which is the database that Rails will use by default. The DATABASE_URL config var will always have the same value as the URL for one of the databases installed on your app. You change which database is set to DATABASE_URL with the '[heroku pg:promote](/heroku-postgresql#promotion-and-database-urls)' command
+
 Using the DATABASE_URL environment variable (Rails)
-------------------------------------------------------
+---------------------------------------------------
 To ease deployment of typical Rails applications, Heroku automatically generates a new database.yml file on deployment.  This auto-generated database.yml file configures your RACK_ENV environment to your selected postgres db.  This enables you to simply push a rails app up to Heroku and have it automatically connect to your database.
  
 	$ heroku console
