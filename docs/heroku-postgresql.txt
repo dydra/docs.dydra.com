@@ -1,213 +1,42 @@
-Heroku PostgreSQL
-=================
+PostgreSQL by Heroku
+====================
 
 The Heroku PostgreSQL add-on is our next generation of our dedicated database service. Unlike the previous generation database service, it is provisioned and managed as an add-on.
 
-Plugin Installation
--------------------
+Installation
+------------
 
 To use the `heroku pg` commands shown throughout this document, install the PostgreSQL by Heroku client plugin:
 
-    $ heroku plugins:install git://github.com/heroku/heroku-postgresql.git
+    $ heroku plugins:install http://github.com/heroku/heroku-postgresql.git
 
-Starting a fresh database
--------------------------
-
-If your app doesn't have any existing data and you wish to start with a blank database, follow these instructions.
-
-Install the add-on:
+Install the add-on. You can view the available plans using 'heroku addons:info | grep postgresql', or install the default plan (ronin):
 
     $ heroku addons:add heroku-postgresql
 
-It takes between two and five minutes for your database to become available:
+Promotion and database URLs
+---------------------------
 
-    $ heroku pg:wait
-    The database is now ready
+Heroku stores database credentials (URL, name, username, and password) in [config vars](/config-vars). The DATABASE_URL config var will be used by rails applications as the default database. 
 
-Now point your DATABASE_URL at the new database:
+Every database (shared dbs, legacy dbs, and Heroku PostgreSQL dbs) has its url specified in a config var. Use these config vars to specify databases in our command-line tool.  Additionally all pg and pgbackups commands will use DATABASE_URL by default. 
 
-    $ heroku pg:attach
+The pg:promote command will set a particular database to be used as the default in your rails application and in the Heroku command-line tool. 
+
+    $ heroku pg:promote HEROKU_POSTGRESQL_RONIN_URL
     Attatching database to myapp ... done
 
-You can now connect to your database using ENV['DATABASE_URL'] or config/database.yml.  Rails apps should work without any changes.  [(details)](http://docs.heroku.com/database#using-the-databaseurl-environment-variable-rails)
+This is equivalent to using 'heroku config:add DATABASE_URL=...' 
 
-Migrating an existing Heroku database
-------------------------------
+Migration of existing databases
+-------------------------------
 
-If you already have a data stored in your Heroku app's default shared Postgres database and wish to migrate this data into your dedicated Heroku PostgreSQL, follow these instructions.
+See the [migration documentation](/postgresql-migrate).
 
-Install the add-on:
+PSQL Console
+------------
 
-    $ heroku addons:add heroku-postgresql
-
-It takes between two and five minutes for your database to become available:
-
-    $ heroku pg:wait
-    The database is now ready
-
-Now your database is ready for use, so we can begin the data migration process.  First make sure you have the pgdumps plugin:
-
-    $ heroku plugins:install git://github.com/nzoschke/heroku-pgdumps.git
-
-Put your app into maintenance mode:
-
-    $ heroku maintenance:on
-
-Capture a pgdump of your current database:
-
-    $ heroku pg:backup
-    Capturing backup 2010-10-01-19:42:18-legacy of 188MB database for app myapp
-    Dump      ...  187.79MB, done
-    Gzip      ...  46.69MB, done
-    Store     ...  46.69MB, done
-    Complete.
-
-Attach your new database to your app:
-
-    $ heroku pg:attach
-    Setting DATABASE_URL to point to HEROKU_POSTGRESQL_URL... done
-
-Restore the pgdump into your new db. You'll need to grab the name from the output of "heroku pg:backup":
-
-    $ heroku pg:restore 2010-10-01-19:42:18-legacy
-
-Once finished, you can confirm that your data was migrated properly using your app's Heroku console.  For example, if you have a model named Post:
-
-    $ heroku console
-    Ruby console for myapp.heroku.com
-    >> Post.count
-    => 57
-
-When you're satisfied that your database is ready for use, take your app out of maintenance mode:
-
-    $ heroku maintenance:off
-
-You're done.  Should at any point after you need to revert to your previous database, you can use the detach command to unset DATABASE_URL:
-
-    $ heroku pg:detach
-    Detatching database from myapp ... done
-
-    heroku addons:remove heroku-postgresql
-
-Migrating a non-Heroku database
-------------------------------
-
-If you already have a data stored in a non-Heroku PostgreSQL server and wish to migrate this data into your dedicated Heroku PostgreSQL, follow these instructions.
-
-Install the add-on:
-
-    $ heroku addons:add heroku-postgresql
-
-It takes between two and five minutes for your database to become available:
-
-    $ heroku pg:wait
-    The database is now ready
-
-Now your database is ready for use, so we can begin the data migration process.  First make sure you have the pgdumps plugin:
-
-    $ heroku plugins:install git://github.com/nzoschke/heroku-pgdumps.git
-
-Export the data from your existing database
-    
-    pg_dump <YOUR_DATABASE_NAME> --no-owner --clean --ignore-version | gzip > database.sql.gz
-
-Next you will need to make this export available as a publicly readable URL. We suggest using Amazon S3. You can take the backup down as soon as the import is complete.
-
-Put your app into maintenance mode:
-
-    $ heroku maintenance:on
-
-Attach your new database to your app:
-
-    $ heroku pg:attach
-    Setting DATABASE_URL to point to HEROKU_POSTGRESQL_URL... done
-
-Restore the pgdump into your new db:
-
-    $ heroku pg:restore <URL for database.sql.gz file>
-
-Once finished, you can confirm that your data was migrated properly using your app's Heroku console.  For example, if you have a model named Post:
-
-    $ heroku console
-    Ruby console for myapp.heroku.com
-    >> Post.count
-    => 57
-
-When you're satisfied that your database is ready for use, take your app out of maintenance mode:
-
-    $ heroku maintenance:off
-
-You're done.  Should at any point after you need to revert to your previous database, you can use the detach command to unset DATABASE_URL:
-
-    $ heroku pg:detach
-    Detatching database from myapp ... done
-
-
-Backup and restore
-------------------
-
-Back up your database like this:
-
-    $ heroku pg:backup
-    Capturing backup 2010-08-03-16:35:44 of 28.6MB database for app myapp
-    Dump       ... 44.0MB, done
-    Gzip       ... 14.0MB, done
-    Upload     ... 13.0MB, done
-    Backup complete
-
-The backup is named after the current date and time.  You can get a list of backups for the database:
-
-    $ heroku pg:backups
-    2010-08-02-12:35:48  13.9MB
-    2010-08-03-16:19:14  14.7MB
-
-Later you can restore a backup by name:
-
-    Capturing backup 2010-08-03-16:35:44 of 28.6MB database for app myapp
-    Dump       ... 44.0MB, done
-    Gzip       ... 14.0MB, done
-    Upload     ... 13.0MB, done
-    Backup complete
-
-NOTE: Restore overwrites the current contents of the database.  You may wish to capture a backup prior to restoring just in case.
-
-Import
-------
-
-If you have an existing PostgreSQL database you'd like to export from elsewhere, dump it using the <a href="http://www.postgresql.org/docs/8.4/interactive/backup-dump.html">pg_dump</a> tool, and gzip the results:
-
-    $ PGPASSWORD=mypassword pg_dump -h myhost -U myuser mydb | gzip > mydb.sql.gz
-
-Upload it somewhere with an HTTP accessible URL.  We recommend using Amazon S3 and <a href="http://www.s3fox.net/">S3Fox</a>.  Create the file with private access and create a temporary authorized URL for the Heroku import.  Then cut and paste that URL into your restore command:
-
-    $ heroku pg:restore 'http://s3.amazonaws.com/mybucket/mydb.sql.gz?authparameters'
-
-NOTE: Be sure to use single quotes around the temporary S3 URL, as it contains ampersands and other characters that will confuse your shell otherwise.
-
-Export
-------
-
-If you'd like to move your database out of the Heroku PostgreSQL service, take a backup and then download it with a tool like curl or wget.
-
-    $ heroku pg:backup
-    $ curl -o myexport.sql.gz `heroku pg:backup_url`
-
-Handy commands
---------------
-
-### Database info
-
-You can get stats on your database with the info command:
-
-    $ heroku pg:info
-    State:       running for 16 days
-    Data size:   12MB in 5 tables
-    Born:        Jan 17 2010 12:30:43
-    URL:         postgres://abc:xyz@ec2-184-70-150-10.compute-1.amazonaws.com/abc
-
-### psql console
-
-If you have PostgreSQL [installed on your system](#local-postgresql-installation), you can open a direct psql console to your remote db:
+If you have PostgreSQL [installed on your system](#local-postgresql-installation), you can open a direct [psql console](http://www.postgresql.org/docs/8.4/static/app-psql.html) to your remote db:
 
     $ heroku pg:psql
     Connecting to Heroku PostgreSQL database for app myapp ...
@@ -218,6 +47,44 @@ If you have PostgreSQL [installed on your system](#local-postgresql-installation
     rd2lk8ev3jt5j50=>
 
 Further reading: [PostgreSQL interactive terminal docs](http://www.postgresql.org/docs/8.4/static/app-psql.html)
+
+Stored Procedures
+-----------------
+
+Heroku PosgreSQL supports stored procedures through the [PL/pgSQL language](http://www.postgresql.org/docs/8.4/interactive/plpgsql.html). 
+
+See [this tutorial](http://nasir.wordpress.com/2007/12/03/stored-procedures-and-rails/) on implementing stored procedures in Ruby on Rails.
+
+Ingress
+-------
+
+Your database is firewalled to enhance security, however, you can temporarily open access to your database. This can be used with GUI applications running on your local computer (e.g. pgadmin), for direct server-to-server access, or for any other purpose.
+
+The pg:ingress command opens access for 60s to connect to the database from your current IP. Connections made during this period will remain active even after the firewall has been re-sealed. The command outputs the parameters needed to connect to your database.
+
+    $ heroku pg:ingress
+    Granting ingress to HEROKU_POSTGRESQL_KAPPA_URL for 60s... done
+    Connection info string:
+       "dbname=dnnnnnnnn host=ec2-123-123-123-123.compute-1.amazonaws.com user=uxxxxxxxxx password=pxxxxxxxxxxxxxxx"
+
+Info
+----
+
+You can get stats on your database with the info command:
+
+    $ heroku pg:info
+    State:       running for 16 days
+    Data size:   12MB in 5 tables
+    URL:         postgres://abc:xyz@ec2-184-70-150-10.compute-1.amazonaws.com/abc
+    PG version   8.4.4
+    Born:        Jan 17 2010 12:30:43
+
+
+Backup, restore, import, export 
+-------------------------------
+
+BRIE (backup, restore, import, and export) operations are handled with the [Heroku PG Backups add-on](http://addons.heroku.com/pgbackups). See the [documentation here](/pgbackups).
+
 
 Local PostgreSQL Installation
 -----------------------------
@@ -232,4 +99,6 @@ Or use Homebrew:
 
 To install on Ubuntu:
 
-    $ sudo apt-get install postgresql
+    $ sudo apt-get install postgresql\
+    
+Use the [postgresql installer](http://pginstaller.projects.postgresql.org/) or [cygwin](http://www.cygwin.com/) to install on windows.

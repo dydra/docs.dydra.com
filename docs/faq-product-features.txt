@@ -4,7 +4,7 @@ Product Features
 How does database scaling work?
 -------------------------------
 
-Heroku can scale your PostgreSQL database vertically. Switching between plans within our shared database tier is instant and seamless. All that changes is the amount of allocated database storage. Switching to/from a dedicated database usually takes one business day as our support staff processes the requests, and verifies that data migrations completed successfully.
+Heroku can scale your PostgreSQL database vertically. Switching between plans within our shared database tier is instant and seamless. All that changes is the amount of allocated database storage. Switching to/from requires that you place your app into [maintenance mode](/maintenance-mode) and migrate your data from your old to your new database using [pgbackups](/pgbackups).
 
 How does dyno & worker scaling work?
 ------------------------------------
