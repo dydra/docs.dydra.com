@@ -39,8 +39,8 @@ If you have multiple databases on your application, you can choose which one to 
     
     HEROKU_POSTGRESQL_URL  ----backup--->  b004
     
-    Dump ... 424.7MB, done
-    Upload ... 424.7MB, done
+    Dump ... done
+    Upload ... done
     
 
 Backup Management
@@ -48,21 +48,16 @@ Backup Management
 
 You can get a summary list of all your backups:
 
-    $ heroku pgbackups:list
+    $ heroku pgbackups
     ID   | Backup Time         | Size    | Database             
     -----+---------------------+---------+----------------------
     b003 | 2010/10/22 15:16.01 |   2.6MB | SHARED_DATABASE_URL  
     b004 | 2010/10/22 15:18.12 | 424.7MB | HEROKU_POSTGRESQL_URL
 
-You can get detailed information about an individual backup by backup ID:
+You can create a publicly accessible URL for backups, which is available for 10 minutes. This can be used for [migrating](/postgresql-migrate) or [exporting](#exporting) your database:
 
-    $ heroku pgbackups:info b004
-    === Backup b026
-    Backup Time  2010/10/26 10:29.52
-    Database     HEROKU_POSTGRESQL_URL
-    Size         424.7MB
-    URL          'http://s3.amazonaws.com/...'
-    
+    $ heroku pgbackups:url b004
+    http://s3.amazonaws.com/hkpgbackups/app1234567@heroku.com/b004.dump?AWSAccessKeyId=ABCD1234&Expires=1289261668&Signature=3mMBeKISewgEUDT%2FL5mRz4EYS4M%3D
 
 You can delete a backup. Depending on your plan you will need to delete obsolete backups manually:
 
@@ -100,17 +95,10 @@ Upload it somewhere with an HTTP accessible URL.  We recommend using Amazon S3 a
 NOTE: Be sure to use single quotes around the temporary S3 URL, as it contains ampersands and other characters that will confuse your shell otherwise.
 
 Exporting
-------
+---------
 
-If you'd like to move your database out of the Heroku PostgreSQL service, take a backup and then download it:
+If you'd like to move your database out of the Heroku PostgreSQL service, take a backup and then download it using a variety of tools such as curl, wget, or a web browser. For example:
 
-    $ heroku pgbackups:download b007
+    $ curl -o latest.dump `heroku pgbackups:url`
     
-    DATABASE_URL  <---restore---  b007
-                                  DATABASE_URL
-                                  2010/10/25 21:41.10
-                                  1.7MB
-
-    Download ... 1.7MB / 1.7MB, done
-    
-You can also use standard tools such as curl, wget, or any web browser to retrieve the URL. Note that the backup URLs will expire 10 minutes after they are issued.
+Note that the backup URLs will expire 10 minutes after they are issued.
