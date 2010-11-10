@@ -41,7 +41,7 @@ See [PG Backups](/pgbackups) for information on backing up your database.
 Database URLs
 -------------
 
-Each database installed on a Heroku app has a unique database URL which can be used by your app to connect to that database. The URLs are viewable and accessible through [config vars](/config-vars). The config var name for the default shared database is HEROKU_SHARED_DATABASE_URL. 
+Each database installed on a Heroku app has a unique database URL which can be used by your app to connect to that database. The URLs are viewable and accessible through [config vars](/config-vars). The config var name for the default shared database is SHARED_DATABASE_URL. 
 
 In addition, each app has a config var named DATABASE_URL, which is the database that Rails will use by default. You can change which database is set to DATABASE_URL with the '[heroku pg:promote](/heroku-postgresql#promotion-and-database-urls)' command.
 
