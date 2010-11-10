@@ -93,7 +93,7 @@ Without any fear, change the **Canvas URL** to _http://www.heroku.com/_, now ope
 * FBML (Facebook Markup Language) Canvas Applications
 * IFrame Canvas Applications
 
-As of today, {the date}, Facebook still allow us to create FBML Canvas Applications but they will be deprecated by the end of 2010. [Click here to see the announcement](http://developers.facebook.com/blog/post/402).
+As of today, 11/10/2010, Facebook still allow us to create FBML Canvas Applications but they will be deprecated by the end of 2010. [Click here to see the announcement](http://developers.facebook.com/blog/post/402).
 
 ###**Configuration**
 
