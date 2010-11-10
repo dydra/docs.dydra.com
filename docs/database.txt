@@ -20,7 +20,7 @@ You can have multiple databases attached to a single Heroku app, but only one da
 Shared vs. Dedicated
 --------------------
 
-Heroku offers you the choice of running on a shared or [dedicated database](/heroku-postgresql) package. The _shared_ plan is suitable for development, staging, and small production apps, and runs PostgreSQL 8.3. The _dedicated_ plans are suitable to medium and large scale applications. In addition, the dedicated databases offer a number of advantages, including direct access (via psql or any native postgresql library), stored procedures, and PostgreSQL 8.4.4 support.
+Heroku offers you the choice of running on a shared or [dedicated database](/heroku-postgresql) package. The _shared_ plan is suitable for development, staging, and small production apps. It runs PostgreSQL 8.3. The _dedicated_ plans are suitable to medium and large scale applications. In addition, the dedicated databases offer a number of advantages, including direct access (via psql or any native postgresql library), stored procedures, and PostgreSQL 8.4.4 support.
 
 New apps created on Heroku automatically have a shared database installed.
 
@@ -38,14 +38,12 @@ Backups
 
 See [PG Backups](/pgbackups) for information on backing up your database.
 
-Default Database
-
 Database URLs
 -------------
 
 Each database installed on a Heroku app has a unique database URL which can be used by your app to connect to that database. The URLs are viewable and accessible through [config vars](/config-vars). The config var name for the default shared database is HEROKU_SHARED_DATABASE_URL. 
 
-In addition, each app has a config var named DATABASE_URL, which is the database that Rails will use by default. The DATABASE_URL config var will always have the same value as the URL for one of the databases installed on your app. You change which database is set to DATABASE_URL with the '[heroku pg:promote](/heroku-postgresql#promotion-and-database-urls)' command
+In addition, each app has a config var named DATABASE_URL, which is the database that Rails will use by default. You can change which database is set to DATABASE_URL with the '[heroku pg:promote](/heroku-postgresql#promotion-and-database-urls)' command.
 
 Using the DATABASE_URL environment variable (Rails)
 ---------------------------------------------------
