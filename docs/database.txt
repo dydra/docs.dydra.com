@@ -11,7 +11,11 @@ DataMapper or Sequel ORMs, the `DATABASE_URL` environment variable contains
 database connection details.
 
 There are [multiple database packages to choose from](http://heroku.com/pricing),
-and you can change plans at any time. Database redundancy and failover is fully managed by Heroku's infrastructure regardless of plan. [Migrating](/postgresql-migrate) from a shared to a dedicated database is a simple, user-managed process. You can have multiple databases attached to a single Heroku app, but only one database from each of our plans.
+and you can change plans at any time. Database redundancy and failover is fully managed by Heroku's infrastructure regardless of plan. 
+
+[Migrating](/postgresql-migrate) from a shared to a dedicated database is a simple, user-managed process. 
+
+You can have multiple databases attached to a single Heroku app, but only one database from each of our plans.
 
 Shared vs. Dedicated
 --------------------
