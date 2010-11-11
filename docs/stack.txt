@@ -43,7 +43,7 @@ You can see what stack your app is on, and all available stacks, using the herok
     $ heroku stack
     * aspen-mri-1.8.6
       bamboo-ree-1.8.7
-      bamboo-mri-1.9.1
+      bamboo-mri-1.9.2
 
 Here, the app is running on [Argent Aspen](/aspen), using MRI 1.8.6.  [Badious Bamboo](/bamboo) stack is also available to this app, with two choices for the VM (Enterprise Edition 1.8.7 and MRI 1.9.1).
 
