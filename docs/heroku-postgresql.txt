@@ -85,6 +85,12 @@ Backup, restore, import, export
 
 BRIE (backup, restore, import, and export) operations are handled with the [Heroku PG Backups add-on](http://addons.heroku.com/pgbackups). See the [documentation here](/pgbackups).
 
+Dropping all Data
+-----------------
+
+If you need to destroy all of the data in your database and start with a fresh schema, you can do so:
+    
+    $ heroku pg:reset
 
 Local PostgreSQL Installation
 -----------------------------
