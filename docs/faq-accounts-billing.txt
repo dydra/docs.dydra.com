@@ -40,6 +40,9 @@ Do you accept foreign credit cards?
 
 Yes, a standard VISA, Mastercard or American Express should work regardless of issuing country. If your card doesn't work, please [submit a support ticket](http://support.heroku.com/tickets/new) or email support@heroku.com.
 
+Why was my credit card declined?
+--------------------------------
+There are a few possible reasons why your credit card might have been declined; our credit card processing service does not specify the cause. We recommend contacting your credit card provider by telephone for further information.
 
 Do you offer support?
 ---------------------
