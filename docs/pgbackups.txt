@@ -1,5 +1,5 @@
-PGBackups by Heroku
-===================
+Heroku PG Backups 
+==========
 
 The Heroku PGBackups addon lets you easily capture and manage backups for your shared and dedicated Heroku PostgreSQL databases.
 
@@ -42,6 +42,9 @@ If you have multiple databases on your application, you can choose which one to 
     Dump ... done
     Upload ... done
     
+You can automatically delete your oldest backup when capturing a new one:
+
+     $ heroku pgbackups:capture --expire
 
 Backup Management
 -----------------
