@@ -85,6 +85,8 @@ Backup, restore, import, export
 
 BRIE (backup, restore, import, and export) operations are handled with the [Heroku PG Backups add-on](http://addons.heroku.com/pgbackups). See the [documentation here](/pgbackups).
 
+NOTE: Heroku bundles will not work with the Heroku PostgreSQL addon. You will need to use the Heroku PG Backups add-on instead.
+
 Dropping all Data
 -----------------
 
