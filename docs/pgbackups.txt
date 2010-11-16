@@ -82,7 +82,6 @@ You can restore a backup into a database. This is a destructive operation: the r
 
     Download... 1.7MB, done
     Restore... 1.7MB, done
-    
 
 Import
 ------
@@ -105,3 +104,13 @@ If you'd like to move your database out of the Heroku PostgreSQL service, take a
     $ curl -o latest.dump `heroku pgbackups:url`
     
 Note that the backup URLs will expire 10 minutes after they are issued.
+
+Transfers
+---------
+
+You can use pgbackups to transfer data from one app to another, say from your production app to your staging app. To do this, capture a backup on the primary app, then import that backup into the secondary app:
+
+    $ heroku pgbackups:capture --app myapp
+    $ heroku pgbackups:restore `heroku pgbackups:url --app myapp` --app myapp-staging
+
+Note that the restore is going *into* myapp-staging, but using the url of the latest backup from myapp.
