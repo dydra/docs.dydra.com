@@ -32,20 +32,23 @@ Capture a backup of your current database:
     Dump ... 424.7MB, done
     Upload ... 424.7MB, done
 
-Set your new database to be the primary database for your application:
-
-    $ heroku pgbackups:promote
-    Setting DATABASE_URL to point to HEROKU_POSTGRESQL_URL... done
 
 Restore the backup to your new db:
 
-    $ heroku pgbackups:restore 
+    $ heroku pgbackups:restore --db <DB URL>
     
     HEROKU_POSTGRESQL_URL  <---restore---  b001 (most recent)
                                            HEROKU_SHARED_DATABASE_URL
                                            2010/10/26 17:33.38
                                            424.7MB
-    
+
+NOTE: You can easily determine your DB URL with the command 'heroku config | grep HEROKU_POSTGRESQL'. The DB URL is always HEROKU_POSTGRESQL_<PLAN_NAME>_URL. So if you have a ronin plan, it is HEROKU_POSTGRESQL_RONIN_URL.
+
+Set your new database to be the primary database for your application:
+
+    $ heroku pgbackups:promote
+    Setting DATABASE_URL to point to HEROKU_POSTGRESQL_URL... done
+
 
 Once finished, you can confirm that your data was migrated properly using your app's Heroku console.  For example, if you have a model named Post:
 
