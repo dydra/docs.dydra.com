@@ -42,7 +42,7 @@ Restore the backup to your new db:
                                            2010/10/26 17:33.38
                                            424.7MB
 
-NOTE: You can easily determine your DB URL with the command 'heroku config | grep HEROKU_POSTGRESQL'. The DB URL is always HEROKU_POSTGRESQL_<PLAN_NAME>_URL. So if you have a ronin plan, it is HEROKU_POSTGRESQL_RONIN_URL.
+NOTE: You can easily determine your db url with the command 'heroku config | grep HEROKU_POSTGRESQL'. The db url is always HEROKU_POSTGRESQL_<PLAN_NAME>_URL. So if you have a ronin plan, it is HEROKU_POSTGRESQL_RONIN_URL.
 
 Set your new database to be the primary database for your application:
 
