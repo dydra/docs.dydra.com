@@ -6,11 +6,11 @@ The Heroku PGBackups addon lets you easily capture and manage backups for your s
 Install
 -------
 
-### Plugin
+### Gem
 
-To use the `heroku pgbackups` commands shown throughout this document, install the PostgreSQL by Heroku client plugin:
+Make sure that you are running the latest version of the Heroku gem:
 
-    $ heroku plugins:install http://github.com/heroku/heroku-postgresql.git
+    $ sudo gem install heroku
 
 ### Add-on
 

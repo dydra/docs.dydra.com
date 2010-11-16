@@ -6,9 +6,9 @@ The Heroku PostgreSQL add-on is our next generation of our dedicated database se
 Installation
 ------------
 
-To use the `heroku pg` commands shown throughout this document, install the PostgreSQL by Heroku client plugin:
+Make sure that you are running the latest version of the Heroku gem:
 
-    $ heroku plugins:install http://github.com/heroku/heroku-postgresql.git
+    $ sudo gem install heroku
 
 Install the add-on. You can view the available plans using 'heroku addons:info | grep postgresql', or install the default plan (ronin):
 
