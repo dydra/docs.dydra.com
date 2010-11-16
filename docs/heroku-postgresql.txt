@@ -23,7 +23,7 @@ Every database (shared dbs, legacy dbs, and Heroku PostgreSQL dbs) has its url s
 
 The pg:promote command will set a particular database to be used as the default in your rails application and in the Heroku command-line tool. 
 
-    $ heroku pg:promote HEROKU_POSTGRESQL_RONIN_URL
+    $ heroku pg:promote --db HEROKU_POSTGRESQL_RONIN_URL
     Attatching database to myapp ... done
 
 This is equivalent to using 'heroku config:add DATABASE_URL=...' 
