@@ -111,5 +111,7 @@ easy steps:
 Additional Resources
 --------------------
 
+  * [Heroku Platform Constraints](constraints)
   * [Renaming your application](renaming-apps)
   * [More about Git](git)
+
