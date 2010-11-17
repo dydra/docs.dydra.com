@@ -6,9 +6,9 @@ The Heroku PostgreSQL add-on is our next generation of our dedicated database se
 Installation
 ------------
 
-To use the `heroku pg` commands shown throughout this document, install the PostgreSQL by Heroku client plugin:
+Make sure that you are running the latest version of the Heroku gem:
 
-    $ heroku plugins:install http://github.com/heroku/heroku-postgresql.git
+    $ sudo gem install heroku
 
 Install the add-on. You can view the available plans using 'heroku addons:info | grep postgresql', or install the default plan (ronin):
 
@@ -23,7 +23,7 @@ Every database (shared dbs, legacy dbs, and Heroku PostgreSQL dbs) has its url s
 
 The pg:promote command will set a particular database to be used as the default in your rails application and in the Heroku command-line tool. 
 
-    $ heroku pg:promote HEROKU_POSTGRESQL_RONIN_URL
+    $ heroku pg:promote --db HEROKU_POSTGRESQL_RONIN_URL
     Attatching database to myapp ... done
 
 This is equivalent to using 'heroku config:add DATABASE_URL=...' 
@@ -85,6 +85,14 @@ Backup, restore, import, export
 
 BRIE (backup, restore, import, and export) operations are handled with the [Heroku PG Backups add-on](http://addons.heroku.com/pgbackups). See the [documentation here](/pgbackups).
 
+NOTE: Heroku bundles will not work with the Heroku PostgreSQL addon. You will need to use the Heroku PG Backups add-on instead.
+
+Dropping all Data
+-----------------
+
+If you need to destroy all of the data in your database and start with a fresh schema, you can do so:
+    
+    $ heroku pg:reset
 
 Local PostgreSQL Installation
 -----------------------------
