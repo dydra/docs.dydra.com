@@ -14,6 +14,11 @@ Install the add-on. You can view the available plans using 'heroku addons:info |
 
     $ heroku addons:add heroku-postgresql
 
+Migration of existing databases
+-------------------------------
+
+See the [migration documentation](/postgresql-migrate).
+
 Promotion and database URLs
 ---------------------------
 
@@ -27,11 +32,6 @@ The pg:promote command will set a particular database to be used as the default 
     Attatching database to myapp ... done
 
 This is equivalent to using 'heroku config:add DATABASE_URL=...' 
-
-Migration of existing databases
--------------------------------
-
-See the [migration documentation](/postgresql-migrate).
 
 PSQL Console
 ------------
