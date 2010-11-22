@@ -105,6 +105,12 @@ If you'd like to move your database out of the Heroku PostgreSQL service, take a
     
 Note that the backup URLs will expire 10 minutes after they are issued.
 
+You can then load this dump into your local database using the <a href="http://www.postgresql.org/docs/8.4/static/app-pgrestore.html">pg_restore</a> tool:
+
+    $ pg_restore --verbose --clean --no-acl --no-owner -h myhost -U myuser -d mydb latest.dump
+
+NOTE: This will usually generate some warnings, due to differences between your Heroku database and a local database, but they are generally safe to ignore.
+
 Transfers
 ---------
 
