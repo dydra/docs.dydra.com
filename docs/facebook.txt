@@ -135,7 +135,7 @@ Facebook returns the response in JSON and its parsed by the callback function an
 
 ![Call Graph API with JS](http://heroku.images.s3.amazonaws.com/facebook-article/architecture/call_graph_api_with_js.gif)
 
-The Facebook's Graph API
+The Facebook Graph API
 ------------------------
 
 The Graph API enables you to read and write objects and connections in the Facebook social graph. It's quite easy to use, and sticks very closely to  [RESTful](http://tomayko.com/writings/rest-to-my-wife) architecture, which you might already be familiar with.
