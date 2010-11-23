@@ -232,7 +232,7 @@ Facebook will request the callback url with the access token
 	
 Store it in a DB, cookie or wherever you want, it must be used to make requests on behalf of the user.
 
-![Authorization process](http://heroku.images.s3.amazonaws.com/facebook-article/architecture/auth_process.gif
+![Authorization process](http://heroku.images.s3.amazonaws.com/facebook-article/architecture/auth_process.gif)
 
 Ok, now our application has been authenticated and the user has authorized it, but you might be wondering what information we have access to.
 
