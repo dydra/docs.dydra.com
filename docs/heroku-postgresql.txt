@@ -22,7 +22,7 @@ See the [migration documentation](/postgresql-migrate).
 Specifying Databases
 --------------------
 
-Most database commands accept a --db flag, which allows you to set the database on which the command will perform. Databases are specified by the [config var](/config-vars) name (but not the value) or their URL. Common database URLs are DATABASE_URL, HEROKU_POSTGRESQL_RONIN_URL, and SHARED_DATABASE_URL. To see a list of available databases, use 'heroku config'. 
+Most database commands accept a --db flag, which allows you to set the database on which the command will perform. Databases are specified by the [config var](/config-vars) name (but not the value) or their URL. Common database URLs are DATABASE_URL, HEROKU_POSTGRESQL_RONIN_URL, and SHARED_DATABASE_URL. To see a list of available databases, use `heroku config`. 
 
 If the --db flag is not specified, most commands will use DATABASE_URL by default.
 
