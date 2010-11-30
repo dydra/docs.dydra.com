@@ -57,6 +57,7 @@ section 'add-ons', "Add-ons" do
 	topic 'amazon_rds',         'Amazon RDS'
 	topic 'apigee',             'Apigee for Twitter'
 	topic 'cloudant',           'Cloudant'
+	topic 'cloudmailin',        'Cloudmailin'
 	topic 'cron',               'Cron'
 	topic 'deploy-hooks',       'Deploy Hooks'
 	topic 'heroku-postgresql',  'Heroku PostgreSQL'
