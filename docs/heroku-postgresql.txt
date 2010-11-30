@@ -19,6 +19,13 @@ Migration of existing databases
 
 See the [migration documentation](/postgresql-migrate).
 
+Specifying Databases
+--------------------
+
+Most database commands accept a --db flag, which allows you to set the database on which the command will perform. Databases are specified by the [config var](/config-vars) name (but not the value) or their URL. Common database URLs are DATABASE_URL, HEROKU_POSTGRESQL_RONIN_URL, and SHARED_DATABASE_URL. To see a list of available databases, use `heroku config`. 
+
+If the --db flag is not specified, most commands will use DATABASE_URL by default.
+
 Promotion and database URLs
 ---------------------------
 
@@ -46,6 +53,8 @@ If you have PostgreSQL [installed on your system](#local-postgresql-installation
 
     rd2lk8ev3jt5j50=>
 
+As with other database command, this one will accept a --db flag allowing you to specific which database to use and it will use your DATABASE_URL by default.
+
 Further reading: [PostgreSQL interactive terminal docs](http://www.postgresql.org/docs/8.4/static/app-psql.html)
 
 Stored Procedures
@@ -67,6 +76,8 @@ The pg:ingress command opens access for 60s to connect to the database from your
     Connection info string:
        "dbname=dnnnnnnnn host=ec2-123-123-123-123.compute-1.amazonaws.com user=uxxxxxxxxx password=pxxxxxxxxxxxxxxx"
 
+As with other database command, this one will accept a --db flag allowing you to specific which database to use and it will use your DATABASE_URL by default.
+
 Info
 ----
 
@@ -78,6 +89,8 @@ You can get stats on your database with the info command:
     URL:         postgres://abc:xyz@ec2-184-70-150-10.compute-1.amazonaws.com/abc
     PG version   8.4.4
     Born:        Jan 17 2010 12:30:43
+
+As with other database command, this one will accept a --db flag allowing you to specific which database to use and it will use your DATABASE_URL by default.
 
 
 Backup, restore, import, export 
@@ -93,6 +106,8 @@ Dropping all Data
 If you need to destroy all of the data in your database and start with a fresh schema, you can do so:
     
     $ heroku pg:reset
+    
+As with other database command, this one will accept a --db flag allowing you to specific which database to use and it will use your DATABASE_URL by default.
 
 Local PostgreSQL Installation
 -----------------------------
