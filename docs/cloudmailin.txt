@@ -1,4 +1,4 @@
-Getting started with CloudMailin on Heroku
+CloudMailin
 ==========================================
 
 [CloudMailin](http://cloudmailin.com) allows you to receive incoming email messages in your web app via an HTTP POST request.
