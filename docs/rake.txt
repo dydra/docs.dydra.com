@@ -32,7 +32,7 @@ a list of known limitations:
    invocation will be available to subsequent invocations.
 
  * The `rake db:reset` task is not supported. Heroku apps do not have
-   permission to drop and create databases. Use the `heroku db:reset` command
+   permission to drop and create databases. Use the `heroku pg:reset` command
    instead.
 
  * Rake tasks cannot read from `stdin`. Piping data to `heroku rake` or
