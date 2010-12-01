@@ -63,7 +63,7 @@ When you're satisfied that your database is ready for use, take your app out of 
 
 Finally, when you are satisfied that your data has been successfully migrated (i.e. you verify that your application is functioning and has all of its data), you can remove your old database.
 
-    $ heroku addons:remove <olddb:addon-plan>
+    $ heroku addons:remove <old_db_addon_plan_url>
 
 You can review the commands available to Heroku Postgresql on it's [documentation page](/heroku-postgresql).
 
