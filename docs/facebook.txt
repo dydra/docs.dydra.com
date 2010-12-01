@@ -1,4 +1,4 @@
-Building a Facebook application with Ruby and hosting it in Heroku
+Building a Facebook application with Ruby and hosting it on Heroku
 =======================================================================
 
 
@@ -18,7 +18,9 @@ A brief explanation of the Facebook application architecture
 
 First things first, we need to understand some of the underlying architecture of a Facebook app.  It'll save us a lot of time in the long run. I swear.
 
-Now, there are actually two kinds of Facebook applications: 
+A Facebook application is actually two applications: **A container application and a web application.**
+
+When we create a Facebook application in the Facebook site what we are actually creating is the container of our web app.
 
 * Ones that use the Facebook APIs to add features such as _Like_ and _Share_ buttons to your own website at, say, www.yourcompany.com. This is called [Facebook for Websites](http://developers.facebook.com/docs/guides/web).
 
@@ -133,7 +135,7 @@ Facebook returns the response in JSON and its parsed by the callback function an
 
 ![Call Graph API with JS](http://heroku.images.s3.amazonaws.com/facebook-article/architecture/call_graph_api_with_js.gif)
 
-The Facebook's Graph API
+The Facebook Graph API
 ------------------------
 
 The Graph API enables you to read and write objects and connections in the Facebook social graph. It's quite easy to use, and sticks very closely to  [RESTful](http://tomayko.com/writings/rest-to-my-wife) architecture, which you might already be familiar with.
@@ -251,6 +253,71 @@ Once we get the access token our application will be able to access all the phot
 
 That's basically how authentication and authorization works in Facebook.
 
+The Open Graph Protocol
+------------------------
+
+So far we've been talking about Facebook applications, but what if we want to take advantage of all the Facebook features in our own Web pages without actually creating a Facebook application? That's what the [Open Graph Protocol](http://developers.facebook.com/docs/opengraph) was created for.
+
+Here are some excerpts of the Open Graph Protocol documentation: 
+
+    The Open Graph protocol enables you to integrate your Web pages into the social graph.
+    To turn your web pages into graph objects, you'll need to add Open Graph protocol <meta> tags and the Like button to your webpages.
+
+Here's a list of available &lt;meta&gt; tags:
+    
+* **og:title** - The title of your object as it should appear within the graph.
+* **og:type** - The type of your object.
+* **og:image** - An image URL which should represent your object within the graph.
+* **og:url** - The canonical URL of your object that will be used as its permanent ID in the graph
+
+In addition, Facebook have extended the basic meta data to add two required fields to let us connect our pages with Facebook:
+
+* **og:site_name** - A human-readable name for your site.
+* **fb:admins** or **fb:app\_id** - A comma-separated list of either Facebook user IDs or a Facebook Platform application ID that administers this page.
+* **og:description** - A one to two sentence description of your page.
+
+This is a short list of tags, there are another ones you can use to [define the location](http://developers.facebook.com/docs/opengraph#extra-data) of a place or contact information, etc.
+
+As you can see, this is all about the [Like button](http://developers.facebook.com/docs/reference/plugins/like) and publishing stream updates when users likes our URL using the [Like button](http://developers.facebook.com/docs/reference/plugins/like), so let's create a page and turn it into a graph object:
+
+This would be our basic page:
+
+	<html>
+
+	  <head>
+	    <title>Heroku Docs & FAQs</title>
+	  </head>
+  
+	  <body>
+	    <b>Heroku Docs & FAQs</b>
+	  </body>
+  
+	</html>
+
+And this would be our page turned into a graph object:
+
+	<html>
+
+	  <head>
+	    <title>Heroku Docs & FAQs</title>
+	    <meta property="og:title" content="Heroku Docs and FAQs"/>
+	    <meta property="og:type" content="blog"/>
+	    <meta property="og:image" content="http://ander.heroku.com/images/ruby.png"/>
+	    <meta property="og:url" content="http://docs.heroku.com/"/>
+	    <meta property="og:site_name" content="Heroku"/>
+	    <meta property="fb:admins" content="YOUR_FACEBOOK_ID_HERE"/>
+	  </head>
+  
+	  <body>
+	    <b>Heroku Docs & FAQs</b>
+	    <br />
+	    <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fdocs.heroku.com%2F&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
+	  </body>
+  
+	</html>
+
+If you want to check if your meta tags are ok, you can use the [og:it application](http://ogit.heroku.com/), in order for this to work you can host your page in [Heroku](http://www.heroku.com), it's free.
+
 Now we know all we need to start creating real Facebook applications begin learning the most important part, how to make them in Ruby (and deploy them on Heroku).
 
 **Making a simple Facebook application**
@@ -277,6 +344,7 @@ If you haven't signed up for Heroku yet, now would be a good time. [Click here t
 #### What other gems are we going to use?
 
 * [Sinatra](http://www.sinatrarb.com/), a [DSL](http://en.wikipedia.org/wiki/Domain-specific_language) for quickly creating web applications in Ruby.
+* [OmniAuth](https://github.com/intridea/omniauth), a flexible authentication system utilizing [Rack middleware](http://railscasts.com/episodes/151-rack-middleware).
 
 #### Installing gems with Bundler
 
@@ -292,6 +360,9 @@ Edit the Gemfile with your preferred text editor to let it look like this:
     source :gemcutter
 
 	gem 'sinatra', '1.0'
+	gem 'oa-oauth', '0.1.6'
+
+Please notice  we're declaring <code>oa-oauth</code> as dependency, not <code>omniauth</code>, this is because <code>OmniAuth</code> is a collection of [Rack middleware](http://railscasts.com/episodes/151-rack-middleware), in this case we're only going to need the <code>oauth</code> one.
 
 Now we need to tell Bundler to check if we're missing the gems our application depends on, if so, tell it to install them:
 	
@@ -340,18 +411,48 @@ I'll let these files look like:
 **faceboku.rb**
 	
 	require 'sinatra'
-	
+	require 'omniauth/oauth'
+
+	enable :sessions
+
 	#Here you have to put your own Application ID and Secret
-	APP_ID = '153304591365687'
-	APP_SECRET = '7a7663099ccb62f180d985ba1252a3e2'
+	APP_ID = "153304591365687"
+	APP_SECRET = "7a7663099ccb62f180d985ba1252a3e2"
+
+	use OmniAuth::Builder do  
+	  provider :facebook, APP_ID, APP_SECRET, { :scope => 'email, status_update, publish_stream' }
+	end
 
 	get '/' do
 	    @articles = []
-	    @articles << {:title => 'Deploying Rack-based apps in Heroku', 
-					  :link => 'http://docs.heroku.com/rack/'}
-	    @articles << {:title => 'Learn Ruby in twenty minutes', 
-	                  :link => 'http://www.ruby-lang.org/en/documentation/quickstart/'}
+	    @articles << {:title => 'Deploying Rack-based apps in Heroku', :url => 'http://docs.heroku.com/rack'}
+	    @articles << {:title => 'Learn Ruby in twenty minutes', :url => 'http://www.ruby-lang.org/en/documentation/quickstart/'}
+
 	    erb :index
+	end
+
+	get '/auth/facebook/callback' do
+	  session['fb_auth'] = request.env['omniauth.auth']
+	  session['fb_token'] = session['fb_auth']['credentials']['token']
+	  session['fb_error'] = nil
+	  redirect '/'
+	end
+
+	get '/auth/failure' do
+	  clear_session
+	  session['fb_error'] = 'In order to use this site you must allow us access to your Facebook data<br />'
+	  redirect '/'
+	end
+
+	get '/logout' do
+	  clear_session
+	  redirect '/'
+	end
+
+	def clear_session
+	  session['fb_auth'] = nil
+	  session['fb_token'] = nil
+	  session['fb_error'] = nil
 	end
 
 **config.ru** like this:
@@ -363,62 +464,59 @@ I'll let these files look like:
 **views/layout.erb**
 
 	<!DOCTYPE HTML>
-	<html xmlns:fb="http://www.facebook.com/2008/fbml">
+	<html>
 		<head>
+			<meta property="og:title" content="List of Articles"/>
+		    <meta property="og:type" content="website"/>
+		    <meta property="og:image" content="http://faceboku.heroku.com/images/heroku_logo.png"/>
+		    <meta property="og:url" content="http://faceboku.heroku.com/"/>
+		    <meta property="og:site_name" content="Heroku:Interesting Articles"/>
+		    <meta property="fb:admins" content="643897273"/>
+	    
 			<title>Faceboku</title>
 			<style>
 				body { font-family: Arial; font-size: 20px ;}
 				a { text-decoration: none; color: #333; }
+				.logout a { color: #2554C7; font-size: 15px; }
 				.article { font-size: 1.2em; }
-				.like_app { font-size: 0.8em }
+				.like_site { font-size: 0.8em }
 			</style>
 		</head>
 		<body>
 			<%= yield %>
-			<div id="fb-root"></div>
-			<script>
-				window.fbAsyncInit = function() {
-
-					FB.init({
-						appId: '<%=APP_ID%>', 
-						status: true,         // check login status
-						cookie: true,         // set a cookie with the session (access token, user id, etc.)
-				        xfbml: true           // parse XFBML (Login and Like buttons)
-					});
-				};
-
-				(function() {
-				  var e = document.createElement('script');
-				  e.type = 'text/javascript';
-				  e.src = document.location.protocol +
-				    '//connect.facebook.net/en_US/all.js';
-				  e.async = true;
-				  document.getElementById('fb-root').appendChild(e);
-				}());
-			</script>
-
 		</body>
 	</html>
 
-The [FB.init](http://developers.facebook.com/docs/reference/javascript/FB.init) method will initialize our application and it will save a cookie called _fbs\_APP\_ID_ (cookie: true) containing the access token, among other things. If we'd want to perform authorized requests on behalf of our users we'd need to include such access token in our Graph API requests.
-
 **views/index.erb**
 
-	<fb:login-button autologoutlink="true"></fb:login-button>
-	<h3>Welcome to my list of interesting articles</h3>
+	<%=session['fb_error']%>
+
+	<% if session['fb_auth'] %>
+		<a href='logout'><img src='images/fb_logout_button.png'></a>
+	<% else %>
+		<a href='auth/facebook'><img src='images/fb_login_button.png'></a>
+	<% end %>
+
+	<h3><%= 'Hello, ' + session['fb_auth']['user_info']['first_name'] + ', ' if session['fb_token'] %>Welcome to my list of interesting articles.</h3>
 
 	<table>
 		<% @articles.each do |article| %>
 		<tr>
-			<td class='article'>- <a href='javascript:void(0);'><%=article[:title]%></a></td>
-			<td><fb:like href="<%=article[:link]%>" layout="button_count" show_faces="false" /></td>
+			<td class='article'>- <a href='<%=article[:url]%>' target='_blank'><%=article[:title]%></a></td>
+			<td>
+				<% if session['fb_auth'] %>
+					<iframe src="http://www.facebook.com/plugins/like.php?href=<%=article[:url]%>&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+				<% end %>
+			</td>
 		</tr>
 		<% end %>
 	</table>
 
-	<hr />
-	<p><span class='like_app'>Do you like this application?</span></p>
-	<p><fb:like /></p>
+	<% if session['fb_auth'] %>
+		<hr />
+		<p><span class='like_site'>Do you like this site?</span></p>
+		<p><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Ffaceboku.heroku.com%2F&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe></p>
+	<% end %>
 
 Wow, what an amazing application!, let's run it and browse it!
 
@@ -448,13 +546,13 @@ Add all the files and directories to source control:
 
 Commit them to your local repository:
 
-    $ git commit -m "First version of my Facebook application"
+    $ git commit -m "First version of my facebook application"
 
 Create the Heroku application:
 
-  $ heroku create faceboku
+  $ heroku create THE_NAME_YOU_WANT
 
-Now your app has been created, and assigned the URL http://faceboku.heroku.com. Time to deploy to Heroku:
+Now your app has been created, and assigned the URL http://THE\_NAME\_YOU\_WANT.heroku.com. Time to deploy to Heroku:
 
 	$ git push heroku master
 	
@@ -468,12 +566,12 @@ Cool, it's right there, but wait, our Canvas application is still pointing to ou
 
 Now let's browse to our application [http://apps.facebook.com/faceboku](http://apps.facebook.com/faceboku) and that's it!
 
-[Download application](link_to_download_application_maybe_github)
+If you want to download the code of this application [here is the link](https://github.com/rafmagana/Faceboku/tree/v1.0.0).
 
 In Conclusion
 -------------
 
-As you can see, building facebook applications with Ruby is simple and hosting with Heroku makes it even easier. However, if you're building a large application you may want to consult a more robust Web framework, other than Sinatra.  The most obvious choice here would be [Rails 3](http://rubyonrails.org/).
+As you can see, building facebook applications with Ruby is simple and hosting with Heroku makes it even easier. However, if you're building a large application you may want to consult a more robust Web framework, other then Sinatra.  The most obvious choice here would be [Rails 3](http://rubyonrails.org/).
 
 ###Rails 3 and Facebook integration
 
