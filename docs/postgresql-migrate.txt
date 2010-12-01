@@ -46,7 +46,7 @@ NOTE: You can easily determine your db url with the command 'heroku config | gre
 
 Set your new database to be the primary database for your application:
 
-    $ heroku pgbackups:promote
+    $ heroku pg:promote
     Setting DATABASE_URL to point to HEROKU_POSTGRESQL_URL... done
 
 
