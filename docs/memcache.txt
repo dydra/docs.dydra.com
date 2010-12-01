@@ -56,6 +56,18 @@ And fetching the data back:
     >> Rails.cache.read('color')
     => "red"
 
+You can also read a value if it is available, or write it if it isn't available:
+    
+    >> Rails.cache.fetch('answer')
+    ==> "nil"
+    >> Rails.cache.fetch('answer') do
+    ?>   1+1
+    >> end
+    ==> 2
+    Rails.cache.fetch('answer')
+    ==> 2
+    
+
 Further reading:
 
 * [Caching with Rails](http://guides.rubyonrails.org/caching_with_rails.html) by RailsGuides
