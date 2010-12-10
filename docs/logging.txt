@@ -1,7 +1,7 @@
-Logging
+Logging (beta)
 =======
 
-Heroku's logging add-on routes together logs from your application and Heroku's infrastructure into a single location.
+Heroku's logging add-on routes together logs from your application and Heroku's infrastructure into a single location.  This feature is currently in public beta.
 
 Setup
 -----
