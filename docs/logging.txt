@@ -20,12 +20,12 @@ Add the add-on to your app:
 Writing to your log
 -------------------
 
-Anything written to standard out (stdout) or standard error (stderr) is captured into your logs.  This means that you can log from anywhere in your application code with a simple puts statement:
+Anything written to standard out (`stdout`) or standard error (`stderr`) is captured into your logs.  This means that you can log from anywhere in your application code with a simple puts statement:
 
     :::ruby
     puts "Hello, logs!"
 
-If you are using Rails, add this to your config/environment.rb initializer block:
+If you are using Rails, add this to your `config/application.rb` (Rails 3) or `config/environment.rb` (Rails 2) initializer block:
 
     :::ruby
     config.action_controller.logger = Logger.new(STDOUT)
@@ -50,8 +50,8 @@ In this example, the output includes line from one of the app's web dynos, the H
     timestamp source[process]: message
 
 * **Timestamp** - The time recorded by syslog on the machine where the process is running.
-* **Source** - All of your app's processes (web webs, background workers, cron) will have a source of "app."  All of Heroku's system components (HTTP router, process manager) will have a source of "heroku."
-* **Process** - The name of the process or component that wrote this log line.  For example, worker #3 will be worker.3, and the Heroku HTTP router will be router.
+* **Source** - All of your app's processes (web webs, background workers, cron) will have a source of `app`.  All of Heroku's system components (HTTP router, process manager) will have a source of `heroku`.
+* **Process** - The name of the process or component that wrote this log line.  For example, worker #3 will be `worker.3`, and the Heroku HTTP router will be `router`.
 * **Message** - The content of the log line.
 
 The logs command fetches 20 lines of logs by default.  You can fetch up to 500 lines using the `--num` (or `-n`) option:
