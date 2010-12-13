@@ -39,7 +39,6 @@ section 'management', "Application Management" do
 	topic 'rails3',             'Rails 3'
 	topic 'ps',                 'Processes'
 	topic 'postgresql-migrate', 'Database migration'
-	topic 'logging',            'Logging'
 end
 
 section 'features', "Platform Features" do
@@ -51,6 +50,7 @@ section 'features', "Platform Features" do
 	topic 'database',           'SQL database'
 	topic 'stack',              'Deployment stack'
 	topic 'releases',           'Release management'
+	topic 'logging',            'Logging'
 end
 
 section 'add-ons', "Add-ons" do
