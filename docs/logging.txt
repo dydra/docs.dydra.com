@@ -75,7 +75,7 @@ Filtering
 If you wish to fetch only logs with a certain source, a certain process, or both, you can use the 	`--source` (or `-s`) and `--ps` (or `-p`) filtering arguments:
 
     :::term
-    $ heroku logs --source heroku --ps http_router
+    $ heroku logs --source heroku --ps router
     2010-09-16T15:13:46-07:00 heroku[router]: GET myapp.heroku.com/posts queue=0 wait=0ms service=1ms bytes=975
     $ heroku logs -s app
     2010-09-16T15:13:46-07:00 app[web.1]: Processing PostController#list (for 208.39.138.12 at 2010-09-16 15:13:46) [GET]
