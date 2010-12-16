@@ -23,11 +23,16 @@ NOTE: <b>Mac OS 10.5 Users</b> A bug in port / Mac OS 10.5 causes an error when 
 Local Setup
 -----------
 
-You will need to run a local memcached process to test against with Sinatra or other Ruby app.  Install it on Mac OS X:
+You will need to run a local memcached process to test against with Sinatra or other Ruby app. Install it on Mac OS X:
 
     :::term
     $ sudo port install memcached
 
+Or use [Homebrew](http://mxcl.github.com/homebrew/) on Mac OS X:
+
+    :::term
+    $ brew install memcached
+    
 Or on Ubuntu:
 
     :::term
