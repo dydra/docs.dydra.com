@@ -61,6 +61,8 @@ Rails Setup
 
 Rails 2.3.3 and later abstracts the caching mechanisms through `Rails.cache`. You must be using Rails 2.3.3 or newer to use memcache on Heroku.
 
+Please see our documentation for a tutorial on [rails caching strategies on Heroku](rails-caching-strategies).
+
 #### Dalli: Rails 3
 
 In your [Gemfile](/bundler):
