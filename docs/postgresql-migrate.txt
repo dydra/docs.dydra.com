@@ -1,7 +1,9 @@
 Migrating to Heroku PostgreSQL
 =====================================
 
-If you already have a data stored in your Heroku app's default shared PostgreSQL database and wish to migrate this data into your dedicated Heroku PostgreSQL, follow these instructions.
+The following are instructions for migrating existing applications to our [Heroku PostgreSQL dedicated database plans](/heroku-postgresql). Please note that these databases incur non-trivial charges. 
+
+If you have a data stored in your Heroku app's default Shared PostgreSQL database, or a legacy dedicated database and wish to migrate this data into your dedicated Heroku PostgreSQL, follow these instructions.
 
 Overview
 --------

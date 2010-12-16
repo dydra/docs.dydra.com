@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/hone/indextank-rb.git
-  revision: 61c2179
+  revision: 61c217938b9c96f69ba0d992f80421aa0f4d5383
   ref: 61c217938b9c96f69ba0
   specs:
     indextank (0.0.1)
