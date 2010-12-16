@@ -1,9 +1,9 @@
 Rails Caching Strategies
 ========================
 
-Heroku recommends against using 'automagic' caching libraries such as cache-money or cache_fu. We have spent time searching for an easy caching solution, but have found that it doesn't exist. In general caching is an application-specific endeavor. The below is a roadmap for approaching performance enhancement through caching on a Rails app running on Heroku.
+Heroku recommends against using 'automagic' caching libraries such as cache-money or cache_fu. We have spent time searching for an easy caching solution, but haven't found one that with which we are satisfied. In general caching is an application-specific endeavor. The below is a roadmap for approaching performance enhancement through caching on a Rails app running on Heroku.
 
-Once you have [configured your application to use memcached], rails will automatically use it for both [action](/) and [fragment](/) caching.
+Once you have [configured your application to use memcached](/memcache), rails will automatically use it for both action and fragment caching.
 
 ### Fix really slow requests first
 
@@ -11,7 +11,7 @@ Web applications will typically have a small handful of pages that take an excep
 
 ### Use Varnish to cache pages with no authentication or customization
 
-Rails [built-in page-caching](http://guides.rubyonrails.org/caching_with_rails.html#page-caching) requires write-access to the file system. As such it does not work on Heroku. However our [Varnish HTTP Cache](/http_cache) will accomplish the same thing (and do it exceptionally quickly). HTTP caching support is built into every Heroku application and does not require memcached.
+Rails [built-in page-caching](http://guides.rubyonrails.org/caching_with_rails.html#page-caching) requires write-access to the file system. As such it does not work on Heroku. However our [Varnish HTTP Cache](/http-caching) will accomplish the same thing (and do it amazingly quickly). HTTP caching support is built into every Heroku application and does not require memcached.
 
 Varnish page caching is appropriate for pages that don't require any before_filter logic (typically authentication) and that are the same for all users (i.e. don't have any customized content). As the application owner, you simply need to decide how up-to-date (or out-of-date) you need the page to be. See the [http cache](/http-caching#caching-dynamic-content-by-age) documentation for instructions on how to set it up.
 
@@ -57,6 +57,7 @@ Fragment caching is a great mechanism for caching widgets or partials in your ap
     
     # _product.html.erb
     <div><%= link_to product, product.name %>: <%= product.price%></div>
+    <div><%= do_something_comlicated%></div>
     
 Then could easily cache the partial for each individual product with fragment caching. Rails will automatically generate a cache key if you pass it an ActiveRecord object:
 
@@ -64,7 +65,7 @@ Then could easily cache the partial for each individual product with fragment ca
     # _product.html.erb
     <% cache(product) do %> 
        <div><%= link_to product, product.name %>: <%= product.price%></div>
-       <div><%= do_something(comlicated)%></div>
+       <div><%= do_something_comlicated%></div>
     <% end %>
 
 Another fragment caching strategy is to cache widgets or other discrete portions of pages that do not need to be refreshed from your live datastore for each new page load. If for example the front page of your website listed top selling products, you could cache this fragment. Let's assume that you want to refresh the information every hour:
