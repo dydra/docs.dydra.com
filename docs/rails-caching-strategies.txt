@@ -17,7 +17,7 @@ Varnish page caching is appropriate for pages that don't require any before_filt
 
 ### Use Action caching to cache pages with authentication or dynamic layouts
 
-If your pages requires authentication or other before/after filters, the content can still be cached using rails [built-in action caching](http://guides.rubyonrails.org/caching_with_rails.html#action-caching). Fragment caching uses (and requires) the Heroku Memcache add-on. 
+If your pages requires authentication or other before/after filters, the content can still be cached using rails [built-in action caching](http://guides.rubyonrails.org/caching_with_rails.html#action-caching). Action caching uses (and requires) the Heroku Memcache add-on. 
 
 Simply add `caches_action :<action_name>` to your controller to turn on caching for specific actions. If your layout contains dynamic elements (such as your user's name or email address in the header), you can render the layout dynamically while still caching the action's contents. Use the `:layout => false` flag to accomplish this. Finally, you can use the `expire_action` command to remove the action from you cache when new data is written.
 
