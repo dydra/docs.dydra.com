@@ -95,7 +95,7 @@ In `config/initializers/session_store.rb`, set secret to a 30+ character random 
     # Session cache
     ActionController::Base.session = {
       :namespace   => '_dalli-rails2_session',
- 			:secret => <random_string_of_at_least_30_characters>
+ 			:secret => '<random_string_of_at_least_30_characters>'
     }
     
     require 'action_controller/session/dalli_store'
