@@ -90,15 +90,12 @@ In `config/environments/production.rb`:
     require 'active_support/cache/dalli_store23'
     config.cache_store = :dalli_store
 
-In `config/initializers/session_store.rb`:
+In `config/initializers/session_store.rb`, set secret to a 30+ character random string:
 
     # Session cache
     ActionController::Base.session = {
-      :namespace   => 'sessions',
-      :expire_after => 20.minutes.to_i,
-      :memcache_server => ['server-1:11211', 'server-2:11211'],
-      :key         => ...,
-      :secret      => ...
+      :namespace   => '_dalli-rails2_session',
+ 			:secret => <random_string_of_at_least_30_characters>
     }
     
     require 'action_controller/session/dalli_store'
