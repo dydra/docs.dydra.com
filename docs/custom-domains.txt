@@ -64,7 +64,6 @@ addresses using your DNS management tool:
     75.101.163.44
     75.101.145.87
     174.129.212.2
-    50.16.215.196
 
 Check that your DNS is configured correctly with the "host" command:
 
@@ -73,7 +72,6 @@ Check that your DNS is configured correctly with the "host" command:
     example.com has address 75.101.163.44
     example.com has address 75.101.145.87
     example.com has address 174.129.212.2
-    example.com has address 50.16.215.196
 
 ### host.mydomain.com (e.g. www.mydomain.com)
 
@@ -88,7 +86,6 @@ Check that your DNS is configured correctly with the `host` command:
     proxy.heroku.com has address 75.101.163.44
     proxy.heroku.com has address 75.101.145.87
     proxy.heroku.com has address 174.129.212.2 
-    proxy.heroku.com has address 50.16.215.196
 
 Output of the host command varies by Unix flavor, but it should indicate that
 your host name is either an alias or CNAME of `proxy.heroku.com`.

@@ -71,7 +71,6 @@ If you are pointing a root domain (e.g. `example.org`) at Heroku, add these thre
     75.101.163.44
     75.101.145.87
     174.129.212.2
-    50.16.215.196
 
 If you are pointing a subdomain (e.g. `sub.example.org`) at Heroku, use this hostname as a CNAME record.
 
