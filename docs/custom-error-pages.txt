@@ -1,7 +1,7 @@
 Custom Error Pages
 ===================
 
-The custom error pages add-on allows you to specify external URL to static HTML pages to be served when your app encounters any HTTP error or while in maintenance mode.  See also [the full error code listing](/error-codes).
+Heroku's HTTP router serves unstyled HTML when your app encounters a system-level error, or while maintenance mode is enabled for your app. The Custom Error Pages add-on lets you provide URLs to error and maintenance pages of your own.
 
 Upload your custom pages
 ------------------------
@@ -9,7 +9,7 @@ Upload your custom pages
 Create your custom pages as static HTML.  You may wish to use the default HTML served by Heroku as a template:
 
 * [http://s3.amazonaws.com/heroku_pages/error.html](http://s3.amazonaws.com/heroku_pages/error.html)
-* [http://s3.amazonaws.com/heroku_pages/maintenace.html](http://s3.amazonaws.com/heroku_pages/maintenace.html)
+* [http://s3.amazonaws.com/heroku_pages/maintenance.html](http://s3.amazonaws.com/heroku_pages/maintenance.html)
 
 You can reference images or CSS from the HTML as long as you use relative paths (e.g., `<img src="error.png">`) and you upload the other assets into the same place as the HTML.
 
@@ -29,22 +29,22 @@ Now you can set ERROR_PAGE_URL and MAINTENANCE_PAGE_URL to point at your custom 
     :::term
     $ heroku config:add ERROR_PAGE_URL=http://s3.amazonaws.com/your_bucket/your_error_page.html MAINTENANCE_PAGE_URL=http://s3.amazonaws.com/your_bucket/your_maintenance_page.html
 
-Testing
--------
+Testing your pages
+------------------
 
-To test your maintenace page, turn on maintenance mode for a moment:
+To test your maintenance page:
 
     :::term
     $ heroku maintenance:on
     $ heroku open
 
-Note that your logs will show an H80 code for that web hit, indicating that a maintenance page was served to the user:
+Your logs will show an H80 code for that web hit, indicating that a maintenance page was served to the user:
 
     :::term
     $ heroku logs -p router -n 1
     2010-10-08T17:44:18-07:00 heroku[router]: H80 (Maintenance mode) -> GET myapp.herou.com/dyno=none queue=0 wait=0ms service=0ms bytes=0
 
-Testing an error page can be done by pushing a bad deploy (e.g., putting a syntax error into config.ru) or by creating a path on your app that sleeps for 35 seconds (thereby triggering the error H12, request timeout).  For example, in a Sinatra app:
+To testing your error page, you can push a bad deploy such as putting a syntax error into `config.ru`, or by creating a path on your app that sleeps for 35 seconds (thereby triggering the error H12 Request Timeout).  For example, in a Sinatra app:
 
     :::ruby
     get '/errortest' do
@@ -62,4 +62,9 @@ Now visit /errortest on your app, while watching your logs:
     2010-10-08T18:05:10-07:00 heroku[router]: Error H12 (Request timeout) -> GET myapp.heroku.com/errortest dyno=web.1 queue=0 wait=0ms service=0ms bytes=0
     2010-10-08T18:05:10-07:00 heroku[nginx]: GET /errortest HTTP/1.1 | 208.66.27.62 | 3364 | http | 503
     2010-10-08T18:05:15-07:00 app[web.1]: Done sleeping
+
+See also
+--------
+
+* [Full error code listing](/error-codes)
 

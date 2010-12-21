@@ -52,6 +52,7 @@ section 'features', "Platform Features" do
 	topic 'stack',              'Deployment stack'
 	topic 'releases',           'Release management'
 	topic 'logging',            'Logging'
+	topic 'custom-error-pages', 'Custom error pages'
 end
 
 section 'add-ons', "Add-ons" do
@@ -83,4 +84,5 @@ section 'troubleshooting', "Troubleshooting" do
 	topic 'support',            'Getting support'
 	topic 'logs-exceptions',    'Logs and exceptions'
 	topic 'performance',        'Performance'
+	topic 'error-codes',        'Error codes'
 end
