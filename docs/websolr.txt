@@ -126,8 +126,6 @@ Queuing your updates to Solr is a perfect job for Heroku's [Delayed Job Workers]
     :::ruby
     handle_asynchronously :solr_index
 
-Sunspot supports
-
 ## Using a different Solr client
 
 There are other Ruby clients, including the venerable `acts_as_solr`. If you are already using one of these clients and are not interested in switching your application to Sunspot, here are a few pointers for using Websolr in production.
