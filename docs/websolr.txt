@@ -142,7 +142,7 @@ Websolr provides a control panel at [http://websolr.com/](http://websolr.com/) w
 
 You may log in to the Websolr control panel at [http://websolr.com/](http://websolr.com/) using your account's Websolr username and password, which you may find by running `heroku config --long` from your application's directory.
 
-# Questions?
+## Questions?
 
 If you are experiencing a problem with installing or using the Websolr add-on, you may visit [http://help.websolr.com/](http://help.websolr.com/) or [http://support.heroku.com/](http://support.heroku.com/) for assistance. Feel free to also ask questions about the service itself and the features we support.
 
