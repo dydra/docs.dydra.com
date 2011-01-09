@@ -5,8 +5,6 @@ require 'sass'
 require 'indextank'
 require 'topic'
 
-require 'heroku/nav'
-use Heroku::Nav::Header
 
 # require 'rack/coderay'
 # use Rack::Coderay, "//pre[@lang]>code"
@@ -85,8 +83,8 @@ helpers do
 	end
 	
 	def search_for(query, page = 0)
-    client = IndexTank::Client.new(ENV['HEROKUTANK_API_URL'])
-    index = client.indexes('heroku-docs')
+    client = IndexTank::Client.new(ENV['DYDRA_INDEXTANK_URL'])
+    index = client.indexes('docs')
     search = index.search(query, :start => page * 10, :len => 10, :fetch => 'title', :snippet => 'text')
     next_page =
       if search['matches'] > (page + 1) * 10

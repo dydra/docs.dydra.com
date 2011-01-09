@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler'
 Bundler.setup
-
+$:.unshift File.dirname(__FILE__)
 require 'indextank'
 require 'topic'
 
@@ -18,8 +18,8 @@ end
 desc 'Index documentation'
 task :index do
   puts "indexing now:"
-  client = IndexTank::Client.new(ENV['HEROKUTANK_API_URL'])
-  index = client.indexes('heroku-docs')
+  client = IndexTank::Client.new(ENV['DYDRA_INDEXTANK_URL'])
+  index = client.indexes('docs')
   index.add unless index.exists?
 
   docs = FileList['docs/*.txt']
@@ -37,8 +37,8 @@ end
 
 desc 'Sample search'
 task :search, :query do |t, args|
-  client = IndexTank::Client.new(ENV['HEROKUTANK_API_URL'])
-  index = client.indexes('heroku-docs')
+  client = IndexTank::Client.new(ENV['DYDRA_INDEXTANK_URL'])
+  index = client.indexes('docs')
   results = index.search(args[:query], :fetch => 'title', :snippet => 'text')
   puts "#{results['matches']} results."
   puts results.inspect
