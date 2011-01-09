@@ -1,0 +1,26 @@
+Introduction to Dydra
+=========================
+
+Dydra is a cloud-based RDF store.  It's everything you need to build RDF-based
+applications, instantly available.
+
+### Multi-Tenant
+
+Dydra is a multi-tenant data store and query engine.  You don't need to
+estimate your data size, worry about clusters, nodes, or resource use, and
+you'll always be running the latest version of the platform.
+
+### Fully Managed
+
+We fully manage every piece of the data store, including versioning, disaster
+recovery, performance, and more.  You just need to use it.
+
+### Open
+
+Dydra uses open standards and documented extensions.  You can use Dydra from
+any programming language running on any platform on any device.  All you need
+is an internet connection.
+
+### Easy
+
+It's easy to get started on Dydra.  There's no licensing, setup, fees--just click and go.  Why not check out the [quickstart?](/quickstart)
