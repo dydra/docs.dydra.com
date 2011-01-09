@@ -54,7 +54,7 @@
 	</div>
 </div>
 
-<% if request.host == 'docs.dydra.com' %>
+<% if ENV['RACK_ENV'] == 'production' %>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
