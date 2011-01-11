@@ -1,0 +1,20 @@
+SPARQL
+======
+
+SPARQL is the standard query language for RDF.  Like SQL for relational
+databases, the [varying
+implementations](http://esw.w3.org/SparqlImplementations) often differ
+slightly, or have a few extensions, but the basics are the same.
+
+### SPARQL and Dydra
+
+Dydra implements SPARQL.  Every Dydra repository has a standard SPARQL endpoint
+at `/your/repository/sparql`.
+
+Dydra's SPARQL dialect is well-defined by an executable specification, which
+will be released soon.
+
+### SPARQL Overview
+
+Here's a very [thorough overview of SPARQL.](http://www.cambridgesemantics.com/2008/09/sparql-by-example/)
+

@@ -1,0 +1,44 @@
+What is RDF?
+============
+
+### Overview
+
+The Resource Description Framework, or RDF, is an extremely flexible data model
+with numerous serializations and a powerful query language.  RDF consists of
+triples: a subject, a predicate, and an object, and a 'graph' contains a list
+of triples.
+
+In RDF, every element is either a universally unique URI, a data literal, or
+'blank node', whose identity is not known.  This can make it seem verbose, but
+it's critically important for machines when reading data from multiple sources.
+
+    <http://example.org/people/bob> <http://example.org/predicates/knows> <http://example.org/people/alice>
+
+A good summary is at <http://www.rdfabout.com/quickintro.xpd>, and a good
+comparison of modeling a simple piece of knowledge in a wide variety of data
+models is at <http://www.w3.org/2000/10/swap/doc/formats>.
+
+The use of URIs allows multiple data sources to talk about the same entities
+using the same language.  It's a critical piece of the puzzle for making wildly
+different data sets talk to each other.  None other than Tim-Berners Lee, who
+invented HTTP and thus the web, has written [a good, short piece on why RDF's
+interoperability characteristics are
+important](http://www.w3.org/DesignIssues/RDF-XML.html).
+
+### Standards
+
+RDF is a W3C standard, the original version of which was completed in 2004.
+The W3C maintains a [list of relevant recommendations.](http://www.w3.org/standards/techs/rdf#w3c_all)
+
+The original set of W3C standards blessed a particular serialization, RDF/XML,
+which we believe was a problem for RDF uptake.  RDF is not a subset of XML, nor
+does it need to be as complicated as RDF/XML can be.
+
+### Using It
+
+RDF is a data model, akin to the relational model we know from databases.  Like
+relational databases you may be familiar with, the model has numerous competing
+implementations, built around a mostly-compatible query language.  For RDF,
+this query language is [SPARQL](/sparql).
+
+
