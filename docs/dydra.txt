@@ -2,7 +2,7 @@ Introduction to Dydra
 =========================
 
 Dydra is a cloud-based RDF store, a database-as-a-service.  It's everything you
-need to build RDF-based applications, instantly available.
+need to build an RDF-based application, in an instant.
 
 ### Multi-Tenant
 
@@ -13,16 +13,15 @@ you'll always be running the latest version of the platform.
 ### Fully Managed
 
 We fully manage every piece of the data store, including versioning, disaster
-recovery, performance, and more.  You just need to use it.
+recovery, performance, and more.  You just use it.
 
 ### No Lock-in
 
 Dydra uses open standards.  You can use Dydra from any programming language
 running on any platform on any device.  All you need is an internet connection.
-And we'll never lock you in--if we can't do it right, take your business
-elsewhere.
+And we'll never lock you in -- it's your data.
 
 ### Easy
 
 It's easy to get started on Dydra.  There's no licensing, setup, or fees--just
-click and go.  Why not check out the [quickstart?](/quickstart)
+click and go.  Go ahead, check out the [quickstart?](/quickstart)
