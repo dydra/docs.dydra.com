@@ -1,0 +1,38 @@
+Our Philosphy
+==================
+
+Dydra is a cloud-based RDF platform built on several principles about how we
+believe software development should work. Some of them come from companies
+before us that inspire us. Others come from our disappointment with existing
+tools for the technologies we love. Together, they're Dydra's goals.
+
+## Developer Productivity is Everything
+
+Nothing is more important than developer productivity. No resource is more
+valuable. Never allow two steps when one would do, never have a step where zero
+would do, use smart defaults, offer multiple ways to do the same thing. Provide
+good tools.  Development should be fun.
+
+## There Should be no Sysadmin
+
+No part of the platform should need babysitting, monitoring, tweaking, or
+interference from you. Every tweak you make should be meaningful for your
+application's behavior, not the platform's performance. You should never have
+to allocate resources, figure out ahead of time how big a repository needs to
+be, or mess around with equivalent queries that mysteriously run at different
+speeds. There should be no sysadmin, and good lord, there should be no DBA.
+
+## Be Open
+
+We're selling a platform. If code we write is *not actually the platform*, it
+should be open, and free. Developers have enough problems without enigmatic,
+mysterious tooling. Our docs? A git repository, make changes to it. Our SPARQL
+dialect? The canonical definition is a set of executable tests. Libraries we
+contribute to? Open. Libraries we write? Open. Platform status? If it breaks,
+you'll know how, and hear about how it's going to be fixed in the future.
+
+## Be the Best
+
+If you have a reason to use another RDF platform, we messed up. Whatever the
+reason. We're listening to you.
+
