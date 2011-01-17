@@ -1,25 +1,25 @@
 Dydra Quickstart Guide
 =======================
 
-After [creating your account,](http://dydra.com/signup) visit your dashboard and
+After you [create your account](http://dydra.com/signup), visit your dashboard and
 create a new repository.
 
-Go to your repository's page, where you'll be able to import data (see the link
-on the upper right).  You can import from local files, copy/paste, or simply
+Go to your repository's page. Use the link on the upper right to import data.
+You can import from local files, copy/paste, or simply
 input a URL that we'll fetch for you.
 
-Create a [SPARQL](/sparql)query on your repository.  Try this one to get a list of the
+Create a [SPARQL](/sparql) query on your repository.  Try this one to get a list of the
 predicates in your dataset:
 
     SELECT DISTINCT ?p WHERE { ?s ?p ?o }
 
-Go ahead and run it.  You'll see a list in your browser.
+Go ahead.  Run it.  You'll see a the results in your browser.
 
 ### SPARQL
 
 Your repository already has a standard SPARQL endpoint.  It's at:
 
-    http://dydra.com/your/repository/sparql
+<pre>http://dydra.com/<i>your</i>/<i>repository</i>/sparql</pre>
 
 ### API
 
