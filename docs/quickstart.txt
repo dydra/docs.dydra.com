@@ -1,7 +1,7 @@
 Dydra Quickstart Guide
 =======================
 
-After [creating your account,](dydra.com/signup) visit your dashboard and
+After [creating your account,](http://dydra.com/signup) visit your dashboard and
 create a new repository.
 
 Go to your repository's page, where you'll be able to import data (see the link
