@@ -4,6 +4,8 @@ Bundler.setup
 $:.unshift File.dirname(__FILE__)
 require 'indextank'
 require 'topic'
+require 'net/http'
+require 'uri'
 
 desc 'Start a development server'
 task :server do
@@ -45,6 +47,18 @@ task :search, :query do |t, args|
 end
 
 task :start => :server
+
+desc "Update template."
+task :update_template do
+  s = Net::HTTP.get URI.parse('http://dydra.com/template')
+  main = File.read('views/main_content.erb')
+  ga = File.read('views/google_analytics.erb')
+  s.gsub!(/\<title\>.+\<\/title\>/m, '<title>Dydra | <%= title %></title>')
+  s.gsub!('[INSERT CONTENT HERE]', main)
+  s.gsub!(/\<script\ type\=[\'\"]text\/javascript[\'\"].+\>.+google-analytics.+\<\/script\>/m, ga)
+  File.open('views/layout.erb', 'w') {|f| f.write s}
+  File.open('views/layout.haml', 'w'){|f| f.write "erb:\n  " + File.read('views/layout.erb').gsub("\n", "\n  ")}
+end
 
 def which(command)
 	ENV['PATH'].
