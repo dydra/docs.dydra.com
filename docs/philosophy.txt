@@ -2,31 +2,30 @@ Our Philosphy
 ==================
 
 Dydra is a cloud-based RDF platform built on several principles about how we
-believe software development should work. Some of them come from companies
-before us that inspire us. Others come from our disappointment with existing
+believe software development should work. Some of them are inspired by companies
+around us. Others come from our disappointment with existing
 tools for the technologies we love. Together, they're Dydra's goals.
 
 ## Developer Productivity is Everything
 
-Nothing is more important than developer productivity. No resource is more
-valuable. Never allow two steps when one would do, never have a step where zero
-would do, use smart defaults, offer multiple ways to do the same thing. Provide
-good tools.  Development should be fun, and removing busywork is what makes
-that happen.
+Developer productivity is paramount. No resource is more valuable.
+We never allow two steps when one would do, never have a step where zero
+would do, use smart defaults, offer multiple ways to do the same thing.
+Development should be fun, and removing busywork makes that happen.
 
 ## There Should be no Sysadmin
 
-No part of the platform should need babysitting, monitoring, tweaking, or
-interference from you. Every tweak you make should be meaningful for your
-application's behavior, not the platform's performance. You should never have
+No part of the platform needs babysitting, monitoring, tweaking, or
+interference from you. Every tweak you make is meaningful for your
+application's behavior, not the platform's performance. You never have
 to allocate resources, figure out ahead of time how big a repository needs to
 be, or mess around with equivalent queries that mysteriously run at different
-speeds. There should be no sysadmin, and good lord, there should be no DBA.
+speeds. There is no sysadmin, and good lord, youn need no DBA.
 
 ## Be Open
 
-We're selling a platform. If code we write is *not actually the platform*, it
-should be open, and free. Developers have enough problems without enigmatic,
+Our product is this platform. An code which is *not actually the platform*, is
+is open, and free. Developers have enough problems without enigmatic,
 mysterious tooling. Our docs? A git repository, make changes to it. Our SPARQL
 dialect? The canonical definition is a set of executable tests. Libraries we
 contribute to? Open. Libraries we write? Open. Platform status? If it breaks,
@@ -34,12 +33,12 @@ you'll know how, and hear about how it's going to be fixed in the future.
 
 ## You Own Your Data
 
-You're not signing your data over to Dydra, Dydra is hosting it for you.
-License it however you see fit, or delete it from our servers entirely. We will
-never make any claim of ownership on any of your work.
+You're not signing your data over to Dydra, Dydra hosts it for you.
+License it however you see fit, or delete it from our servers entirely. We
+claim no ownership on any of your work.
 
 ## Be the Best
 
-If you have a reason to use another RDF platform, we messed up. Whatever the
+If you have any reason to use another RDF platform, we want to know. Whatever the
 reason. We're listening to you.
 
