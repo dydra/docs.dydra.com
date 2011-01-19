@@ -53,11 +53,12 @@ task :update_template do
   s = Net::HTTP.get URI.parse('http://dydra.com/template')
   main = File.read('views/main_content.erb')
   ga = File.read('views/google_analytics.erb')
-  s.gsub!(/\<title\>.+\<\/title\>/m, '<title>Dydra | <%= title %></title>')
+  s.gsub!(/\<title\>.+\<\/title\>/m, '<title>Dydra | <%=h @title %></title>')
   s.gsub!('[INSERT CONTENT HERE]', main)
-  s.gsub!(/\<script\ type\=[\'\"]text\/javascript[\'\"].+\>.+google-analytics.+\<\/script\>/m, ga)
+  m = s.match(/.+(<script\b[^>]*>.+?google-analytics.+?<\/script\>)/m)
+  s.gsub!(m[1], ga)
   File.open('views/layout.erb', 'w') {|f| f.write s}
-  File.open('views/layout.haml', 'w'){|f| f.write "erb:\n  " + File.read('views/layout.erb').gsub("\n", "\n  ")}
+  File.open('views/layout.haml', 'w'){|f| f.write ":erb\n  " + File.read('views/layout.erb').gsub("\n", "\n  ")}
 end
 
 def which(command)

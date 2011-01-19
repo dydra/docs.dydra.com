@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml2/DTD/xhtml1-strict.dtd">
 <!--[if lt IE 7 ]> <html class="ie6 no-js" lang="en" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"> <![endif]-->
 <!--[if IE 7 ]>    <html class="ie7 no-js" lang="en" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8 no-js" lang="en" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"> <![endif]-->
@@ -9,38 +10,32 @@
 <head>
 <meta charset='UTF-8' content='text/html' http-equiv='Content-Type'>
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
-	<title>Dydra | <%=h @title %></title>
+<title>Dydra | <%=h @title %></title>
 <meta content='Dydra.com' name='description'>
 <meta content='Dydra' name='author'>
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/themes/smoothness/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="http://public.dydra.com.s3.amazonaws.com/stylesheets/style.css?1294962321" media="all" rel="stylesheet" type="text/css" />
-<link type="text/css" rel="stylesheet" href="/stylesheets/coderay.css" media="screen" />
+<link href="http://public.dydra.com.s3.amazonaws.com/stylesheets/style.css?1295419064" media="all" rel="stylesheet" type="text/css" />
 
 
-<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/modernizr-1.6.min.js?1294962321" type="text/javascript"></script>
+<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/modernizr-1.6.min.js?1295419064" type="text/javascript"></script>
 <meta name="csrf-param" content="authenticity_token"/>
-<meta name="csrf-token" content="UFFt0jqEQwVqC56Hxd3BB3f6AEtW3NFazboV+ZhzE14="/>
+<meta name="csrf-token" content="eCIwOUJ+q6eHcJYauAERjccgAVxk/fVx5iKYAK8wDws="/>
 <link href='http://fonts.googleapis.com/css?family=Copse:regular"' rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css'>
 
 </head>
 
 <body class='application'>
-<div class='clearfix' id='header-wrapper'>
-<header id='header'>
-<div class='title'>
-<h1>
+<div id='header'>
+<div class='wrapper'>
+<h1 id='title'>
 <a href='http://dydra.com/'>Dydra</a>
 </h1>
-</div>
-<div class='navigation'>
+<div id='navigation'>
 <ul>
 <li class='dydra-link-home first'>
 <a href="http://dydra.com/">Home</a>
-</li>
-<li class='dydra-link-about'>
-<a href="http://dydra.com/about">About</a>
 </li>
 <li class='dydra-link-blog'>
 <a href="http://blog.dydra.com">Blog</a>
@@ -78,65 +73,57 @@
 
 
 </div>
+</div>
+</div>
 
-</header>
-</div>
-<div class='clearfix' id='main'>
-<div id='flash-wrapper'>
-<div class='single-column' id='flash'>
-</div>
-<div class='clear'></div>
+<div class='wrapper'>
+<div id='flash'>
 </div>
 
 
 <div class='content'>
-  
-	<div class="column-3 first" id="docsnav">
-		<form action="/search">
-			<div id="search">
-				<input type="text" name="q" size="25" value="<%= params[:q] || '' %>" />
-			</div>
-		</form>
+<div class="column-3 first" id="docsnav">
+  <form action="/search">
+    <div id="search">
+      <input type="text" name="q" size="25" value="<%= params[:q] || '' %>" />
+    </div>
+  </form>
 
-		<ul>
-			<% sections.each do |slug, title, topics| %>
-				<li>
-				<h3><%= title %></h3>
-				<ul>
-					<% topics.each do |slug, title, _| %>
-						<% if params[:topic] == slug %>
-							<li class="current"><a><%=h title %></a></li>
-						<% else %>
-							<li><a href="/<%= slug %>"><%=h title %></a></li>
-						<% end %>
-					<% end %>
-				</ul>
-				</li>
-			<% end %>
-		</ul>
-	</div>
+  <ul>
+    <% sections.each do |slug, title, topics| %>
+      <li>
+      <h3><%= title %></h3>
+      <ul>
+        <% topics.each do |slug, title, _| %>
+          <% if params[:topic] == slug %>
+            <li class="current"><a><%=h title %></a></li>
+          <% else %>
+            <li><a href="/<%= slug %>"><%=h title %></a></li>
+          <% end %>
+        <% end %>
+      </ul>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
-	<div id="docscontent" class="column-9 last">
-		<div class="topic_content">
-			<%= yield %>
-		</div>
-	</div>
-  <div class="clear"></div>
+<div id="docscontent" class="column-9 last">
+  <div class="topic_content">
+    <%= yield %>
+  </div>
+</div>
+<div class="clear"></div>
+
 </div>
 
 </div>
-<div class='clearfix' id='footer'>
-<div class='single-column'>
+<div id='footer'>
+<div class='wrapper'>
 <hr>
-</div>
-<div class='clear'></div>
-<div class='left'>
+<div class='navigation'>
 <ul>
 <li class='dydra-link-home first'>
 <a href="http://dydra.com/">Home</a>
-</li>
-<li class='dydra-link-about'>
-<a href="http://dydra.com/about">About</a>
 </li>
 <li class='dydra-link-blog'>
 <a href="http://blog.dydra.com">Blog</a>
@@ -173,28 +160,28 @@
 </script>
 
 
-<div>
 <small class='copyright'>
 Copyright &copy; 2011 Dydra
 </small>
 </div>
-</div>
-<div class='right'>
-<a href="http://github.com/datagraph" title="Our github profile"><img alt="Our Github profile" src="http://public.dydra.com.s3.amazonaws.com/images/github_32.png?1294962321" /></a>
-<a href="http://twitter.com/dydrate" title="Follow us on Twitter"><img alt="Follow us on Twitter" src="http://public.dydra.com.s3.amazonaws.com/images/twitter_32.png?1294962321" /></a>
-<a href="http://feeds.feedburner.com/datagraph" title="Subscribe to our blog"><img alt="Subscribe to our blog" src="http://public.dydra.com.s3.amazonaws.com/images/rss_32.png?1294962321" /></a>
+<div class='social-buzz'>
+<a href="http://github.com/datagraph" title="Our github profile"><img alt="Our Github profile" src="http://public.dydra.com.s3.amazonaws.com/images/github_32.png?1295419064" /></a>
+<a href="http://twitter.com/dydrate" title="Follow us on Twitter"><img alt="Follow us on Twitter" src="http://public.dydra.com.s3.amazonaws.com/images/twitter_32.png?1295419064" /></a>
+<a href="http://feeds.feedburner.com/datagraph" title="Subscribe to our blog"><img alt="Subscribe to our blog" src="http://public.dydra.com.s3.amazonaws.com/images/rss_32.png?1295419064" /></a>
 <!-- Icon provided by Komodo Media, http://www.komodomedia.com -->
 </div>
-
 </div>
+</div>
+
+<!-- -# Javascript at the bottom for fast page loading -->
 <script type='text/javascript'>
   //<![CDATA[
-    var DYDRA = {
-      CURRENT_ACCOUNT_NAME: "-none-",
-      BASE_HOST: "dydra.com",
-      BLOG_HOST: "blog.dydra.com",
-      DOCS_HOST: "docs.dydra.com"
-    }
+    var DYDRA = new function(){
+      this.CURRENT_ACCOUNT_NAME = "-none-";
+      this.BASE_HOST = "dydra.com";
+      this.BLOG_HOST = "blog.dydra.com";
+      this.DOCS_HOST = "docs.dydra.com";
+    };
   //]]>
 </script>
 
@@ -205,9 +192,10 @@ Copyright &copy; 2011 Dydra
     !window.jQuery && document.write(unescape('%3Cscript src="/javascripts/jquery-1.4.4.min.js"%3E%3C/script%3E'))
   //]]>
 </script>
-<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/rails.js?1294962321" type="text/javascript"></script>
-<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/plugins.js?1294962321" type="text/javascript"></script>
-<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/application.js?1294962321" type="text/javascript"></script>
+<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/rails.js?1295419064" type="text/javascript"></script>
+<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/plugins.js?1295419064" type="text/javascript"></script>
+<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/jquery.jsonrpc.js?1295419064" type="text/javascript"></script>
+<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/application.js?1295419064" type="text/javascript"></script>
 <!--[if lt IE 7 ]>
 <script type='text/javascript'>
   //<![CDATA[
@@ -231,6 +219,7 @@ Copyright &copy; 2011 Dydra
 
 </script>
 <% end %>
+
 
 
 </body>
