@@ -34,9 +34,9 @@ follows:
 
 <table>
   <tr>
-    <td>Format</td>
-    <td>Accept: header content type</td>
-    <td>Extension-based location</td>
+    <td style='padding-left: 1em;'>Format</td>
+    <td style='padding-left: 2em; padding-right: 1em'>Accept: header content type</td>
+    <td style='padding-left: 2em;'>Extension-based location</td>
   <tr>
     <td>N-Triples</td>
     <td>`text/plain`</td>
