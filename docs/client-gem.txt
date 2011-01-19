@@ -1,0 +1,110 @@
+The Dydra Client
+================
+
+We currently support one client application, a Ruby gem installable via
+RubyGems. This client has command-line functions for most of the RPC API.
+
+##### Installing the Client
+
+On Mac OS X and most Linux systems, the RubyGems is installed or easily
+available. Windows users can install a working RubyGems environment with the
+Ruby installer at <http://rubyinstaller.org/>.
+
+After installing RubyGems, installing the client is easy:
+
+    :::term
+    $ gem install dydra
+
+The Dydra command should now be available.
+
+The first time you run the Dydra command, you'll be asked to authenticate. When
+you type your username and password, your API token will be saved to
+`~/.dydra/credentials` and used for future commands.
+
+    $ dydra create foaf
+    Username: alice
+    Password:
+    alice/foaf
+
+### Client Commands
+
+The client currently performs several basic operations at the command line.
+
+##### Repository Creation
+
+    :::term
+    $ dydra create foaf
+    alice/foaf
+
+This creates a repository for your account named foaf.
+
+
+##### Importing
+
+Imports a URL or local file into a repository.
+
+    :::term
+    $ dydra import foaf http://datagraph.org/jhacker/foaf.nt
+    25414300-061c-012e-c283-0023df827da6
+
+Importing is an asynchronous operation.
+
+##### Querying
+
+Runs a [SPARQL query](/dydra-sparql) on a repository.
+
+    :::term
+    $ dydra query foaf 'select distinct ?s where { ?s ?p ?o }'
+    <http://datagraph.org/jhacker/#self>
+    <http://datagraph.org/jhacker/foaf>
+
+Querying is an asynchronous operation in the RPC API, but has been abstracted
+to a synchronous operation in client.
+
+### Client API
+
+The Dydra gem can also be used as an API for writing Ruby programs.  This is a short example:
+
+    :::ruby
+    #!/usr/bin/env ruby
+
+    Dydra.authenticate('user','password')
+    # or try...
+    # Dydra.token_authenticate('token')
+
+    repository = Dydra::Repository.create('foaf')
+    repository.import("http://datagraph.org/jhacker/foaf.nt")
+    results = repository.query("select * where { ?s ?p ?o }")
+    results.each do |binding|
+      puts binding.s + " " + binding.p + " " + binding.o
+    end
+
+
+### Asynchronous Operation
+
+Many of the commands supported by the API are asynchronous. This means that
+they will not necessarily be completed at the time you request them. This
+allows you to quickly and simply request long-running operations and check on
+their status later. After completing or experiencing an error, job statuses are
+maintained for 24 hours.
+
+To check the status of a job, use the status command:
+
+    :::term
+    $ dydra import foaf http://datagraph.org/foaf.nt
+    25414300-061c-012e-c283-0023df827da6
+    $ dydra status 25414300-061c-012e-c283-0023df827da6
+    25414300-061c-012e-c283-0023df827da6 is running (25% complete)
+    $ dydra status 25414300-061c-012e-c283-0023df827da6
+    25414300-061c-012e-c283-0023df827da6 is done.
+
+Job status is also the preferred way to discover informationa bout failures:
+
+    :::term
+    $ dydra import foaf http://google.com/favicon.ico
+    25414300-061c-012e-c283-0023df827da6
+    $ dydra status 25414300-061c-012e-c283-0023df827da6
+    25414300-061c-012e-c283-0023df827da6 Error: Unsupported content type: image/x-icon
+    
+
+

@@ -1,0 +1,34 @@
+Using SPARQL with Dydra
+=======================
+
+Every Dydra repository is also a SPARQL endpoint. We have an [introduction to
+SPARQL](/sparql) if you're not familiar with the language.
+
+Your repository's SPARQL endpoint is found by appending `/sparql` to the
+repository's URL. So a user `jhacker` who created a repository named `foaf`
+would have a SPARQL endpoint located at `http://dydra.com/jhacker/foaf/sparql.`
+
+### Dydra's SPARQL Dialect
+
+Like all SPARQL implementations, Dydra's has some quirks. Unlike all SPARQL
+implementations, our canonical description is a [set of executable
+tests](http://github.com/dydra/sparql-tests), written in
+[RSpec](http://rspec.info).  Some quirks are worth noting.
+
+NOTE: Not all SPARQL features are currently supported during our beta test.
+
+##### Blank Node Handling
+
+Dydra treats blank node identifiers as canonical. When data is imported,
+existing blank node identifiers are saved, and new, canonical blank node
+identifiers are created for new nodes. In practice, this is quite useful: the
+output of one query can be used for another.
+
+##### Numeric Normalization
+
+If your query performs a numeric operation on a type which can be cast to a
+numeric type, such as performing arithmetic on the literal "01", bindings for
+that literal will be the normalized numeric type, rather than the
+non-normalized type saved in the store.
+
+

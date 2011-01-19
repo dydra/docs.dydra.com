@@ -1,0 +1,52 @@
+Technical Overview
+==================
+
+For day-to-day use of your Dydra repository, there are currently two APIs
+available: a standard [SPARQL endpoint](/dydra-sparql), and an [RPC API](/api).
+These two APIs are documented, and can be accessed from any programming
+language or device.
+
+In addition, we currently support a [Dydra client gem](/client-gem) for Ruby.
+The client gem also acts as a command-line interface to the RPC interface. We
+will add more programming languages to our supported list during and after our
+beta test period.
+
+Several repository functions, such as import, export, and more, can also be
+done directly via the website.
+
+##### Exporting
+
+Repositories are always available for exporting via HTTP directly; this
+functionality is not part of the API. Simply browse to your repository and
+click 'Export', then select your format.
+
+You can also access a repository programatically. You can do this in two ways:
+
+ * Adding an extension to the repository name
+ * Setting the HTTP `Accept` header
+
+
+### Format Request table
+
+
+Exports for the repository at `http://dydra.com/jhacker/foaf` are available as
+follows:
+
+<table>
+  <tr>
+    <td>Format</td>
+    <td>Accept: header content type</td>
+    <td>Extension-based location</td>
+  <tr>
+    <td>N-Triples</td>
+    <td>`text/plain`</td>
+    <td>`http://dydra.com/jhacker/foaf.nt`</td>
+  <tr>
+    <td>Turtle</td>
+    <td>`text/turtle`</td>
+    <td>`http://dydra.com/jhacker/foaf.ttl`</td>
+  <tr>
+    <td>RDF/XML</td>
+    <td>`application/rdf+xml`</td>
+    <td>`http://dydra.com/jhacker/foaf.rdf`</td>
+</table>

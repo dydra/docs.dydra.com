@@ -11,7 +11,8 @@ tools for the technologies we love. Together, they're Dydra's goals.
 Nothing is more important than developer productivity. No resource is more
 valuable. Never allow two steps when one would do, never have a step where zero
 would do, use smart defaults, offer multiple ways to do the same thing. Provide
-good tools.  Development should be fun.
+good tools.  Development should be fun, and removing busywork is what makes
+that happen.
 
 ## There Should be no Sysadmin
 
@@ -30,6 +31,12 @@ mysterious tooling. Our docs? A git repository, make changes to it. Our SPARQL
 dialect? The canonical definition is a set of executable tests. Libraries we
 contribute to? Open. Libraries we write? Open. Platform status? If it breaks,
 you'll know how, and hear about how it's going to be fixed in the future.
+
+## You Own Your Data
+
+You're not signing your data over to Dydra, Dydra is hosting it for you.
+License it however you see fit, or delete it from our servers entirely. We will
+never make any claim of ownership on any of your work.
 
 ## Be the Best
 
