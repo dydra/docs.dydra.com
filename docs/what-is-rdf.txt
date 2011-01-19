@@ -5,8 +5,9 @@ What is RDF?
 
 The Resource Description Framework, or RDF, is an extremely flexible data model
 with numerous serializations and a powerful query language.  RDF consists of
-triples: a subject, a predicate, and an object, and a 'graph' contains a list
-of triples.
+'graphs' and 'triples'.
+each triple comprises a 'subject', a 'predicate', and an 'object'.
+each graph contains a set of triples.
 
 In RDF, every element is either a universally unique URI, a data literal, or
 'blank node', whose identity is not known.  This can make it seem verbose, but
