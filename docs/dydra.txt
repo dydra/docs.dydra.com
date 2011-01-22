@@ -6,13 +6,13 @@ data and a SPARQL endpoint will be available for your application to use.
 
 ### Multi-Tenant
 
-Dydra is a fully multi-tenant data store and query engine. You don't need to
+Dydra is a multi-tenant data store and query engine. You don't need to
 estimate your data size, worry about clusters, nodes, or resource use, and
 you'll always be running the latest version of the platform.
 
 ### Fully Managed
 
-We fully manage every piece of the data store, including versioning, disaster
+We manage every piece of the data store, including versioning, disaster
 recovery, performance, and more. You just use it.
 
 ### No Lock-in
