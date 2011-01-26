@@ -1,0 +1,16 @@
+<% if ns = next_section(params[:topic]) %>
+  <a href="/<%= ns[0] %>" id="aside-link">Next: <strong><%=h ns[1] %></strong>  &rarr;</a>
+<% end %>
+
+<% sections.each do |slug, title, topics| %>
+  <h5><%= title %></h5>
+  <ul class="links">
+    <% topics.each do |slug, title, _| %>
+      <% if params[:topic] == slug %>
+        <li class="current"><a><%=h title %></a></li>
+      <% else %>
+        <li><a href="/<%= slug %>"><%=h title %></a></li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>

@@ -53,8 +53,11 @@ task :update_template do
   s = Net::HTTP.get URI.parse('http://dydra.com/template')
   main = File.read('views/main_content.erb')
   ga = File.read('views/google_analytics.erb')
+  sidebar = File.read('views/sidebar.erb')
   s.gsub!(/\<title\>.+\<\/title\>/m, '<title>Dydra | <%=h @title %></title>')
+  s.gsub!(/\<body\ class=[\'\"].+[\'\"]\>/, '<body class="docs">')
   s.gsub!('[INSERT CONTENT HERE]', main)
+  s.gsub!('[INSERT SIDEBAR CONTENT HERE]', sidebar)
   m = s.match(/.+(<script\b[^>]*>.+?google-analytics.+?<\/script\>)/m)
   s.gsub!(m[1], ga)
   File.open('views/layout.erb', 'w') {|f| f.write s}

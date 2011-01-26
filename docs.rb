@@ -31,15 +31,15 @@ end
 # REDIRECTS
 
 get '/getting-started' do
-  redirect '/heroku'
+  redirect '/dydra'
 end
 
-get '/memcached' do
-  redirect '/memcache'
+get '/rdf' do
+  redirect '/what-is-rdf'
 end
 
-get '/technologies' do
-  redirect '/aspen'
+get '/using-dydra' do
+  redirect '/overview'
 end
 
 # 
@@ -58,12 +58,6 @@ end
 get '/:topic' do
 	cache_long
 	render_topic params[:topic]
-end
-
-get '/css/docs.css' do
-	cache_long
-	content_type 'text/css'
-	erb :css, :layout => false
 end
 
 helpers do

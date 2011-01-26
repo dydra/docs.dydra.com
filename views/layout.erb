@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml2/DTD/xhtml1-strict.dtd">
-<!--[if lt IE 7 ]> <html class="ie6 no-js" lang="en" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7 no-js" lang="en" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8 no-js" lang="en" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"> <![endif]-->
-<!--[if IE 9 ]>    <html class="ie9 no-js" lang="en" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<html class='no-js' lang='en' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:foaf='http://xmlns.com/foaf/0.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:rdfs='http://www.w3.org/2000/01/rdf-schema#'>
-<!--<![endif]-->
+<html lang='en' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:foaf='http://xmlns.com/foaf/0.1/' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#' xmlns:rdfs='http://www.w3.org/2000/01/rdf-schema#'>
 <head>
 <meta charset='UTF-8' content='text/html' http-equiv='Content-Type'>
 <meta content='IE=edge,chrome=1' http-equiv='X-UA-Compatible'>
@@ -15,49 +8,31 @@
 <meta content='Dydra' name='author'>
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/themes/smoothness/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="http://public.dydra.com.s3.amazonaws.com/stylesheets/style.css?1295419064" media="all" rel="stylesheet" type="text/css" />
+<link href="https://s3.amazonaws.com/public.dydra.com/stylesheets/style.css?1296056293" media="all" rel="stylesheet" type="text/css" />
 
 
-<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/modernizr-1.6.min.js?1295419064" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/webfonts/humanist.js?1296056293" type="text/javascript"></script>
 <meta name="csrf-param" content="authenticity_token"/>
-<meta name="csrf-token" content="eCIwOUJ+q6eHcJYauAERjccgAVxk/fVx5iKYAK8wDws="/>
-<link href='http://fonts.googleapis.com/css?family=Copse:regular"' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold' rel='stylesheet' type='text/css'>
+<meta name="csrf-token" content="a1CxWe47ISzZAcdpB0xsrpjcl3zxqbLujrDAcmvK1To="/>
 
 </head>
 
-<body class='application'>
+<body class="docs">
 <div id='header'>
 <div class='wrapper'>
-<h1 id='title'>
-<a href='http://dydra.com/'>Dydra</a>
-</h1>
-<div id='navigation'>
-<ul>
-<li class='dydra-link-home first'>
-<a href="http://dydra.com/">Home</a>
-</li>
-<li class='dydra-link-blog'>
-<a href="http://blog.dydra.com">Blog</a>
-</li>
-<li class='dydra-link-docs'>
-<a href="http://docs.dydra.com">Docs</a>
-</li>
+<a href="http://dydra.com/" id="logo">Dydra</a>
+<ul id='nav'>
+<li><a href="http://dydra.com/" class="dydra-link-home">Home</a></li>
+<li><a href="http://dydra.com/about" class="dydra-link-about">About</a></li>
+<li><a href="http://docs.dydra.com/" class="dydra-link-blog">Docs</a></li>
+<li><a href="http://blog.dydra.com/" class="dydra-link-docs">Blog</a></li>
 <div id='dydra-header-logged-in'>
-<li class='dydra-link-my-account'>
-<a href="http://dydra.com/my_account">My Account</a>
-</li>
-<li class='dydra-link-logout'>
-<a href="http://dydra.com/logout">Logout</a>
-</li>
+<li><a href="http://dydra.com/my_account" class="dydra-link-my-account">My Account</a></li>
+<li><a href="http://dydra.com/logout" class="dydra-link-logout">Logout</a></li>
 </div>
 <div id='dydra-header-logged-out'>
-<li class='dydra-link-signup'>
-<a href="http://dydra.com/signup">Signup</a>
-</li>
-<li class='dydra-link-login'>
-<a href="http://dydra.com/login">Login</a>
-</li>
+<li><a href="http://dydra.com/signup" class="dydra-link-signup">Signup</a></li>
+<li><a href="http://dydra.com/login" class="dydra-link-login">Login</a></li>
 </div>
 </ul>
 <script type='text/javascript'>
@@ -71,83 +46,77 @@
   //]]>
 </script>
 
-
-</div>
 </div>
 </div>
 
-<div class='wrapper'>
 <div id='flash'>
 </div>
 
+<div id='main'>
+<div id='main-0'>
+<div class='wrapper'>
+<div id='content'>
+<%= yield %>
 
-<div class='content'>
-<div class="column-3 first" id="docsnav">
-  <form action="/search">
-    <div id="search">
-      <input type="text" name="q" size="25" value="<%= params[:q] || '' %>" />
-    </div>
-  </form>
 
-  <ul>
-    <% sections.each do |slug, title, topics| %>
-      <li>
-      <h3><%= title %></h3>
-      <ul>
-        <% topics.each do |slug, title, _| %>
-          <% if params[:topic] == slug %>
-            <li class="current"><a><%=h title %></a></li>
-          <% else %>
-            <li><a href="/<%= slug %>"><%=h title %></a></li>
-          <% end %>
-        <% end %>
-      </ul>
-      </li>
+</div>
+<div id='aside'>
+<% if ns = next_section(params[:topic]) %>
+  <a href="/<%= ns[0] %>" id="aside-link">Next: <strong><%=h ns[1] %></strong>  &rarr;</a>
+<% end %>
+
+<% sections.each do |slug, title, topics| %>
+  <h5><%= title %></h5>
+  <ul class="links">
+    <% topics.each do |slug, title, _| %>
+      <% if params[:topic] == slug %>
+        <li class="current"><a><%=h title %></a></li>
+      <% else %>
+        <li><a href="/<%= slug %>"><%=h title %></a></li>
+      <% end %>
     <% end %>
   </ul>
-</div>
+<% end %>
 
-<div id="docscontent" class="column-9 last">
-  <div class="topic_content">
-    <%= yield %>
-  </div>
-</div>
-<div class="clear"></div>
 
 </div>
-
+</div>
+</div>
 </div>
 <div id='footer'>
 <div class='wrapper'>
-<hr>
-<div class='navigation'>
-<ul>
-<li class='dydra-link-home first'>
-<a href="http://dydra.com/">Home</a>
-</li>
-<li class='dydra-link-blog'>
-<a href="http://blog.dydra.com">Blog</a>
-</li>
-<li class='dydra-link-docs'>
-<a href="http://docs.dydra.com">Docs</a>
-</li>
-<div id='dydra-footer-logged-in'>
-<li class='dydra-link-my-account'>
-<a href="http://dydra.com/my_account">My Account</a>
-</li>
-<li class='dydra-link-logout'>
-<a href="http://dydra.com/logout">Logout</a>
-</li>
+<p id='copyright'>
+Copyright &copy; 2011 Datagraph, Inc.
+&nbsp;&bull;&nbsp;
+<span><a href="http://dydra.com/" class="dydra-link-home">Home</a></span>
+&nbsp;&bull;&nbsp;
+<span><a href="http://dydra.com/about" class="dydra-link-about">About</a></span>
+&nbsp;&bull;&nbsp;
+<span><a href="http://docs.dydra.com/" class="dydra-link-blog">Docs</a></span>
+&nbsp;&bull;&nbsp;
+<span><a href="http://blog.dydra.com/" class="dydra-link-docs">Blog</a></span>
+<span id='dydra-footer-logged-in'>
+&nbsp;&bull;&nbsp;
+<span><a href="http://dydra.com/my_account" class="dydra-link-my-account">My Account</a></span>
+&nbsp;&bull;&nbsp;
+<span><a href="http://dydra.com/logout" class="dydra-link-logout">Logout</a></span>
+</span>
+<span id='dydra-footer-logged-out'>
+&nbsp;&bull;&nbsp;
+<span><a href="http://dydra.com/signup" class="dydra-link-signup">Signup</a></span>
+&nbsp;&bull;&nbsp;
+<span><a href="http://dydra.com/login" class="dydra-link-login">Login</a></span>
+</span>
+</p>
+<p id='footer-links'>
+<a href='#'>GitHub</a>
+&nbsp;&bull;&nbsp;
+<a href='#'>Twitter</a>
+&nbsp;&bull;&nbsp;
+<a href='#'>RSS</a>
+</p>
 </div>
-<div id='dydra-footer-logged-out'>
-<li class='dydra-link-signup'>
-<a href="http://dydra.com/signup">Signup</a>
-</li>
-<li class='dydra-link-login'>
-<a href="http://dydra.com/login">Login</a>
-</li>
 </div>
-</ul>
 <script type='text/javascript'>
   //<![CDATA[
     if(document.cookie.indexOf('dydra_session') != -1) {
@@ -159,21 +128,6 @@
   //]]>
 </script>
 
-
-<small class='copyright'>
-Copyright &copy; 2011 Dydra
-</small>
-</div>
-<div class='social-buzz'>
-<a href="http://github.com/datagraph" title="Our github profile"><img alt="Our Github profile" src="http://public.dydra.com.s3.amazonaws.com/images/github_32.png?1295419064" /></a>
-<a href="http://twitter.com/dydrate" title="Follow us on Twitter"><img alt="Follow us on Twitter" src="http://public.dydra.com.s3.amazonaws.com/images/twitter_32.png?1295419064" /></a>
-<a href="http://feeds.feedburner.com/datagraph" title="Subscribe to our blog"><img alt="Subscribe to our blog" src="http://public.dydra.com.s3.amazonaws.com/images/rss_32.png?1295419064" /></a>
-<!-- Icon provided by Komodo Media, http://www.komodomedia.com -->
-</div>
-</div>
-</div>
-
-<!-- -# Javascript at the bottom for fast page loading -->
 <script type='text/javascript'>
   //<![CDATA[
     var DYDRA = new function(){
@@ -192,17 +146,14 @@ Copyright &copy; 2011 Dydra
     !window.jQuery && document.write(unescape('%3Cscript src="/javascripts/jquery-1.4.4.min.js"%3E%3C/script%3E'))
   //]]>
 </script>
-<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/rails.js?1295419064" type="text/javascript"></script>
-<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/plugins.js?1295419064" type="text/javascript"></script>
-<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/jquery.jsonrpc.js?1295419064" type="text/javascript"></script>
-<script src="http://public.dydra.com.s3.amazonaws.com/javascripts/application.js?1295419064" type="text/javascript"></script>
-<!--[if lt IE 7 ]>
-<script type='text/javascript'>
-  //<![CDATA[
-    $.getScript("/javascripts/dd_belatedpng.js",function(){ DD_belatedPNG.fix('img, .png_bg'); });
-  //]]>
-</script>
-<![endif]-->
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/rails.js?1296056293" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/plugins.js?1296056293" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/browser_selector.js?1296056293" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/jquery.jsonrpc.js?1296056293" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/jquery.dropdown.js?1296056293" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/jquery.text-effects.js?1296056293" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/application.js?1296056293" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/application.js?1296056293" type="text/javascript"></script>
 
 <% if ENV['RACK_ENV'] == 'production' %>
 <script type="text/javascript">

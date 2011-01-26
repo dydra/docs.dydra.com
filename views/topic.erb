@@ -6,7 +6,7 @@
   	});
   });
 </script>
-<h1><%= @title %></h1>
+<h1 id="content-title"><%= @title %></h1>
 
 <%= @intro %>
 
@@ -20,6 +20,3 @@
 
 <%= @body %>
 
-<% if ns = next_section(params[:topic]) %>
-	<div id="next_section">Next: <a href="/<%= ns[0] %>"><%=h ns[1] %> &rarr;</div>
-<% end %>
