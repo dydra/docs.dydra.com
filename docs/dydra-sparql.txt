@@ -1,12 +1,12 @@
 Using SPARQL with Dydra
 =======================
 
-Every Dydra repository is also a SPARQL endpoint. We have an [introduction to
-SPARQL](/sparql) if you're not familiar with the language.
+Every Dydra repository is also a SPARQL endpoint. If you're not familiar with the
+SPARQL language, we have an [introduction](/sparql).
 
 Your repository's SPARQL endpoint is found by appending `/sparql` to the
 repository's URL. So a user `jhacker` who created a repository named `foaf`
-would have a SPARQL endpoint located at `http://dydra.com/jhacker/foaf/sparql.`
+would have a SPARQL endpoint located at `http://dydra.com/jhacker/foaf/sparql`.
 
 ### Dydra's SPARQL Dialect
 
@@ -15,7 +15,11 @@ implementations, our canonical description is a [set of executable
 tests](http://github.com/dydra/sparql-tests), written in
 [RSpec](http://rspec.info).  Some quirks are worth noting.
 
-NOTE: Not all SPARQL features are currently supported during our beta test.
+##### Features
+
+Dydra's SPARQL processor beging the beta period in conformance with SPARQL 1.0.
+Over the course of the beta period, successive features will be added to
+achieve SPARQL 1.1 conformance.
 
 ##### Blank Node Handling
 
@@ -29,6 +33,6 @@ output of one query can be used for another.
 If your query performs a numeric operation on a type which can be cast to a
 numeric type, such as performing arithmetic on the literal "01", bindings for
 that literal will be the normalized numeric type, rather than the
-non-normalized type saved in the store.
+non-normalized type in the original query expression.
 
 
