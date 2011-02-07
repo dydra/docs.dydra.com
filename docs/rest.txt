@@ -1,0 +1,41 @@
+Dydra REST API
+==============
+
+You can perform most account functions on Dydra.com via a standard [REST
+API.](http://en.wikipedia.org/wiki/Representational_State_Transfer)
+
+### API Token
+
+You'll want your API token for most REST API operations. Your API token is very
+much like your password, except that it does not provide permissions to edit
+your password. You can use it most anywhere you can use your password. You can
+find your API token either on your account dashboard in your browser, or if you
+perform an authenticated request with your username and password for your
+account information via the REST API.
+
+### Supported Formats
+
+The dydra.com REST API supports `application/json` (for JSON requests) and
+`application/xml` (for XML requests) formats for both input and output. Simply
+set your client's 'Accept:' headers to the appropriate format.
+
+#### Your Account
+
+You can read and update your account information by  accessing your account URL
+at `http://dydra.com/<your account>`. If you perform HTTP basic authentication,
+you can retrive your API token here.
+
+#### Your Repositories
+
+##### Creating
+
+You can create a repository by performing an authenticated POST request to
+`http://dydra.com/<your account>/repositories`. You only need to include the
+repository name.
+
+##### Managing
+
+You'll download your repository in various RDF formats from your repository's
+URL, so your repositories' REST APIs are at `http://dydra.com/<your
+account>/<repository>/meta`. 
+
