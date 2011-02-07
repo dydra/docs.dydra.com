@@ -1,28 +1,48 @@
 Dydra Quickstart Guide
 =======================
 
+You can get started quickly using either the web interface or the command-line
+RubyGem. If you're already familiar with [SPARQL](/sparql), that works too.
+
+## Starting from your browser
+
 After you [create your account](http://dydra.com/signup), visit your dashboard and
 create a new repository.
 
 Go to your repository's page. Use the link on the upper right to import data.
-You can import from local files, copy/paste, or simply
-input a URL that we'll fetch for you.
+You can import from local files, copy/paste, or simply input a URL that we'll
+fetch for you. During the beta period, there are some limitations on the size
+of repositories we'll allow you to create.
 
-Create a [SPARQL](/sparql) query on your repository.  Try this one to get a list of the
-predicates in your dataset:
+After your import is complete, try running a quick query. Click 'Query' on the
+upper right, and you'll visit the query creation screen, which lets you run
+example [SPARQL](/sparql) queries in your browser.  Try this one to get a list
+of the predicates in your dataset:
 
     SELECT DISTINCT ?p WHERE { ?s ?p ?o }
 
-Go ahead.  Run it.  You'll see a the results in your browser.
+Go ahead and run it.  You'll see a the results in your browser.
 
-### SPARQL
+When you're done, you can access your [SPARQL endpint](/dydra-sparql) via any
+existing tools you might have.
+
+## Command line RubyGem
+
+You can perform most repository functions from the command line with the
+`dydra` RubyGem. After creating your account, try this:
+
+    $ gem install dydra
+    $ dydra create my-test-repository
+    Username or Email address: <your username>
+    Password: 
+    $ dydra import my-test-repository http://datagraph.org/jhacker.nt
+    $ dydra query my-test-repository 'SELECT DISTINCT ?p WHERE {?s ?p ?o}'
+
+When you're done, you can access your [SPARQL endpint](/dydra-sparql) via any
+existing tools you might have.
+
+## SPARQL
 
 Your repository already has a standard SPARQL endpoint.  It's at:
 
 <pre>http://dydra.com/<i>your</i>/<i>repository</i>/sparql</pre>
-
-### API
-
-In addition to a standard SPARQL endpoint, we provide our own asynchronous API
-for processing standard SPARQL queries, which we'll be documenting soon.
-
