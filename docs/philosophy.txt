@@ -2,16 +2,16 @@ Our Philosphy
 ==================
 
 Dydra is a cloud-based RDF platform built on several principles about how we
-believe software development should work. Some of them are inspired by companies
-around us. Others come from our disappointment with existing
-tools for the technologies we love. Together, they're Dydra's goals.
+believe tools for software developers should work. Some of them are inspired by
+companies around us. Others come from our disappointment with existing tools
+for the technologies we love. Together, they're Dydra's goals.
 
 ## Developer Productivity is Everything
 
 Developer productivity is paramount. No resource is more valuable.
 We never allow two steps when one would do, never have a step where zero
 would do, use smart defaults, offer multiple ways to do the same thing.
-Development should be fun, and removing busywork makes that happen.
+Development should be fun, and busywork isn't fun.
 
 ## There Should be no Sysadmin
 
@@ -20,7 +20,7 @@ interference from you. Every tweak you make is meaningful for your
 application's behavior, not the platform's performance. You never have
 to allocate resources, figure out ahead of time how big a repository needs to
 be, or mess around with equivalent queries that mysteriously run at different
-speeds. There is no sysadmin, and good lord, youn need no DBA.
+speeds.
 
 ## Be Open
 
@@ -29,16 +29,10 @@ is open, and free. Developers have enough problems without enigmatic,
 mysterious tooling. Our docs? A git repository, make changes to it. Our SPARQL
 dialect? The canonical definition is a set of executable tests. Libraries we
 contribute to? Open. Libraries we write? Open. Platform status? If it breaks,
-you'll know how, and hear about how it's going to be fixed in the future.
+you'll know how, and hear about why it's not going happen in the future.
 
 ## You Own Your Data
 
-You're not signing your data over to Dydra, Dydra hosts it for you.
-License it however you see fit, or delete it from our servers entirely. We
-claim no ownership on any of your work.
-
-## Be the Best
-
-If you have any reason to use another RDF platform, we want to know. Whatever the
-reason. We're listening to you.
-
+You're not signing your data over to Dydra, we're just a host.  License it
+however you see fit, or delete it from our servers entirely. We claim no
+ownership on any of your work.
