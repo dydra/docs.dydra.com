@@ -1,5 +1,5 @@
-Command-Line Client
-===================
+Command-Line Client (CLI)
+=========================
 
 We currently support one client application, a Ruby gem installable via
 RubyGems. This client has command-line functions for most of the RPC API.
