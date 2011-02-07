@@ -50,9 +50,14 @@ get '/search' do
   erb :search, :locals => {:search => search, :query => params[:q], :prev_page => prev_page, :next_page => next_page}
 end
 
-get '/:topic' do
+get '/:topic/:subtopic' do |topic, subtopic|
   cache_long
-  render_topic params[:topic]
+  render_topic [topic, subtopic].join('/')
+end
+
+get '/:topic' do |topic|
+  cache_long
+  render_topic topic
 end
 
 helpers do
@@ -88,11 +93,12 @@ helpers do
   end
 
   def topic_file(topic)
-    if topic.include?('/')
-      topic
-    else
-      "#{options.root}/docs/#{topic}.txt"
-    end
+    #if topic.include?('/')
+    #  topic
+    #else
+    #  "#{options.root}/docs/#{topic}.txt"
+    #end
+    "#{options.root}/docs/#{topic}.txt"
   end
 
   def cache_long
