@@ -1,12 +1,12 @@
 section 'getting-started', "Getting Started" do
-	topic 'dydra',           'What is Dydra?'
-	topic 'quickstart',      'Quickstart guide'
-  topic 'philosophy',      'Our Philosophy'
+  topic 'dydra',           "What is Dydra?"
+  topic 'quickstart',      "Quickstart Guide"
+  topic 'philosophy',      "Our Philosophy"
 end
 
 section 'rdf',             "RDF" do
-  topic 'rdf',             'What is RDF?'
-  topic 'sparql',          'SPARQL'
+  topic 'rdf',             "What is RDF?"
+  topic 'sparql',          "SPARQL"
 end
 
 section 'using-dydra',     "Using Dydra" do
