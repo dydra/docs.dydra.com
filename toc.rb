@@ -11,10 +11,7 @@ end
 
 section 'using-dydra',     "Using Dydra" do
   topic 'overview',        "Overview"
-  topic 'api',             "RPC API"
   topic 'client-gem',      "Client Gem"
   topic 'dydra-sparql',    "Dydra SPARQL Endpoints"
-end
-
-section 'troubleshooting', "Troubleshooting" do
+  topic 'rest',            "REST API"
 end
