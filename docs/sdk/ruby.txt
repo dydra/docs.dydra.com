@@ -1,11 +1,14 @@
 SDK for Ruby
 ============
 
-The Dydra gem can also be used as an API for writing Ruby programs. This is
-a short example:
+Example Usage
+-------------
+
+This is a short example:
 
     :::ruby
     #!/usr/bin/env ruby
+    require 'dydra'
     
     Dydra.setup!(:user => 'me', :pass => 'password') # ...or use:
     #Dydra.setup!(:token => 'my_token')
@@ -19,3 +22,36 @@ a short example:
     results.each do |binding|
       puts binding.s + " " + binding.p + " " + binding.o
     end
+
+Installation
+------------
+
+To install the Dydra gem, execute the following in your shell:
+
+    $ gem install dydra
+
+Uninstallation
+--------------
+
+To uninstall the Dydra gem, execute the following in your shell:
+
+    $ gem uninstall dydra
+
+Using with Bundler
+------------------
+
+Place the following in your `Gemfile` to use the development version of the
+Dydra gem in your Rails project with [Bundler](http://gembundler.com/).
+
+    gem 'dydra', :git => 'git://github.com/dydra/dydra.git'
+
+Source Code
+-----------
+
+<https://github.com/dydra/dydra>
+
+License
+-------
+
+The Dydra SDK is free and unencumbered [public domain](http://unlicense.org/)
+software.
