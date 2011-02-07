@@ -8,6 +8,24 @@ Your repository's SPARQL endpoint is found by appending `/sparql` to the
 repository's URL. So a user `jhacker` who created a repository named `foaf`
 would have a SPARQL endpoint located at `http://dydra.com/jhacker/foaf/sparql`.
 
+#### Authentication
+
+During the beta period, you'll need to authenticate yourself for any SPARQL
+query. You can do this either with HTTP Basic Authentication, or by appending
+an [API token](/rest) to your URL.
+
+###### HTTP Basic Authentication
+
+To use HTTP basic authentication, simply use your username and password as
+normal. We'll also accept your API token in the password field.
+
+###### Query String
+
+You can append your API token to a query string to any SPARQL query to
+authenticate yourself. This method is not recommended, as it will log
+credentials in firewall logs, but may be easier for some legacy clients to
+support. 
+
 ### Dydra's SPARQL Dialect
 
 Like all SPARQL implementations, Dydra's has some quirks. Unlike all SPARQL
@@ -17,9 +35,13 @@ tests](http://github.com/dydra/sparql-tests), written in
 
 ##### Features
 
-Dydra's SPARQL processor beging the beta period in conformance with SPARQL 1.0.
-Over the course of the beta period, successive features will be added to
-achieve SPARQL 1.1 conformance.
+We're always interested in [your feedback](http://getsatisfaction.com/dydra)
+about our feature set.
+
+##### SPARQL versions
+
+Dydra's SPARQL processor is mostly SPARQL 1.0 conformant and supports some features of
+SPARQL 1.1. As we implement new features, we'll [blog about it.](http://blog.dydra.com) 
 
 ##### Blank Node Handling
 
@@ -30,9 +52,6 @@ output of one query can be used for another.
 
 ##### Numeric Normalization
 
-If your query performs a numeric operation on a type which can be cast to a
-numeric type, such as performing arithmetic on the literal "01", bindings for
-that literal will be the normalized numeric type, rather than the
-non-normalized type in the original query expression.
-
+Dydra normalizes numeric datatypes. See the test suite test tagged for native
+arithmetic for details.
 
