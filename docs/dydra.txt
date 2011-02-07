@@ -1,14 +1,15 @@
 What is Dydra?
 =========================
 
-Dydra is a cloud-based RDF store, a database-as-a-service. Just import your
+Dydra is a cloud-based [RDF](/what-is-rdf) store, a database-as-a-service. Just import your
 data and a SPARQL endpoint will be available for your application to use. 
 
-### Multi-Tenant
+### Transparent Scaling
 
 Dydra is a multi-tenant data store and query engine. You don't need to
-estimate your data size, worry about clusters, nodes, or resource use, and
-you'll always be running the latest version of the platform.
+estimate your data size, worry about clusters, nodes, resource use, or make big
+licensing commitments up front. And you'll always be running the latest version
+of the platform.
 
 ### Fully Managed
 
@@ -20,10 +21,10 @@ recovery, performance, and more. You just use it.
 Dydra uses open standards recommended by the W3C. You can use Dydra from any
 programming language running on any platform on any device. All you need is an
 internet connection. And you own your data: it's always yours to take with you
-in the easiest, smoothest way possible.
+in a number of formats.
 
 ### Easy
 
-It's easy to get started on Dydra.  There's no licensing, setup, or fees--just
-click and go.  Go ahead, check out the [quickstart?](/quickstart)
+It's easy to get started on Dydra.  There's no licensing, setup, or fees to
+start--just click and go.  Go ahead, check out the [quickstart.](/quickstart)
 
