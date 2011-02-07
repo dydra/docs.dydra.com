@@ -2,8 +2,8 @@ Technical Overview
 ==================
 
 For day-to-day use of your Dydra repository, there are currently two APIs
-available: a standard [SPARQL endpoint](/dydra-sparql), and an [RPC API](/api).
-These two APIs are documented, and can be accessed from any programming
+available: a standard [SPARQL endpoint](/dydra-sparql), and a standard REST API.
+These two APIs can be accessed from any programming
 language or device.
 
 In addition, we currently support a [Dydra client gem](/client-gem) for Ruby.
