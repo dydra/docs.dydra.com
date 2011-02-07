@@ -13,5 +13,5 @@ section 'using-dydra',     "Using Dydra" do
   topic 'overview',        "Overview"
   topic 'cli',             "Command-Line Interface"
   topic 'dydra-sparql',    "Dydra SPARQL Endpoints"
-  topic 'rest',            "REST API"
+  topic 'api/rest',        "REST API"
 end

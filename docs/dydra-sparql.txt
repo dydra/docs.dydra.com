@@ -12,7 +12,7 @@ would have a SPARQL endpoint located at `http://dydra.com/jhacker/foaf/sparql`.
 
 During the beta period, you'll need to authenticate yourself for any SPARQL
 query. You can do this either with HTTP Basic Authentication, or by appending
-an [API token](/rest) to your URL.
+an [API token](/api/rest) to your URL.
 
 ###### HTTP Basic Authentication
 
