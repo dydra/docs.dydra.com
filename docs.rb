@@ -5,7 +5,6 @@ require 'sass'
 require 'indextank'
 require 'topic'
 
-
 # require 'rack/coderay'
 # use Rack::Coderay, "//pre[@lang]>code"
 
@@ -38,11 +37,11 @@ get '/using-dydra' do
   redirect '/overview'
 end
 
-# 
+#
 
 get '/' do
-	cache_long
-	haml :index
+  cache_long
+  haml :index
 end
 
 get '/search' do
@@ -52,27 +51,27 @@ get '/search' do
 end
 
 get '/:topic' do
-	cache_long
-	render_topic params[:topic]
+  cache_long
+  render_topic params[:topic]
 end
 
 helpers do
-	def render_topic(topic)
-		source = File.read(topic_file(topic))
-		@topic = Topic.load(topic, source)
-		
-		@title   = @topic.title
-		@content = @topic.content
-		@intro   = @topic.intro
-		@toc     = @topic.toc
-		@body    = @topic.body
-		
-		erb :topic
-	rescue Errno::ENOENT
-		status 404
-	end
-	
-	def search_for(query, page = 0)
+  def render_topic(topic)
+    source = File.read(topic_file(topic))
+    @topic = Topic.load(topic, source)
+
+    @title   = @topic.title
+    @content = @topic.content
+    @intro   = @topic.intro
+    @toc     = @topic.toc
+    @body    = @topic.body
+
+    erb :topic
+  rescue Errno::ENOENT
+    status 404
+  end
+
+  def search_for(query, page = 0)
     client = IndexTank::Client.new(ENV['DYDRA_INDEXTANK_URL'])
     index = client.indexes('docs')
     search = index.search(query, :start => page * 10, :len => 10, :fetch => 'title', :snippet => 'text')
@@ -86,62 +85,62 @@ helpers do
       end
 
     [search, prev_page, next_page]
-	end
-	
-	def topic_file(topic)
-		if topic.include?('/')
-			topic
-		else
-			"#{options.root}/docs/#{topic}.txt"
-		end
-	end
+  end
 
-	def cache_long
-		response['Cache-Control'] = "public, max-age=#{60 * 60}" unless development?
-	end
+  def topic_file(topic)
+    if topic.include?('/')
+      topic
+    else
+      "#{options.root}/docs/#{topic}.txt"
+    end
+  end
 
-	def slugify(title)
-		title.downcase.gsub(/[^a-z0-9 -]/, '').gsub(/ /, '-')
-	end
+  def cache_long
+    response['Cache-Control'] = "public, max-age=#{60 * 60}" unless development?
+  end
 
-	def sections
-		TOC.sections
-	end
+  def slugify(title)
+    title.downcase.gsub(/[^a-z0-9 -]/, '').gsub(/ /, '-')
+  end
 
-	def next_section(current_slug, root=sections)
-		return sections.first if current_slug.nil?
-		root.each_with_index do |(slug, title, topics), i|
-			if current_slug == slug and i < root.length-1
-				return root[i+1]
-			elsif topics.any?
-				res = next_section(current_slug, topics)
-				return res if res
-			end
-		end
-		nil
-	end
+  def sections
+    TOC.sections
+  end
 
-	alias_method :h, :escape_html
+  def next_section(current_slug, root=sections)
+    return sections.first if current_slug.nil?
+    root.each_with_index do |(slug, title, topics), i|
+      if current_slug == slug and i < root.length-1
+        return root[i+1]
+      elsif topics.any?
+        res = next_section(current_slug, topics)
+        return res if res
+      end
+    end
+    nil
+  end
+
+  alias_method :h, :escape_html
 end
 
 module TOC
-	extend self
+  extend self
 
-	def sections
-		@sections ||= []
-	end
+  def sections
+    @sections ||= []
+  end
 
-	# define a section
-	def section(name, title)
-		sections << [name, title, []]
-		yield if block_given?
-	end
+  # define a section
+  def section(name, title)
+    sections << [name, title, []]
+    yield if block_given?
+  end
 
-	# define a topic
-	def topic(name, title)
-		sections.last.last << [name, title, []]
-	end
+  # define a topic
+  def topic(name, title)
+    sections.last.last << [name, title, []]
+  end
 
-	file = File.dirname(__FILE__) + '/toc.rb'
-	eval File.read(file), binding, file
+  file = File.dirname(__FILE__) + '/toc.rb'
+  eval File.read(file), binding, file
 end
