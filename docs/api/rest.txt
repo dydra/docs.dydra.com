@@ -1,5 +1,5 @@
-Dydra REST API
-==============
+REST API
+========
 
 You can perform most account functions on Dydra.com via a standard [REST
 API.](http://en.wikipedia.org/wiki/Representational_State_Transfer)

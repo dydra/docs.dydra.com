@@ -1,0 +1,21 @@
+SDK for Ruby
+============
+
+The Dydra gem can also be used as an API for writing Ruby programs. This is
+a short example:
+
+    :::ruby
+    #!/usr/bin/env ruby
+    
+    Dydra.setup!(:user => 'me', :pass => 'password') # ...or use:
+    #Dydra.setup!(:token => 'my_token')
+    
+    repository = Dydra::Repository.create!('foaf')
+    
+    repository.import("http://datagraph.org/jhacker/foaf.nt")
+    
+    results = repository.query("SELECT * WHERE { ?s ?p ?o }", :parsed)
+    puts results.first.each_name.to_a.join(" "*25)
+    results.each do |binding|
+      puts binding.s + " " + binding.p + " " + binding.o
+    end

@@ -37,6 +37,14 @@ get '/using-dydra' do
   redirect '/overview'
 end
 
+get '/api' do
+  redirect '/api/sparql'
+end
+
+get '/sdk' do
+  redirect '/sdk/ruby'
+end
+
 #
 
 get '/' do

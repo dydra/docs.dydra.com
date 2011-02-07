@@ -15,3 +15,7 @@ section 'using-dydra',     "Using Dydra" do
   topic 'api/sparql',      "SPARQL Endpoints"
   topic 'api/rest',        "REST API"
 end
+
+section 'sdk',             "Libraries" do
+  topic 'sdk/ruby',        "SDK for Ruby"
+end

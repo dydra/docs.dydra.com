@@ -1,5 +1,5 @@
-The Dydra Client
-================
+Command-Line Client
+===================
 
 We currently support one client application, a Ruby gem installable via
 RubyGems. This client has command-line functions for most of the RPC API.
@@ -63,23 +63,7 @@ to a synchronous operation in client.
 
 ### Client API
 
-The Dydra gem can also be used as an API for writing Ruby programs.  This is a short example:
-
-    :::ruby
-    #!/usr/bin/env ruby
-
-    Dydra.setup!(:user => 'me', :pass => 'password')
-    # or try...
-    # Dydra.setup!(:token => 'my_token')
-
-    repository = Dydra::Repository.create!('foaf')
-    repository.import("http://datagraph.org/jhacker/foaf.nt")
-    results = repository.query("select * where { ?s ?p ?o }", :parsed)
-    puts results.first.each_name.to_a.join(" "*25)
-    results.each do |binding|
-      puts binding.s + " " + binding.p + " " + binding.o
-    end
-
+The Dydra gem can also be used as an [API for writing Ruby programs](/sdk/ruby).
 
 ### Asynchronous Operation
 
