@@ -2,6 +2,7 @@ section 'getting-started', "Getting Started" do
   topic 'dydra',           "What is Dydra?"
   topic 'quickstart',      "Quickstart Guide"
   topic 'philosophy',      "Our Philosophy"
+  topic 'faq',             "Frequently Asked Questions"
 end
 
 section 'rdf',             "RDF" do
