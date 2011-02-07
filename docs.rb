@@ -34,10 +34,6 @@ get '/getting-started' do
   redirect '/dydra'
 end
 
-get '/rdf' do
-  redirect '/what-is-rdf'
-end
-
 get '/using-dydra' do
   redirect '/overview'
 end

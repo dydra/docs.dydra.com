@@ -1,7 +1,7 @@
 What is Dydra?
 =========================
 
-Dydra is a cloud-based [RDF](/what-is-rdf) store, a database-as-a-service. Just import your
+Dydra is a cloud-based [RDF](/rdf) store, a database-as-a-service. Just import your
 data and a SPARQL endpoint will be available for your application to use. 
 
 ### Transparent Scaling

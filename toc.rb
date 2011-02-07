@@ -5,7 +5,7 @@ section 'getting-started', "Getting Started" do
 end
 
 section 'rdf',             "RDF" do
-  topic 'what-is-rdf',     'What is RDF?'
+  topic 'rdf',             'What is RDF?'
   topic 'sparql',          'SPARQL'
 end
 
