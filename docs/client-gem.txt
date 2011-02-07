@@ -22,7 +22,7 @@ you type your username and password, your API token will be saved to
 `~/.dydra/credentials` and used for future commands.
 
     $ dydra create foaf
-    Username: alice
+    Username or email: alice
     Password:
     alice/foaf
 
@@ -68,13 +68,13 @@ The Dydra gem can also be used as an API for writing Ruby programs.  This is a s
     :::ruby
     #!/usr/bin/env ruby
 
-    Dydra.authenticate('user','password')
+    Dydra.setup!(:user => 'me', :pass => 'password')
     # or try...
-    # Dydra.token_authenticate('token')
+    # Dydra.setup!(:token => 'my_token')
 
-    repository = Dydra::Repository.create('foaf')
+    repository = Dydra::Repository.create!('foaf')
     repository.import("http://datagraph.org/jhacker/foaf.nt")
-    results = repository.query("select * where { ?s ?p ?o }")
+    results = repository.query("select * where { ?s ?p ?o }", :parsed)
     results.each do |binding|
       puts binding.s + " " + binding.p + " " + binding.o
     end
@@ -82,7 +82,7 @@ The Dydra gem can also be used as an API for writing Ruby programs.  This is a s
 
 ### Asynchronous Operation
 
-Many of the commands supported by the API are asynchronous. This means that
+Some of the commands supported by the API are asynchronous. This means that
 they will not necessarily be completed at the time you request them. This
 allows you to quickly and simply request long-running operations and check on
 their status later. After completing or experiencing an error, job statuses are
@@ -98,7 +98,7 @@ To check the status of a job, use the status command:
     $ dydra status 25414300-061c-012e-c283-0023df827da6
     25414300-061c-012e-c283-0023df827da6 is done.
 
-Job status is also the preferred way to discover informationa bout failures:
+Job status is also the preferred way to discover information about failures:
 
     :::term
     $ dydra import foaf http://google.com/favicon.ico
