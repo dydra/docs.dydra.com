@@ -3,11 +3,10 @@ Technical Overview
 
 For day-to-day use of your Dydra repository, there are currently two APIs
 available: a standard [SPARQL endpoint](/dydra-sparql), and a standard REST API.
-These two APIs can be accessed from any programming
-language or device.
+These two APIs can be accessed from any programming language or device.
 
 In addition, we currently support a [Dydra client gem](/client-gem) for Ruby.
-The client gem also acts as a command-line interface to the RPC interface. We
+The client gem also acts as a command-line interface to the REST interface. We
 will add more programming languages to our supported list during and after our
 beta test period.
 
@@ -27,7 +26,6 @@ You can also access a repository programatically. You can do this in two ways:
 
 
 ### Format Request table
-
 
 Exports for the repository at `http://dydra.com/jhacker/foaf` are available as
 follows:
