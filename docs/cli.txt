@@ -51,7 +51,7 @@ Importing is an asynchronous operation.
 
 ##### Querying
 
-Runs a [SPARQL query](/dydra-sparql) on a repository.
+Runs a [SPARQL query](/api/sparql) on a repository.
 
     :::term
     $ dydra query foaf 'select distinct ?s where { ?s ?p ?o }'

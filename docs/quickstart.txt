@@ -23,7 +23,7 @@ of the predicates in your dataset:
 
 Go ahead and run it.  You'll see a the results in your browser.
 
-When you're done, you can access your [SPARQL endpint](/dydra-sparql) via any
+When you're done, you can access your [SPARQL endpint](/api/sparql) via any
 existing tools you might have.
 
 ## Command line RubyGem
@@ -38,7 +38,7 @@ You can perform most repository functions from the command line with the
     $ dydra import my-test-repository http://datagraph.org/jhacker.nt
     $ dydra query my-test-repository 'SELECT DISTINCT ?p WHERE {?s ?p ?o}'
 
-When you're done, you can access your [SPARQL endpint](/dydra-sparql) via any
+When you're done, you can access your [SPARQL endpint](/api/sparql) via any
 existing tools you might have.
 
 ## SPARQL
