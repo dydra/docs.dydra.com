@@ -1,5 +1,5 @@
-Our Philosphy
-==================
+Our Philosophy
+==============
 
 Dydra is a cloud-based RDF platform built on several principles about how we
 believe tools for software developers should work. Some of them are inspired

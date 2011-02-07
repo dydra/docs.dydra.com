@@ -1,5 +1,5 @@
-Dydra Quickstart Guide
-=======================
+Quickstart Guide
+================
 
 You can get started quickly using either the web interface or the command-line
 RubyGem. If you're already familiar with [SPARQL](/sparql), that works too.
