@@ -23,7 +23,7 @@ of the predicates in your dataset:
 
 Go ahead and run it.  You'll see a the results in your browser.
 
-When you're done, you can access your [SPARQL endpint](/api/sparql) via any
+When you're done, you can access your [SPARQL endpoint](/api/sparql) via any
 existing tools you might have.
 
 ## Command line RubyGem
