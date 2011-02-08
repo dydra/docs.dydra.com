@@ -1,0 +1,57 @@
+SDK for Ruby
+============
+
+Example Usage
+-------------
+
+This is a short example:
+
+    :::ruby
+    #!/usr/bin/env ruby
+    require 'dydra'
+    
+    Dydra.setup!(:user => 'me', :pass => 'password') # ...or use:
+    #Dydra.setup!(:token => 'my_token')
+    
+    repository = Dydra::Repository.create!('foaf')
+    
+    repository.import("http://datagraph.org/jhacker/foaf.nt")
+    
+    results = repository.query("SELECT * WHERE { ?s ?p ?o }", :parsed)
+    puts results.first.each_name.to_a.join(" "*25)
+    results.each do |binding|
+      puts binding.s + " " + binding.p + " " + binding.o
+    end
+
+Installation
+------------
+
+To install the Dydra gem, execute the following in your shell:
+
+    $ gem install dydra
+
+Uninstallation
+--------------
+
+To uninstall the Dydra gem, execute the following in your shell:
+
+    $ gem uninstall dydra
+
+Using with Bundler
+------------------
+
+Place the following in your `Gemfile` to use the development version of the
+Dydra gem in your Rails project with [Bundler](http://gembundler.com/).
+
+    gem 'dydra', :git => 'git://github.com/dydra/dydra.git'
+
+Source Code
+-----------
+
+<https://github.com/dydra/dydra>
+
+License
+-------
+
+The Dydra SDK is free and unencumbered [public domain](http://unlicense.org/)
+software.

@@ -1,5 +1,5 @@
-Using SPARQL with Dydra
-=======================
+SPARQL Endpoints
+================
 
 Every Dydra repository is also a SPARQL endpoint. If you're not familiar with the
 SPARQL language, we have an [introduction](/sparql).
