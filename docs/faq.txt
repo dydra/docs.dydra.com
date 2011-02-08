@@ -11,6 +11,13 @@ Who is behind Dydra, and where are you based?
 
 Dydra is a product of [Datagraph, Inc.](http://datagraph.org/), a
 privately-held U.S. corporation headquartered in New Orleans. Our
-[team][About] is located in both New Orleans and in Berlin.
+[team][about] is located in both New Orleans and in Berlin.
 
-[About]: http://dydra.com/about
+The Dydra website rocks, who designed it?
+-----------------------------------------
+
+Our brand and website was designed with meticulous attention to detail by
+the very talented folks at [Makalu Interactive][Makalu].
+
+[about]:  http://dydra.com/about
+[Makalu]: http://www.makaluinc.com/
