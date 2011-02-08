@@ -19,6 +19,13 @@ The Dydra website rocks, who designed it?
 Our brand and website was designed with meticulous attention to detail by
 the very talented folks at [Makalu Interactive][Makalu].
 
+How much would it cost to host X billion triples?
+-------------------------------------------------
+
+We're currently in an invite-only, limited-availability beta program, but
+we'll let you know as soon as we're ready for general availability and have
+announced pricing details.
+
 What technologies is Dydra built on?
 ------------------------------------
 
