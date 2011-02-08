@@ -22,14 +22,14 @@ the very talented folks at [Makalu Interactive][Makalu].
 What technologies is Dydra built on?
 ------------------------------------
 
-We'll post more details in upcoming [blog][] posts, but the website is built
-with [Ruby][] and [Ruby on Rails][Rails], relying heavily on the [RDF.rb][]
-framework. Our back-end infrastructure is based on core technologies such as
-[ZeroMQ][], [AMQP][], and [Redis][]. Our proprietary distributed SPARQL
-query engine, called SPOCQ, is built in [Lisp][]. Our proprietary
-distributed RDF storage system is built in Ruby and [C][], relying on many
-great open-source libraries, in particular [Raptor][] and [Rasqal][]. Our
-stack as a whole is relying on and running on [Amazon Web Services][AWS].
+We'll share more details in upcoming [blog][] posts, but the website is
+built with [Ruby][] and [Ruby on Rails][Rails], relying heavily on the
+[RDF.rb][] framework. Our back-end infrastructure is based on core
+technologies such as [ZeroMQ][], [AMQP][], and [Redis][]. Our proprietary
+distributed SPARQL query engine, called SPOCQ, is built in [Lisp][]. Our
+distributed RDF storage system is built in Ruby and [C][], relying on
+[Raptor][] and [Rasqal][] in particular. Our stack as a whole is hosted on
+[Amazon Web Services][AWS].
 
 [about]:  http://dydra.com/about
 [blog]:   http://blog.dydra.com/
