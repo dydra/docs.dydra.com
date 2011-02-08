@@ -26,6 +26,16 @@ We're currently in an invite-only, limited-availability beta program, but
 we'll let you know as soon as we're ready for general availability and have
 announced pricing details.
 
+Do you support feature X, Y, or Z?
+----------------------------------
+
+We have a baseline set of features we're currently working on making rock
+solid with the help of our limited-availability beta program, and an
+exciting roadmap that we look forward to sharing on our [blog][] soon. We
+will prioritize offering what our customers need, so please do [let us
+know][group] about your use case(s) for Dydra and which features are
+essential to you.
+
 What technologies is Dydra built on?
 ------------------------------------
 
@@ -40,6 +50,7 @@ distributed RDF storage system is built in Ruby and [C][], relying on
 
 [about]:  http://dydra.com/about
 [blog]:   http://blog.dydra.com/
+[group]:  http://groups.google.com/group/dydra
 [Makalu]: http://www.makaluinc.com/
 [Ruby]:   http://ruby-lang.org/
 [Rails]:  http://rubyonrails.org/
