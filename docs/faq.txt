@@ -5,3 +5,12 @@ How do you pronounce the name Dydra?
 ------------------------------------
 
 It's pronounced 'die-dra', rhyming with 'hydra'. ('dei-dra', auf Deutsch.)
+
+Who is behind Dydra, and where are you based?
+---------------------------------------------
+
+Dydra is a product of [Datagraph, Inc.](http://datagraph.org/), a
+privately-held U.S. corporation headquartered in New Orleans. Our
+[team][About] is located in both New Orleans and in Berlin.
+
+[About]: http://dydra.com/about
