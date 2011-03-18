@@ -8,19 +8,24 @@
   <meta content='Dydra.com' name='description'>
   <meta content='Dydra' name='author'>
   <meta content='width=device-width, initial-scale=1.0' name='viewport'>
-  <link href='https://s3.amazonaws.com/public.dydra.com/favicon.ico?1297297901' rel='shortcut icon'>
-  <link href='https://s3.amazonaws.com/public.dydra.com/apple-touch-icon.png?1297297901' rel='apple-touch-icon'>
+  <link href='https://s3.amazonaws.com/public.dydra.com/favicon.ico?1300412658' rel='shortcut icon'>
+  <link href='https://s3.amazonaws.com/public.dydra.com/apple-touch-icon.png?1300412658' rel='apple-touch-icon'>
   <link href='http://feeds.feedburner.com/dydra' rel='alternate' title='Dydra Blog' type='application/rss+xml'>
-  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.7/themes/smoothness/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="https://s3.amazonaws.com/public.dydra.com/stylesheets/style.css?1297297918" media="all" rel="stylesheet" type="text/css" />
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/smoothness/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="https://s3.amazonaws.com/public.dydra.com/stylesheets/style.css?1300412789" media="screen" rel="stylesheet" type="text/css" />
   
   
   <meta name="csrf-param" content="authenticity_token"/>
-  <meta name="csrf-token" content="ap7MDQetebQv9VlCLcy6fUGJLFfMiDzgS9YS3voo/nk="/>
+  <meta name="csrf-token" content="/YAIxfIiDq0A2q27djsticjbjDHke0MhPRnmSRz5Oww="/>
   
   </head>
   
   <body class="docs">
+  <div id='flash' style='display:none'>
+  <div class='wrapper'>
+  </div>
+  </div>
+  
   <div id='header'>
   <div class='wrapper'>
   <a href="http://dydra.com/" id="logo">Dydra</a>
@@ -49,11 +54,6 @@
     //]]>
   </script>
   
-  </div>
-  </div>
-  
-  <div class='wrapper'>
-  <div id='flash'>
   </div>
   </div>
   
@@ -113,6 +113,8 @@
   &nbsp;&bull;&nbsp;
   <span><a href="https://dydra.com/login" class="dydra-link-login">Login</a></span>
   </span>
+  &nbsp;&bull;&nbsp;
+  <span><a href="http://dydra.com/legal/terms_of_service">Legal</a></span>
   </p>
   <p id='footer-links'>
   <a href='https://github.com/dydra'>GitHub</a>
@@ -150,14 +152,13 @@
   <script type='text/javascript'>
     //<![CDATA[
       if (!window.jQuery) {
-        document.write(unescape('%3Cscript src="/javascripts/lib/jquery-1.4.4.min.js"%3E%3C/script%3E'))
-        document.write(unescape('%3Cscript src="/javascripts/lib/jquery-ui-1.8.9.min.js"%3E%3C/script%3E'));
+        document.write(unescape('%3Cscript src="/javascripts/vendor/jquery-1.4.4.min.js"%3E%3C/script%3E'))
+        document.write(unescape('%3Cscript src="/javascripts/vendor/jquery-ui-1.8.9.min.js"%3E%3C/script%3E'));
         document.write(unescape('%3Clink href="/stylesheets/jquery-ui-1.8.9.css" media="screen" rel="stylesheet" type="text/css" /%3E'));
-      
       }
     //]]>
   </script>
-  <script src="https://s3.amazonaws.com/public.dydra.com/javascripts/all.js?1297297918" type="text/javascript"></script>
+  <script src="https://s3.amazonaws.com/public.dydra.com/javascripts/app.js?1300412789" type="text/javascript"></script>
   
   <% if ENV['RACK_ENV'] == 'production' %>
   <script type="text/javascript">
@@ -194,6 +195,16 @@
       var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
     //]]>
   </script>
+  <!--[if lt IE 7]>
+  <script type='text/javascript'>
+    //<![CDATA[
+      var IE6UPDATE_OPTIONS = {
+        icons_path: "javascripts/ie6update/images/"
+      }
+    //]]>
+  </script>
+  <script src="https://s3.amazonaws.com/public.dydra.com/javascripts/ie6update/ie6update.js?1300412789" type="text/javascript"></script>
+  <![endif]-->
   
   </body>
   </html>
