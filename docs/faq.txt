@@ -36,18 +36,6 @@ will prioritize offering what our customers need, so please do [let us
 know][group] about your use case(s) for Dydra and which features are
 essential to you.
 
-What technologies is Dydra built on?
-------------------------------------
-
-We'll share more details in upcoming [blog][] posts, but the website is
-built with [Ruby][] and [Ruby on Rails][Rails], relying heavily on the
-[RDF.rb][] framework. Our back-end infrastructure is based on core
-technologies such as [ZeroMQ][], [AMQP][], and [Redis][]. Our proprietary
-distributed SPARQL query engine, called SPOCQ, is built in [Lisp][]. Our
-distributed RDF storage system is built in Ruby and [C][], relying on
-[Raptor][] and [Rasqal][] in particular. Our stack as a whole is hosted on
-[Amazon Web Services][AWS].
-
 [about]:  http://dydra.com/about
 [blog]:   http://blog.dydra.com/
 [group]:  http://groups.google.com/group/dydra
