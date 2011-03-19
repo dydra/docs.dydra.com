@@ -31,7 +31,7 @@ support.
 Like all SPARQL implementations, Dydra's has some quirks. Unlike all SPARQL
 implementations, our canonical description is a [set of executable
 tests](http://github.com/dydra/sparql-tests), written in
-[RSpec](http://rspec.info).  Some quirks are worth noting.
+[RSpec](http://rspec.info).
 
 ##### Features
 
@@ -48,10 +48,14 @@ SPARQL 1.1. As we implement new features, we'll [blog about it.](http://blog.dyd
 Dydra treats blank node identifiers as canonical. When data is imported,
 existing blank node identifiers are saved, and new, canonical blank node
 identifiers are created for new nodes. In practice, this is quite useful: the
-output of one query can be used for another.
+output of one query can be matched with another.
 
-##### Numeric Normalization
+##### Normalization
 
-Dydra normalizes numeric datatypes. See the test suite test tagged for native
-arithmetic for details.
+Dydra is a graph store (as opposed to a document store).  We store the semantic
+representations of numerics, dates, and times. The result is that several of
+these formats do not round-trip. For example, data imported as
+`"01"^^XSD.integer` would be returned as `"1"^^XSD.integer`. See the [Dydra
+reference tests](http://github.com/dydra/sparql-tests) for more detail.
+
 
