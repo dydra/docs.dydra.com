@@ -1,21 +1,59 @@
 Command-Line Client (CLI)
 =========================
 
-We currently support one client application, a Ruby gem installable via
-RubyGems. This client has command-line functions for most of the RPC API.
+The Dydra command-line client is a Ruby gem installable via RubyGems. This
+client has command-line functions for most of the REST and RPC APIs. You may
+never need to use it, but you can use it to easily write scripts to automate
+certain repository actions, and to use query results inside other, simple
+scripts.
 
 ##### Installing the Client
 
-On Mac OS X and most Linux systems, the RubyGems is installed or easily
-available. Windows users can install a working RubyGems environment with the
-Ruby installer at <http://rubyinstaller.org/>.
+The client is installed via RubyGems. The client is tested on Ruby 1.8.7,
+1.9.1, 1.9.2, and JRuby.
 
-After installing RubyGems, installing the client is easy:
+###### OS X
+
+RubyGems is installed by default on OS X. Simply open a terminal ( Applications
+-> Utilities -> Terminal) and type:
+
+    :::term
+    $ sudo gem install dydra
+
+You'll be asked to enter your system password.
+
+###### Windows
+
+Windows users can install a working RubyGems environment with the Ruby
+installer at <http://rubyinstaller.org/>. If you have any trouble, there's a
+wealth if tutorials for getting Ruby started on windows at
+<https://github.com/oneclick/rubyinstaller/wiki/Tutorials>
+
+After installing Ruby via the Ruby Installer, run a shell (Win+R and type
+`cmd`) and type:
+
+    :::term
+    C:\Users\Administrator>gem update --system
+    Updating RubyGems
+    Nothing to update
+    C:\Users\Administrator>gem install dydra
+
+###### Linux
+
+Most Linux systems have Ruby and RubyGems easily available. For Ubuntu 10.x, we
+recommend the `rubygems1.9.1` package. If you have another version of Ruby
+installed, that's fine too.
+
+After Ruby and RubyGems are installed, whatever package your distribution uses, type:
 
     :::term
     $ gem install dydra
 
-The Dydra command should now be available.
+The `dydra` command should now be available. If not, your distributions may require
+adjustments to your `PATH` environment variable to properly use RubyGems. Check
+your distribution's RubyGems documentation.
+
+### Using the Client
 
 The first time you run the Dydra command, you'll be asked to authenticate. When
 you type your username and password, your API token will be saved to
@@ -26,18 +64,36 @@ you type your username and password, your API token will be saved to
     Password:
     alice/foaf
 
-### Client Commands
-
 The client currently performs several basic operations at the command line.
+
+##### Specifiying Repositories
+
+After you log in with the client, your account name will be cached, and any
+command which specifies a repository will default to your own.
+
+    :::term
+    $ dydra count foaf
+    10 foaf
+    10 total
+    $
+
+But you can always specify any repository to which you have access for any
+command by specifying the username:
+
+    :::term
+    $ dydra count bhuga/foaf
+    20 foaf
+    20 total
 
 ##### Repository Creation
 
+Create a new repository with the `create` command:
+
     :::term
     $ dydra create foaf
-    alice/foaf
+    $
 
 This creates a repository for your account named foaf.
-
 
 ##### Importing
 
@@ -45,9 +101,7 @@ Imports a URL or local file into a repository.
 
     :::term
     $ dydra import foaf http://datagraph.org/jhacker/foaf.nt
-    25414300-061c-012e-c283-0023df827da6
-
-Importing is an asynchronous operation.
+    completed: Completed at 2011-03-19 21:29:37 +0000
 
 ##### Querying
 
@@ -55,41 +109,85 @@ Runs a [SPARQL query](/api/sparql) on a repository.
 
     :::term
     $ dydra query foaf 'select distinct ?s where { ?s ?p ?o }'
+    s
     <http://datagraph.org/jhacker/#self>
     <http://datagraph.org/jhacker/foaf>
 
-Querying is an asynchronous operation in the RPC API, but has been abstracted
-to a synchronous operation in client.
+Command-line sparql queries are output in a tab-delimited format for easy
+processing by further command-line tools. The first line will be a list of variables.
+
+You can also get raw SPARQL results to feed in to an existing tool, if you
+choose. Add `-x` to get SPARQL-XML results.
+    
+    :::term
+    $ dydra query foaf 'select distinct ?s where { ?s ?p ?o }' -x
+    <?xml version='1.0'?>
+    <sparql xmlns='http://www.w3.org/2005/sparql-results#'>
+     <head>
+      <variable>s</variable>
+     </head>
+     <results>
+      <result>
+       <binding name='s'><uri>http://datagraph.org/jhacker/#self</uri></binding>
+      </result>
+      <result>
+       <binding name='s'><uri>http://datagraph.org/jhacker/foaf</uri></binding>
+      </result>
+     </results>
+    </sparql>
+
+Add `-j` for SPARQL-JSON results.
+
+    $ dydra query foaf 'select distinct ?s where { ?s ?p ?o }' -j
+    { "head": { "vars": [ "s" ] },
+       "results": {
+       "bindings": [
+       { "s": {"type":"uri", "value":"http://datagraph.org/jhacker/#self"} },
+       { "s": {"type":"uri", "value":"http://datagraph.org/jhacker/foaf"} } ] } }
+
+##### Clearing a Repository
+
+Clear a repository's contents with the `clear` command:
+
+    :::term
+    $ dydra clear foaf
+    $
+
+##### Counting Triples
+
+Get a count of the triples in a repository with the `count` command:
+
+    :::term
+    $ dydra count foaf empty-repo
+    10 foaf
+    0 empty-repo
+    10 total
+
+
+##### Listing Repositories
+
+List your repositories, or those of another user, with the `list` command:
+
+    :::term
+    $ dydra list
+    foaf
+    empty-repo
+    $ dydra list bhuga
+    foaf
+    sparql-test
+    example
+    $
+
+##### Deleting a Repository
+
+Delete a repository permanently with the `drop` command:
+
+    :::term
+    $ dydra drop foaf
+    $
 
 ### Client API
 
 The Dydra gem can also be used as an [API for writing Ruby programs](/sdk/ruby).
-
-### Asynchronous Operation
-
-Some of the commands supported by the API are asynchronous. This means that
-they will not necessarily be completed at the time you request them. This
-allows you to quickly and simply request long-running operations and check on
-their status later. After completing or experiencing an error, job statuses are
-maintained for 24 hours.
-
-To check the status of a job, use the status command:
-
-    :::term
-    $ dydra import foaf http://datagraph.org/foaf.nt
-    25414300-061c-012e-c283-0023df827da6
-    $ dydra status 25414300-061c-012e-c283-0023df827da6
-    25414300-061c-012e-c283-0023df827da6 is running (25% complete)
-    $ dydra status 25414300-061c-012e-c283-0023df827da6
-    25414300-061c-012e-c283-0023df827da6 is done.
-
-Job status is also the preferred way to discover information about failures:
-
-    :::term
-    $ dydra import foaf http://google.com/favicon.ico
-    25414300-061c-012e-c283-0023df827da6
-    $ dydra status 25414300-061c-012e-c283-0023df827da6
-    25414300-061c-012e-c283-0023df827da6 Error: Unsupported content type: image/x-icon
-    
 
 
