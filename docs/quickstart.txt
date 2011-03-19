@@ -1,18 +1,25 @@
 Quickstart Guide
 ================
 
+Dydra is an RDF store meant to be quick and easy for developers. Getting
+started quickly will require already being familiar with [RDF](/rdf) and
+[SPARQL](/sparql).
+
 You can get started quickly using either the web interface or the command-line
-RubyGem. If you're already familiar with [SPARQL](/sparql), that works too.
+RubyGem. As soon as you've created your repository, your SPARQL endpoint is
+already ready.
 
 ## Starting from your browser
 
 After you [create your account](http://dydra.com/signup), visit your dashboard and
-create a new repository.
+create a new repository with the `New` button. You can enter some optional
+metadata; the only thing your repository needs is a name.
 
-Go to your repository's page. Use the link on the upper right to import data.
-You can import from local files, copy/paste, or simply input a URL that we'll
-fetch for you. During the beta period, there are some limitations on the size
-of repositories we'll allow you to create.
+After creating your repository, you should be at your repository's home page.
+Use the link on the upper right to import data.  You can import from local
+files, copy/paste, or simply input a URL that we'll fetch for you. During the
+beta period, there are some limitations on the size of repositories we'll allow
+you to create.
 
 After your import is complete, try running a quick query. Click 'Query' on the
 upper right, and you'll visit the query creation screen, which lets you run
