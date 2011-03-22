@@ -15,11 +15,10 @@ After you [create your account](http://dydra.com/signup), visit your dashboard a
 create a new repository with the `New Repository` button. You can enter some optional
 metadata; the only thing your repository needs is a name.
 
-After creating your repository, you should be at your repository's home page.
-Use the link on the upper right to import data.  You can import from local
-files, copy/paste, or simply input a URL that we'll fetch for you. During the
-beta period, there are some limitations on the size of repositories we'll allow
-you to create.
+Once you've created your repository, you will be redirected to your repository's import
+page. From here you can import from local files or simply input a URL that 
+we'll fetch for you. During the beta period, there are some limitations on the size 
+of repositories we'll allow you to create.
 
 After your import is complete, try running a quick query. Click 'Query' on the
 upper right, and you'll visit the query creation screen, which lets you run
