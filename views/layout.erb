@@ -7,15 +7,15 @@
 <meta content='Dydra.com' name='description'>
 <meta content='Dydra' name='author'>
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
-<link href='https://s3.amazonaws.com/public.dydra.com/favicon.ico?1300412658' rel='shortcut icon'>
-<link href='https://s3.amazonaws.com/public.dydra.com/apple-touch-icon.png?1300412658' rel='apple-touch-icon'>
+<link href='https://s3.amazonaws.com/public.dydra.com/favicon.ico?1300649481' rel='shortcut icon'>
+<link href='https://s3.amazonaws.com/public.dydra.com/apple-touch-icon.png?1300649481' rel='apple-touch-icon'>
 <link href='http://feeds.feedburner.com/dydra' rel='alternate' title='Dydra Blog' type='application/rss+xml'>
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/smoothness/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="https://s3.amazonaws.com/public.dydra.com/stylesheets/style.css?1300412789" media="screen" rel="stylesheet" type="text/css" />
+<link href="https://s3.amazonaws.com/public.dydra.com/stylesheets/style.css?1300649619" media="screen" rel="stylesheet" type="text/css" />
 
 
 <meta name="csrf-param" content="authenticity_token"/>
-<meta name="csrf-token" content="/YAIxfIiDq0A2q27djsticjbjDHke0MhPRnmSRz5Oww="/>
+<meta name="csrf-token" content="z5/D78gUBLeMhBl4qnkboZPHkinjhwMaINemmcJbAMg="/>
 
 </head>
 
@@ -33,14 +33,14 @@
 <li><a href="http://dydra.com/about" class="dydra-link-about">About</a></li>
 <li><a href="http://docs.dydra.com/" class="dydra-link-docs">Docs</a></li>
 <li><a href="http://blog.dydra.com/" class="dydra-link-blog">Blog</a></li>
-<div id='dydra-header-logged-in'>
+<span id='dydra-header-logged-in'>
 <li><a href="http://dydra.com/my_account" class="dydra-link-my-account">My Account</a></li>
 <li><a href="http://dydra.com/logout" class="dydra-link-logout">Logout</a></li>
-</div>
-<div id='dydra-header-logged-out'>
+</span>
+<span id='dydra-header-logged-out'>
 <li><a href="http://dydra.com/signup" class="dydra-link-signup">Signup</a></li>
 <li><a href="https://dydra.com/login" class="dydra-link-login">Login</a></li>
-</div>
+</span>
 </ul>
 <script type='text/javascript'>
   //<![CDATA[
@@ -137,6 +137,24 @@ A product of
 
 <script type='text/javascript'>
   //<![CDATA[
+    var is_ssl = ("https:" == document.location.protocol);
+    var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+    document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var feedback_widget_options = {};
+    feedback_widget_options.display = "overlay";  
+    feedback_widget_options.company = "dydra";
+    feedback_widget_options.placement = "right";
+    feedback_widget_options.color = "#333";
+    feedback_widget_options.style = "idea";
+    var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
     var DYDRA = new function(){
       this.CURRENT_ACCOUNT_NAME = "-none-";
       this.BASE_HOST = "dydra.com";
@@ -157,7 +175,7 @@ A product of
     }
   //]]>
 </script>
-<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/app.js?1300412789" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/app.js?1300649619" type="text/javascript"></script>
 
 <% if ENV['RACK_ENV'] == 'production' %>
 <script type="text/javascript">
@@ -176,24 +194,6 @@ A product of
 <% end %>
 
 
-<script type='text/javascript'>
-  //<![CDATA[
-    var is_ssl = ("https:" == document.location.protocol);
-    var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-    document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-  //]]>
-</script>
-<script type='text/javascript'>
-  //<![CDATA[
-    var feedback_widget_options = {};
-    feedback_widget_options.display = "overlay";  
-    feedback_widget_options.company = "dydra";
-    feedback_widget_options.placement = "right";
-    feedback_widget_options.color = "#333";
-    feedback_widget_options.style = "idea";
-    var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-  //]]>
-</script>
 <!--[if lt IE 7]>
 <script type='text/javascript'>
   //<![CDATA[
@@ -202,7 +202,7 @@ A product of
     }
   //]]>
 </script>
-<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/ie6update/ie6update.js?1300412789" type="text/javascript"></script>
+<script src="https://s3.amazonaws.com/public.dydra.com/javascripts/ie6update/ie6update.js?1300649619" type="text/javascript"></script>
 <![endif]-->
 
 </body>
