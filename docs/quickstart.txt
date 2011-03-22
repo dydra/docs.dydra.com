@@ -12,7 +12,7 @@ already ready.
 ## Starting from your browser
 
 After you [create your account](http://dydra.com/signup), visit your dashboard and
-create a new repository with the `New` button. You can enter some optional
+create a new repository with the `New Repository` button. You can enter some optional
 metadata; the only thing your repository needs is a name.
 
 After creating your repository, you should be at your repository's home page.
