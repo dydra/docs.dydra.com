@@ -8,15 +8,15 @@
   <meta content='Dydra.com' name='description'>
   <meta content='Dydra' name='author'>
   <meta content='width=device-width, initial-scale=1.0' name='viewport'>
-  <link href='https://s3.amazonaws.com/public.dydra.com/favicon.ico?1300649481' rel='shortcut icon'>
-  <link href='https://s3.amazonaws.com/public.dydra.com/apple-touch-icon.png?1300649481' rel='apple-touch-icon'>
+  <link href='https://s3.amazonaws.com/public.dydra.com/favicon.ico?1300988510' rel='shortcut icon'>
+  <link href='https://s3.amazonaws.com/public.dydra.com/apple-touch-icon.png?1300988510' rel='apple-touch-icon'>
   <link href='http://feeds.feedburner.com/dydra' rel='alternate' title='Dydra Blog' type='application/rss+xml'>
   <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/themes/smoothness/jquery-ui.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="https://s3.amazonaws.com/public.dydra.com/stylesheets/style.css?1300649619" media="screen" rel="stylesheet" type="text/css" />
+  <link href="https://s3.amazonaws.com/public.dydra.com/stylesheets/style.css?1300988661" media="screen" rel="stylesheet" type="text/css" />
   
   
   <meta name="csrf-param" content="authenticity_token"/>
-  <meta name="csrf-token" content="z5/D78gUBLeMhBl4qnkboZPHkinjhwMaINemmcJbAMg="/>
+  <meta name="csrf-token" content="dQBUxfYxeIa2a6hIZnb7schWFWBGjdQA/AIwZcc6igk="/>
   
   </head>
   
@@ -29,20 +29,22 @@
   <div id='header'>
   <div class='wrapper'>
   <a href="http://dydra.com/" id="logo">Dydra</a>
-  <ul id='nav'>
+  <div id='nav'>
+  <ul class='nav' id='dydra-header-logged-out'>
+  <li><a href="http://dydra.com/signup" class="dydra-link-signup">Signup</a></li>
+  <li><a href="https://dydra.com/login" class="dydra-link-login">Login</a></li>
+  </ul>
+  <ul class='nav' id='dydra-header-logged-in'>
+  <li><a href="http://dydra.com/my_account" class="dydra-link-my-account">My Account</a></li>
+  <li><a href="http://dydra.com/logout" class="dydra-link-logout">Logout</a></li>
+  </ul>
+  <ul class='nav'>
   <li><a href="http://dydra.com/" class="dydra-link-home">Home</a></li>
   <li><a href="http://dydra.com/about" class="dydra-link-about">About</a></li>
   <li><a href="http://docs.dydra.com/" class="dydra-link-docs">Docs</a></li>
   <li><a href="http://blog.dydra.com/" class="dydra-link-blog">Blog</a></li>
-  <span id='dydra-header-logged-in'>
-  <li><a href="http://dydra.com/my_account" class="dydra-link-my-account">My Account</a></li>
-  <li><a href="http://dydra.com/logout" class="dydra-link-logout">Logout</a></li>
-  </span>
-  <span id='dydra-header-logged-out'>
-  <li><a href="http://dydra.com/signup" class="dydra-link-signup">Signup</a></li>
-  <li><a href="https://dydra.com/login" class="dydra-link-login">Login</a></li>
-  </span>
   </ul>
+  </div>
   <script type='text/javascript'>
     //<![CDATA[
       if(document.cookie.indexOf('dydra_session') != -1) {
@@ -176,7 +178,7 @@
       }
     //]]>
   </script>
-  <script src="https://s3.amazonaws.com/public.dydra.com/javascripts/app.js?1300649619" type="text/javascript"></script>
+  <script src="https://s3.amazonaws.com/public.dydra.com/javascripts/app.js?1300988661" type="text/javascript"></script>
   
   <% if ENV['RACK_ENV'] == 'production' %>
   <script type="text/javascript">
@@ -203,7 +205,7 @@
       }
     //]]>
   </script>
-  <script src="https://s3.amazonaws.com/public.dydra.com/javascripts/ie6update/ie6update.js?1300649619" type="text/javascript"></script>
+  <script src="https://s3.amazonaws.com/public.dydra.com/javascripts/ie6update/ie6update.js?1300988661" type="text/javascript"></script>
   <![endif]-->
   
   </body>
