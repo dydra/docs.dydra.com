@@ -15,6 +15,7 @@ section 'using-dydra',     "Using Dydra" do
   topic 'cli',             "Command-Line Interface"
   topic 'api/sparql',      "SPARQL Endpoints"
   topic 'api/rest',        "REST API"
+  topic 'api/sesame',      "Sesame API"
 end
 
 section 'sdk',             "Libraries" do
