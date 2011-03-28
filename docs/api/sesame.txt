@@ -6,7 +6,7 @@ API](http://www.openrdf.org/doc/sesame/users/ch08.html) to help interact with
 the data in your repositories.  There are some noteable changes in the Dydra.com
 Sesame API implmentation that have been documented below.
 
-### Sesame API URLs
+## Sesame API URLs
 
 The standard Sesame API URLs can be found at
 
@@ -29,7 +29,7 @@ can access the uploadURL method at
 
 `http://dydra.com/jhacker/foaf/uploadURL`.
 
-### Authentication
+## Authentication
 
 The Dydra.com Sesame API does not support logging in ([8.1.1](http://www.openrdf.org/doc/sesame/users/ch08.html#d0e2533))
 or logging out ([8.1.2](http://www.openrdf.org/doc/sesame/users/ch08.html#d0e2590))
@@ -37,20 +37,20 @@ using the standard Sesame API methods. Instead, you will need to authenticate
 each of your API requests using your API token or by using your username 
 and password via standard HTTP authentication.
 
-### SeRQL
+## SeRQL
 
 At this time, Dydra does not currently support either of the SeRQL Sesame API
 methods. ([8.1.2](http://www.openrdf.org/doc/sesame/users/ch08.html#section-comm-http-table-queries) 
 and [8.1.4](http://www.openrdf.org/doc/sesame/users/ch08.html#section-comm-http-graph-queries))
 
-### Requesting a list of available repositories (8.1.3)
+## Requesting a list of available repositories (8.1.3)
 
 **Available at:**
 
 * `/<your account>/sesame/servlets/listRepositories`
 * `/<your account>/sesame/listRepositories`
 
-### Extracting RDF from a repository (8.1.6)
+## Extracting RDF from a repository (8.1.6)
 
 Please note that currently, instead of returning a 200 with the contents 
 of the repository in the body, this method will return a 301 redirect a 
@@ -63,7 +63,7 @@ and `niceOutput` parameters are also currently ignored.
 * `/<your account>/sesame/extractRDF`
 * `/<your account>/<repository>/extractRDF`
 
-### Uploading data to a repository (8.1.7)
+## Uploading data to a repository (8.1.7)
 
 Please note that the `verifyData` parameter is currently ignored. Additionally,
 you can provide a `context` parameter that will determine which named graph this
@@ -75,7 +75,7 @@ data is inserted into.
 * `/<your account>/sesame/uploadData`
 * `/<your account>/<repository>/uploadData`
 
-### Adding data from the web to a repository (8.1.8)
+## Adding data from the web to a repository (8.1.8)
 
 Please note that the `verifyData` parameter is currently ignored. Additionally,
 you can provide a `context` parameter that will determine which named graph the
@@ -87,7 +87,7 @@ data gets inserted into.
 * `/<your account>/sesame/uploadURL`
 * `/<your account>/<repository>/uploadURL`
 
-### Clearing a repository (8.1.9)
+## Clearing a repository (8.1.9)
 
 **Available at:**
 
@@ -95,7 +95,7 @@ data gets inserted into.
 * `/<your account>/sesame/clearRepository`
 * `/<your account>/<repository>/clearRepository`
 
-### Removing statements (8.1.10)
+## Removing statements (8.1.10)
 
 **Available at:**
 
