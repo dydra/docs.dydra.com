@@ -56,6 +56,7 @@ task :update_template do
   sidebar = File.read('views/sidebar.erb')
   s.gsub!(/\<title\>.+\<\/title\>/m, '<title>Dydra | <%=h @title %></title>')
   s.gsub!(/\<body\ class=[\'\"].+[\'\"]\>/, '<body class="docs">')
+  s.gsub!(/\<script\ src=\"https\:\/\/www.google.com\/jsapi\?key\=.+\"\ type=\"text\/javascript\"\>\<\/script\>/, '<script src="https://www.google.com/jsapi?key=ABQIAAAAQUhgcqxq--MWYkEaUwYkOxSiLYLpKcN2trQdajp33h_3zPteGBSjW0O6m_UM52KZWX3vyqlIZagqSQ" type="text/javascript"></script>')
   s.gsub!('[INSERT CONTENT HERE]', main)
   s.gsub!('[INSERT SIDEBAR CONTENT HERE]', sidebar)
   m = s.match(/.+(<script\b[^>]*>.+?google-analytics.+?<\/script\>)/m)
