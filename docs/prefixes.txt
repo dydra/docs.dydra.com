@@ -1,7 +1,7 @@
 Prefixes
 ========
 
-To help simplify SPARQL queries, Dydra has added several default prefixes that you can use within your queries without having to explicitly define them. These defaults can be added to and overwritten as needed.
+To help simplify SPARQL queries, Dydra provides several default prefixes that you can use within your queries without having to explicitly define them. These defaults can be added to and overwritten as needed.
 
 Overriding the Defaults
 -----------------------
