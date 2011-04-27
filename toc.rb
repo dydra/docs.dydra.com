@@ -16,7 +16,7 @@ section 'using-dydra',     "Using Dydra" do
   topic 'api/sparql',      "SPARQL Endpoints"
   topic 'prefixes',        "Prefixes"
   topic 'api/rest',        "REST API"
-  topic 'api/sesame',      "Sesame API"
+  #topic 'api/sesame',      "Sesame API"
 end
 
 section 'sdk',             "Libraries" do
