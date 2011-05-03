@@ -1,104 +1,246 @@
 Sesame API
 ==========
 
-Dydra supports a standard [Sesame
-API](http://www.openrdf.org/doc/sesame/users/ch08.html) to help interact with
-the data in your repositories.  There are some noteable changes in the Dydra.com
+Dydra supports Version 2 of the [Sesame HTTP
+API](http://www.openrdf.org/doc/sesame2/system/ch08.html).
+There are some noteable changes and additions in the Dydra.com
 Sesame API implmentation that have been documented below.
 
-## Sesame API URLs
+## Content Types
 
-The standard Sesame API URLs can be found at
+The following RDF document formats are accepted:
 
-`http://dydra.com/<your account>/sesame`.  
+* RDF/XML
+  * application/rdf+xml
+* N-Triples
+  * text/plain
+* Turtle
+  * application/x-turtle
+* N3
+  * text/rdf+n3
 
-All of the routes in the Sesame API
-include a 'servlets' path which is optional in Dydra's implementation of the 
-spec. For example, 
+The following variable binding formats are accepted:
 
-`http://dydra.com/jhacker/sesame/servlets/uploadURL` 
+* [SPARQL Query Results XML Format](http://www.w3.org/TR/rdf-sparql-XMLres/)
+  * Mime type: application/sparql-results+xml
+* [SPARQL Query Results JSON Format](http://www.w3.org/TR/rdf-sparql-json-res/)
+  * Mime type: application/sparql-results+json
 
-is also accessible at 
+_**Please note:** the binary RDF results table format is currently not supported._
 
-`http://dydra.com/jhacker/sesame/uploadURL`.
+The following boolean result formats are accepted:
 
-Additionally, where applicable, repository specific paths have been enabled
-to allow direct access to an API method. In these instances, the `repository`
-parameter specified in the API is determined from the URL. For example, You
-can access the uploadURL method at 
+* [SPARQL Query Results XML Format](http://www.w3.org/TR/rdf-sparql-XMLres/)
+  * Mime type: application/sparql-results+xml
+  * Mime type: application/sparql-results+json
+* Plain text boolean result formats
+  * Mime type: text/boolean
 
-`http://dydra.com/jhacker/foaf/uploadURL`.
+## Sesame API URL Overview
 
-## Authentication
+The root dydra.com URL (`http://dydra.com`) serves as the base Sesame API
+url.  This is referred to as the `<SESAME_URL>` in the original OpenRDF Sesame 
+API documentation as well as this documentation page.
 
-The Dydra.com Sesame API does not support logging in ([8.1.1](http://www.openrdf.org/doc/sesame/users/ch08.html#d0e2533))
-or logging out ([8.1.2](http://www.openrdf.org/doc/sesame/users/ch08.html#d0e2590))
-using the standard Sesame API methods. Instead, you will need to authenticate
-each of your API requests using your API token or by using your username 
-and password via standard HTTP authentication.
+Your repository ID, referred to here as `<REPO_ID>`, is a combination of your
+account name and the repository name separated by a forward slash ("`/`").  For example, 
+the repository ID for jhacker's foaf repository is `jhacker/foaf`.
 
-## SeRQL
+Dydra currently supports the following Sesame API methods.
 
-At this time, Dydra does not currently support either of the SeRQL Sesame API
-methods. ([8.1.2](http://www.openrdf.org/doc/sesame/users/ch08.html#section-comm-http-table-queries) 
-and [8.1.4](http://www.openrdf.org/doc/sesame/users/ch08.html#section-comm-http-graph-queries))
+* 8.2 Protocol summary
+  * `GET /protocol`
+* 8.3 Repository list
+  * `GET /repositories`
+* 8.4 Repository queries
+  * `GET /repositories/<REPO_ID>`
+  * `POST /repositories/<REPO_ID>`
+* 8.5 Repository statements
+  * `GET /repositories/<REPO_ID>/statements`
+  * `POST /repositories/<REPO_ID>/statements`
+  * `PUT /repositories/<REPO_ID>/statements`
+  * `DELETE /repositories/<REPO_ID>/statements`
+* 8.6 Context lists
+  * `GET /repositories/<REPO_ID>/contexts`
+* 8.7 Namespace declaration lists
+  * `GET /repositories/<REPO_ID>/namespaces`
+  * `DELETE /repositories/<REPO_ID>/namespaces`
+* 8.8 Namespace delcarations
+  * `GET /repositories/<REPO_ID>/namespaces/<PREFIX>`
+  * `PUT /repositories/<REPO_ID>/namespaces/<PREFIX>`
+  * `DELETE /repositories/<REPO_ID>/namespaces/<PREFIX>`
+* 8.9 Repository Size
+  * `GET /repositories/<REPO_ID>/size`
 
-## Requesting a list of available repositories (8.1.3)
+Additionally, Dydra implements one additional API method that allows you to
+obtain the import status on a given repository.
 
-**Available at:**
+* Repository Import Status
+  * `GET /repositories/<REPO_ID>/status`
 
-* `/<your account>/sesame/servlets/listRepositories`
-* `/<your account>/sesame/listRepositories`
+## Protocol summary (8.2)
 
-## Extracting RDF from a repository (8.1.6)
+**Request path:**
 
-Please note that currently, instead of returning a 200 with the contents 
-of the repository in the body, this method will return a 301 redirect a 
-file containing the repository contents. The `schema`, `data`, `explicitOnly`,
-and `niceOutput` parameters are also currently ignored.
+* `GET /protocol`
+  * Returns the current protocol version implemented by Dydra.
 
-**Available at:**
+**Curl Example: Obtaining the current protocol version**
 
-* `/<your account>/sesame/servlets/extractRDF`
-* `/<your account>/sesame/extractRDF`
-* `/<your account>/<repository>/extractRDF`
+    curl http://dydra.com/protocol
 
-## Uploading data to a repository (8.1.7)
+## Repository List (8.3)
 
-Please note that the `verifyData` parameter is currently ignored. Additionally,
-you can provide a `context` parameter that will determine which named graph this
-data is inserted into.
+**Request paths:**
 
-**Available at:**
+* `GET /repositories`
+* `GET /repositories/<account>`
 
-* `/<your account>/sesame/servlets/uploadData`
-* `/<your account>/sesame/uploadData`
-* `/<your account>/<repository>/uploadData`
+The first path will return all repositories visible to you. This includes
+public repositories. The second form filters the repositories to the account
+specified. (See repository permissions document)
 
-## Adding data from the web to a repository (8.1.8)
+**Curl Example: Showing all repositories**
 
-Please note that the `verifyData` parameter is currently ignored. Additionally,
-you can provide a `context` parameter that will determine which named graph the
-data gets inserted into.
+    curl -H 'Accept: application/sparql-results+xml' \
+         http://dydra.com/repositories
 
-**Available at:**
+**Curl Example: Showing repositories for one account**
 
-* `/<your account>/sesame/servlets/uploadURL`
-* `/<your account>/sesame/uploadURL`
-* `/<your account>/<repository>/uploadURL`
+    curl -H 'Accept: application/sparql-results+xml' \
+         http://dydra.com/repositories/jhacker
 
-## Clearing a repository (8.1.9)
+## Repository Queries (8.4)
 
-**Available at:**
+**Request paths:**
 
-* `/<your account>/sesame/servlets/clearRepository`
-* `/<your account>/sesame/clearRepository`
-* `/<your account>/<repository>/clearRepository`
+* `GET /repositories/<account>/<repo>`
+* `POST /repositories/<account>/<repo>`
 
-## Removing statements (8.1.10)
+At this time, Dydra does not currently support the SeRQL query syntax. All
+queries will assume the SPARQL syntax.
 
-**Available at:**
+_**Please note:** the `queryLn`, `infer`, and `$<varname>` parameters are not yet supported for
+this method._
 
-* `/<your account>/sesame/servlets/removeStatements`
-* `/<your account>/sesame/removeStatements`
-* `/<your account>/<repository>/removeStatements`
+**Curl Example: Querying a repository**
+
+    curl -H 'Accept: application/sparql-results+xml' \
+         -d 'query=select * where {?s ?p ?o}' \
+         http://dydra.com/repositories/jhacker/foaf
+
+## Repository Statements (8.5)
+
+**Parameters:**
+
+* `subj` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded resource as subject.
+* `pred` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded URI as predicate.
+* `obj` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded value as object.
+* `context` (optional): If specified, restricts the operation to one or more specific contexts in the repository. The value of this parameter is either an N-Triples encoded URI or bnode ID, or the special value 'null' which represents all context-less statements. If multiple 'context' parameters are specified, the request will operate on the union of all specified contexts. The operation is executed on all statements that are in the repository if no context is specified.
+* `baseURI` (optional): Specifies the base URI to resolve any relative URIs found in uploaded data against. This parameter only applies to the PUT and POST method.
+
+_**Please note:** the `infer` parameter specified in the OpenRDF Sesame API
+documentation is not supported on Dydra._
+
+_**Please note:** Transaction documents are currently not supported._
+
+**Request paths:**
+
+* `GET /repositories/<account>/<repo>/statements`
+  * Fetches statements from the repository.
+* `POST /repositories/<account>/<repo>/statements`
+  * Adds given triples to the repository.
+* `PUT /repositories/<account>/<repo>/statements`
+  * Updates or adds the given triples to the repository.
+* `DELETE /repositories/<account>/<repo>/statements`
+  * Removes statements from the repository.
+
+**Curl Example: Fetching all statements from a repository**
+
+    curl -H 'Accept: application/sparql-results+xml' \
+         http://dydra.com/repositories/jhacker/foaf/statements
+
+**Curl Example: Adding ntriples statements to a repository**
+
+    curl -H 'Content-Type: text/plain' \
+         -d '<http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .' \
+         http://dydra.com/repositories/jhacker/foaf/statements
+
+## Context lists (8.6)
+
+**Request path:**
+
+* `GET /repositories/<REPO_ID>/contexts`
+  * List all contexts contained within the repository.
+
+**Curl Example: Obtaining all contexts in a repository**
+
+    curl -H 'Accept: application/sparql-results+xml' \
+         http://dydra.com/repositories/jhacker/foaf/contexts
+
+## Namespace declaration lists (8.7)
+
+**Request paths:**
+
+* `GET /repositories/<REPO_ID>/namespaces`
+  * Get all namespaces defined for the given repository.
+* `DELETE /repositories/<REPO_ID>/namespaces`
+  * Remove all namespaces from the given repository.
+
+**Curl Example, obtaining all namespaces defined for a given repository**
+
+    curl -H 'Accept: application/sparql-results+xml' \
+         http://dydra.com/repositories/jhacker/foaf/namespaces
+
+**Curl Example, clearing all namespaces in a repository**
+
+    curl -X DELETE -H 'Accept: application/sparql-results+xml' \
+         http://dydra.com/repositories/jhacker/foaf/namespaces
+
+## Namespace delcarations (8.8)
+
+**Request paths:**
+
+* `GET /repositories/<REPO_ID>/namespaces/<PREFIX>`
+  * Returns the identifier for the given prefix.
+* `PUT /repositories/<REPO_ID>/namespaces/<PREFIX>`
+  * Updates or adds the identified prefix.
+* `DELETE /repositories/<REPO_ID>/namespaces/<PREFIX>`
+  * Remove the prefixes from the repository prefix list.
+
+**Curl Example: Obtaining the identifier for a specific namespace**
+
+    curl http://dydra.com/repositories/jhacker/foaf/namespaces/rdf
+
+**Curl Example: Updating or adding a namespace**
+
+    curl -X PUT -d 'http://example.org#' \
+         http://dydra.com/repositories/jhacker/foaf/namespaces/example
+
+**Curl Example: Removing a namespace from a repository**
+
+    curl -X DELETE http://dydra.com/repositories/jhacker/foaf/namespaces/example
+
+## Repository Size (8.9)
+
+**Request path:**
+
+* `GET /repositories/<REPO_ID>/size`
+  * Returns the total number of triples in the repository.
+
+_**Please note:** Dydra's implementation of this method currently does not support the `context` parameter specified in the OpenRDF Sesame API spec._
+
+**Curl Example, Obtaining the number of triples in a repository**
+
+    curl http://dydra.com/repositories/jhacker/foaf/size
+
+## Repository Import Status
+
+**Request path:**
+
+* `GET /repositories/<REPO_ID>/status`
+  * Returns the import status for the given repository. Possible return values are "0" or "1". Status "0" indicates no import is currently taking place. A status of "1" indicates that an import is currently in progress.
+
+**Curl Example, Obtaining the import status of a repository**
+
+    curl http://dydra.com/repositories/jhacker/foaf/status
