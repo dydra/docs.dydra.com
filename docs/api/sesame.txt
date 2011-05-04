@@ -39,11 +39,11 @@ The following boolean result formats are accepted:
 ## Sesame API URL Overview
 
 The root dydra.com URL (`http://dydra.com`) serves as the base Sesame API
-url.  This is referred to as the `<SESAME_URL>` in the original OpenRDF Sesame 
+url.  This is referred to as the `<SESAME_URL>` in the original OpenRDF Sesame
 API documentation as well as this documentation page.
 
 Your repository ID, referred to here as `<REPO_ID>`, is a combination of your
-account name and the repository name separated by a forward slash ("`/`").  For example, 
+account name and the repository name separated by a forward slash ("`/`").  For example,
 the repository ID for jhacker's foaf repository is `jhacker/foaf`.
 
 Dydra currently supports the following Sesame API methods.
@@ -96,6 +96,19 @@ Additionally, Dydra implements several additional API methods as documented belo
 
     curl http://dydra.com/protocol
 
+**Sample Request**
+
+    GET /protocol HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: text/plain; charset=utf-8
+    Content-Length: 1
+
+    4
+
 ## Repository List (8.3)
 
 **Request paths:**
@@ -112,10 +125,66 @@ specified. (See repository permissions document)
     curl -H 'Accept: application/sparql-results+xml' \
          http://dydra.com/repositories
 
+**Sample Request**
+
+    GET /repositories HTTP/1.1
+    Host: dydra.com
+    Accept: application/sparql-results+xml
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: chunked
+    Content-Type: application/sparql-results+xml; charset=utf-8
+
+    <?xml version='1.0' encoding='UTF-8'?>
+    <sparql xmlns='http://www.w3.org/2005/sparql-results#'>
+      <head>
+        <variable name='uri'/>
+        <variable name='id'/>
+        <variable name='title'/>
+        <variable name='readable'/>
+        <variable name='writable'/>
+      </head>
+      <results ordered='false' distinct='false'>
+        <result>
+          <binding name='uri'>
+            <uri>http://dydra.com/jhacker/foaf</uri>
+          </binding>
+          <binding name='id'>
+            <literal>jhacker/foaf</literal>
+          </binding>
+          <binding name='title'>
+            <literal>foaf</literal>
+          </binding>
+          <binding name='readable'>
+            <literal datatype='http://www.w3.org/2001/XMLSchema#boolean'>true</literal>
+          </binding>
+          <binding name='writable'>
+            <literal datatype='http://www.w3.org/2001/XMLSchema#boolean'>false</literal>
+          </binding>
+        </result>
+      </results>
+    </sparql>
+
 **Curl Example: Showing repositories for one account**
 
     curl -H 'Accept: application/sparql-results+xml' \
          http://dydra.com/repositories/jhacker
+
+**Sample Request**
+
+    GET /repositories/jhacker HTTP/1.1
+    Host: dydra.com
+    Accept: application/sparql-results+xml
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: chunked
+    Content-Type: application/sparql-results+xml; charset=utf-8
+
+    [SPARQL XML BINDINGS]
 
 ## Repository Queries (8.4)
 
@@ -124,8 +193,8 @@ specified. (See repository permissions document)
 * `GET /repositories/<account>/<repo>`
 * `POST /repositories/<account>/<repo>`
 
-At this time, Dydra does not currently support the SeRQL query syntax. All
-queries will assume the SPARQL syntax.
+_**Please note:** At this time, Dydra does not currently support the SeRQL query syntax. All
+queries will assume the SPARQL syntax._
 
 _**Please note:** the `queryLn`, `infer`, and `$<varname>` parameters are not yet supported for
 this method._
@@ -135,6 +204,22 @@ this method._
     curl -H 'Accept: application/sparql-results+xml' \
          -d 'query=select * where {?s ?p ?o}' \
          http://dydra.com/repositories/jhacker/foaf
+
+**Sample Request**
+
+    GET /repositories/jhacker/foaf HTTP/1.1
+    Host: dydra.com
+    Accept: application/sparql-results+xml
+
+    query=select%20*%20where%20%7B%3Fs%20%3Fp%20%3Fo%7D
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: chunked
+    Content-Type: application/sparql-results+xml; charset=utf-8
+
+    [SPARQL XML BINDINGS]
 
 ## Repository Statements (8.5)
 
@@ -275,7 +360,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
 **Curl Example: Deleting a repository**
 
-    curl -X DELETE -H 'Accept: application/sparql-results+json' \
+    curl -X DELETE -H 'Accept: text/plain' \
          http://dydra.com/repositories/jhacker/xyz_repository
 
 ## Repository Meta Data
