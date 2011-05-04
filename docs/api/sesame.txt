@@ -247,16 +247,42 @@ _**Please note:** Transaction documents are currently not supported._
 * `DELETE /repositories/<account>/<repo>/statements`
   * Removes statements from the repository.
 
-**Curl Example: Fetching all statements from a repository**
+**Curl Example: Fetching all statements from a repository as N-Triples**
 
-    curl -H 'Accept: application/sparql-results+xml' \
+    curl -H 'Accept: text/plain' \
          http://dydra.com/repositories/jhacker/foaf/statements
 
-**Curl Example: Adding ntriples statements to a repository**
+**Sample Request**
+
+    GET /repositories/jhacker/foaf/statements HTTP/1.1
+    Host: dydra.com
+    Accept: text/plain
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: chunked
+    Content-Type: text/plain; charset=utf-8
+
+    [N-TRIPLES RDF DOCUMENT]
+
+**Curl Example: Adding N-Triples statements to a repository**
 
     curl -H 'Content-Type: text/plain' \
          -d '<http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .' \
          http://dydra.com/repositories/jhacker/foaf/statements
+
+**Sample Request**
+
+    POST /repositories/jhacker/foaf/statements HTTP/1.1
+    Host: dydra.com
+    Content-Type: text/plain
+
+    <http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
 
 ## Context lists (8.6)
 
