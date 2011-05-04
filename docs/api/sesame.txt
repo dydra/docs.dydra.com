@@ -72,10 +72,17 @@ Dydra currently supports the following Sesame API methods.
 * 8.9 Repository Size
   * `GET /repositories/<REPO_ID>/size`
 
-Additionally, Dydra implements one additional API method that allows you to
-obtain the import status on a given repository.
+Additionally, Dydra implements several additional API methods as documented below.
 
-* Repository Import Status
+* Create a repository
+  * `PUT /repositories/<REPO_ID>`
+* Delete a repository
+  * `DELETE /repositories/<REPO_ID>`
+* Get repository Meta Data
+  * `GET /repositories/<REPO_ID>/meta`
+* Update repository Meta Data
+  * `PUT /repositories/<REPO_ID>/meta`
+* Repository import status
   * `GET /repositories/<REPO_ID>/status`
 
 ## Protocol summary (8.2)
@@ -239,6 +246,68 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 **Curl Example, Obtaining the number of triples in a repository**
 
     curl http://dydra.com/repositories/jhacker/foaf/size
+
+## Creating a Repository
+
+**Parameters:**
+
+* `summary` (optional): A summary of the data contained within the repository.
+* `homepage` (optional): A URL to the repository's home page.
+* `description` (optional): A long form description the repository. This description can contain markdown formatting.
+
+**Request path:**
+
+* `PUT /repositories/<REPO_ID>`
+  * Creates a new repository
+
+**Curl Example: Creating a new repository**
+
+    curl -X PUT -H 'Accept: application/sparql-results+json' \
+         -d "summary=A test summary." \
+         http://dydra.com/repositories/jhacker/xyz_repository
+
+## Deleting a Repository
+
+**Request path:**
+
+* `DELETE /repositories/<REPO_ID>`
+  * Deletes a new repository
+
+**Curl Example: Deleting a repository**
+
+    curl -X DELETE -H 'Accept: application/sparql-results+json' \
+         http://dydra.com/repositories/jhacker/xyz_repository
+
+## Repository Meta Data
+
+**Request path:**
+
+* `GET /repositories/<REPO_ID>/meta`
+  * Obtain repository meta data
+
+**Curl Example: Getting repository meta data**
+
+    curl -H 'Accept: application/sparql-results+json' \
+         http://dydra.com/repositories/jhacker/xyz_repository/meta
+
+## Updating Repository Meta Data
+
+**Parameters:**
+
+* `summary` (optional): A summary of the data contained within the repository.
+* `homepage` (optional): A URL to the repository's home page.
+* `description` (optional): A long form description the repository. This description can contain markdown formatting.
+
+**Request path:**
+
+* `PUT /repositories/<REPO_ID>/meta`
+  * Updating repository meta data
+
+**Curl Example: Updating repository meta data**
+
+    curl -X PUT -H 'Accept: application/sparql-results+json' \
+         -d "summary=A test summary." \
+         http://dydra.com/repositories/jhacker/xyz_repository/meta
 
 ## Repository Import Status
 
