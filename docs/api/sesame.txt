@@ -207,7 +207,7 @@ this method._
 
 **Sample Request**
 
-    GET /repositories/jhacker/foaf HTTP/1.1
+    POST /repositories/jhacker/foaf HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
