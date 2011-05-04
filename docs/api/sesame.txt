@@ -180,6 +180,12 @@ _**Please note:** Transaction documents are currently not supported._
 
 ## Namespace declaration lists (8.7)
 
+_**Please note:** In addition to repository level namespace definitions, Dydra
+also supports account level namespace definitions which apply across all repositories
+belonging to that account.  The namespace API methods mentioned here and in section 8.8
+refer only to those namespaces declared on the repository.  See the
+[namespace prefixes](/namespace-prefixes) documentation for more details._
+
 **Request paths:**
 
 * `GET /repositories/<REPO_ID>/namespaces`

@@ -14,7 +14,7 @@ section 'using-dydra',     "Using Dydra" do
   topic 'overview',        "Overview"
   topic 'cli',             "Command-Line Interface"
   topic 'api/sparql',      "SPARQL Endpoints"
-  topic 'prefixes',        "Prefixes"
+  topic 'namespace-prefixes', "Namespace Prefixes"
   topic 'api/rest',        "REST API"
   #topic 'api/sesame',      "Sesame API"
 end
