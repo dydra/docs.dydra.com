@@ -230,11 +230,15 @@ this method._
 * `obj` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded value as object.
 * `context` (optional): If specified, restricts the operation to one or more specific contexts in the repository. The value of this parameter is either an N-Triples encoded URI or bnode ID, or the special value 'null' which represents all context-less statements. If multiple 'context' parameters are specified, the request will operate on the union of all specified contexts. The operation is executed on all statements that are in the repository if no context is specified.
 * `baseURI` (optional): Specifies the base URI to resolve any relative URIs found in uploaded data against. This parameter only applies to the PUT and POST method.
+* `url` (optional): Specifies the URL to import from. This parameter only applies to the PUT and POST method. _**This a Dydra extension of the standard Sesame API.**_
+* `file` (optional): An HTML multipart/form-data encoded file containing the triples to import into the repository. This parameter only applies to the PUT and POST method. _**This a Dydra extension of the standard Sesame API.**_
 
-_**Please note:** the `infer` parameter specified in the OpenRDF Sesame API
-documentation is not supported on Dydra._
+_**Please note:**_
 
-_**Please note:** Transaction documents are currently not supported._
+* The `infer` parameter specified in the OpenRDF Sesame API
+documentation is not supported on Dydra.
+* Transaction documents are currently not supported.
+* As an extension to the standard Sesame API, Dydra also supports importing data into a repository using the `file` or `url` parameters mentioned above. Only one import method can be used at a time.
 
 **Request paths:**
 
@@ -279,6 +283,45 @@ _**Please note:** Transaction documents are currently not supported._
     Content-Type: text/plain
 
     <http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
+**Curl Example: Adding N-Triples statements to a repository via file upload**
+
+    curl -F "file=@data.nt" \
+         http://dydra.com/repositories/jhacker/foaf/statements
+
+**Sample Request**
+
+    POST /repositories/jhacker/foaf/statements HTTP/1.1
+    Host: dydra.com
+    Content-Type: multipart/form-data; boundary=AaB03x
+
+    --AaB03x
+    Content-Disposition: form-data; name="file"; filename="data.nt"
+    Content-Type: text/plain
+
+    ... contents of data.nt ...
+    --AaB03x--
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
+**Curl Example: Adding N-Triples statements to a repository via URL**
+
+    curl -d "url=http://datagraph.org/jhacker/foaf.nt" \
+         http://dydra.com/repositories/jhacker/foaf/statements
+
+**Sample Request**
+
+    POST /repositories/jhacker/foaf/statements HTTP/1.1
+    Host: dydra.com
+    Content-Type: application/x-www-form-urlencoded
+
+    url=http%3A%2F%2Fdatagraph.org%2Fjhacker%2Ffoaf.nt
 
 **Sample Response**
 
