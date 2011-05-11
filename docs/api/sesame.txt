@@ -3,7 +3,7 @@ Sesame API
 
 Dydra supports Version 2 of the [Sesame HTTP
 API](http://www.openrdf.org/doc/sesame2/system/ch08.html).
-There are some noteable changes and additions in the Dydra.com
+There are some noteable changes and additions in the Dydra
 Sesame API implmentation that have been documented below.
 
 ## Content Types
@@ -46,6 +46,11 @@ Your repository ID, referred to here as `<REPO_ID>`, is a combination of your
 account name and the repository name separated by a forward slash ("`/`").  For example,
 the repository ID for jhacker's foaf repository is `jhacker/foaf`.
 
+_**Please note:** If your repository name contains special characters, capitalized letters,
+spaces, or punctuation, a slug will be automatically generated for your repository that
+sanitizes the name so it can be used in a URL.  This full repository ID can be found using the
+repository list method (8.3) described below._
+
 Dydra currently supports the following Sesame API methods.
 
 * 8.2 Protocol summary
@@ -84,6 +89,10 @@ Additionally, Dydra implements several additional API methods as documented belo
   * `PUT /repositories/<REPO_ID>/meta`
 * Repository import status
   * `GET /repositories/<REPO_ID>/status`
+* Current list of active jobs
+  * `GET /jobs`
+* Status of a single job
+  * `GET /jobs/<JOB_ID>`
 
 ## Protocol summary (8.2)
 
@@ -339,6 +348,32 @@ documentation is not supported on Dydra.
     curl -H 'Accept: application/sparql-results+xml' \
          http://dydra.com/repositories/jhacker/foaf/contexts
 
+**Sample Request**
+
+    GET /repositories/jhacker/foaf/contexts HTTP/1.1
+    Host: dydra.com
+    Content-Type: application/sparql-results+xml
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: cunked
+    Content-Type: application/sparql-results+xml; charset=utf-8
+
+    <?xml version='1.0' encoding='UTF-8'?>
+    <sparql xmlns='http://www.w3.org/2005/sparql-results#'>
+      <head>
+        <variable name='contextID'/>
+      </head>
+      <results ordered='false' distinct='false'>
+        <result>
+          <binding name='contextID'>
+            <uri>urn:x-local:graph1</uri>
+          </binding>
+        </result>
+      </results>
+    </sparql>
+
 ## Namespace declaration lists (8.7)
 
 _**Please note:** In addition to repository level namespace definitions, Dydra
@@ -359,10 +394,49 @@ refer only to those namespaces declared on the repository.  See the
     curl -H 'Accept: application/sparql-results+xml' \
          http://dydra.com/repositories/jhacker/foaf/namespaces
 
+**Sample Request**
+
+    GET /repositories/jhacker/foaf/namespaces HTTP/1.1
+    Host: dydra.com
+    Content-Type: application/sparql-results+xml
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: cunked
+    Content-Type: application/sparql-results+xml; charset=utf-8
+
+    <?xml version='1.0' encoding='UTF-8'?>
+    <sparql xmlns='http://www.w3.org/2005/sparql-results#'>
+      <head>
+        <variable name='prefix'/>
+        <variable name='namespace'/>
+      </head>
+      <results ordered='false' distinct='false'>
+        <result>
+          <binding name='prefix'>
+            <literal>rdf</literal>
+          </binding>
+          <binding name='namespace'>
+            <literal>http://www.w3.org/1999/02/22-rdf-syntax-ns#</literal>
+          </binding>
+        </result>
+      </results>
+    </sparql>
+
 **Curl Example, clearing all namespaces in a repository**
 
     curl -X DELETE -H 'Accept: application/sparql-results+xml' \
          http://dydra.com/repositories/jhacker/foaf/namespaces
+
+**Sample Request**
+
+    DELETE /repositories/jhacker/foaf/namespaces HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
 
 ## Namespace delcarations (8.8)
 
@@ -379,14 +453,46 @@ refer only to those namespaces declared on the repository.  See the
 
     curl http://dydra.com/repositories/jhacker/foaf/namespaces/rdf
 
+**Sample Request**
+
+    GET /repositories/jhacker/foaf/namespaces/rdf HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: text/plain; charset=utf-8
+
+    http://www.w3.org/1999/02/22-rdf-syntax-ns# 
+
 **Curl Example: Updating or adding a namespace**
 
     curl -X PUT -d 'http://example.org#' \
          http://dydra.com/repositories/jhacker/foaf/namespaces/example
 
+**Sample Request**
+
+    PUT /repositories/jhacker/foaf/namespaces/example HTTP/1.1
+    Host: dydra.com
+
+    http://example.org#
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
 **Curl Example: Removing a namespace from a repository**
 
     curl -X DELETE http://dydra.com/repositories/jhacker/foaf/namespaces/example
+
+**Sample Request**
+
+    DELETE /repositories/jhacker/foaf/namespaces/example HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
 
 ## Repository Size (8.9)
 
@@ -400,6 +506,18 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 **Curl Example, Obtaining the number of triples in a repository**
 
     curl http://dydra.com/repositories/jhacker/foaf/size
+
+**Sample Request**
+
+    GET /repositories/jhacker/foaf/size HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: text/plain
+
+    123456
 
 ## Creating a Repository
 
@@ -418,7 +536,18 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
     curl -X PUT -H 'Accept: application/sparql-results+json' \
          -d "summary=A test summary." \
-         http://dydra.com/repositories/jhacker/xyz_repository
+         http://dydra.com/repositories/jhacker/foaf
+
+**Sample Request**
+
+    PUT /repositories/jhacker/foaf HTTP/1.1
+    Host: dydra.com
+
+    summary=A%20test%20summary.
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
 
 ## Deleting a Repository
 
@@ -432,6 +561,15 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
     curl -X DELETE -H 'Accept: text/plain' \
          http://dydra.com/repositories/jhacker/xyz_repository
 
+**Sample Request**
+
+    DELETE /repositories/jhacker/foaf HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
 ## Repository Meta Data
 
 **Request path:**
@@ -441,8 +579,68 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
 **Curl Example: Getting repository meta data**
 
-    curl -H 'Accept: application/sparql-results+json' \
+    curl -H 'Accept: application/sparql-results+xml' \
          http://dydra.com/repositories/jhacker/xyz_repository/meta
+
+**Sample Request**
+
+    GET /repositories/jhacker/foaf/meta HTTP/1.1
+    Accept: application/sparql-results+xml
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+
+  <jhuckabee?xml version="1.0" encoding="UTF-8"?>
+  <sparql xmlns="http://www.w3.org/2005/sparql-results#">
+    <head>
+      <variable name="uri"/>
+      <variable name="id"/>
+      <variable name="title"/>
+      <variable name="readable"/>
+      <variable name="writeable"/>
+      <variable name="summary"/>
+      <variable name="description"/>
+      <variable name="homepage"/>
+      <variable name="triple_count"/>
+      <variable name="byte_size"/>
+    </head>
+    <results ordered="false" distinct="false">
+      <result>
+        <binding name="uri">
+          <uri>http://dydra.com/jhacker/foaf</uri>
+        </binding>
+        <binding name="id">
+          <literal>jhacker/foaf</literal>
+        </binding>
+        <binding name="title">
+          <literal>foaf</literal>
+        </binding>
+        <binding name="readable">
+          <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">true</literal>
+        </binding>
+        <binding name="writeable">
+          <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">true</literal>
+        </binding>
+        <binding name="summary">
+          <literal></literal>
+        </binding>
+        <binding name="description">
+          <literal></literal>
+        </binding>
+        <binding name="homepage">
+          <uri>http://dydra.com/jhacker/foaf</uri>
+        </binding>
+        <binding name="triple_count">
+            <literal>14</literal>
+          </binding>
+          <binding name="byte_size">
+            <literal>4224</literal>
+          </binding>
+        </result>
+      </results>
+    </sparql>
 
 ## Updating Repository Meta Data
 
@@ -459,17 +657,74 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
 **Curl Example: Updating repository meta data**
 
-    curl -X PUT -H 'Accept: application/sparql-results+json' \
-         -d "summary=A test summary." \
+    curl -X PUT -d "summary=A test summary." \
          http://dydra.com/repositories/jhacker/xyz_repository/meta
+
+**Sample Request**
+
+    PUT /repositories/jhacker/foaf/meta HTTP/1.1
+    Host: dydra.com
+
+    summary=A%20test%20summary.
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
 
 ## Repository Import Status
 
 **Request path:**
 
 * `GET /repositories/<REPO_ID>/status`
-  * Returns the import status for the given repository. Possible return values are "0" or "1". Status "0" indicates no import is currently taking place. A status of "1" indicates that an import is currently in progress.
+  * Returns the import status for the given repository.
 
 **Curl Example, Obtaining the import status of a repository**
 
     curl http://dydra.com/repositories/jhacker/foaf/status
+
+**Sample Request**
+
+    PUT -H 'Accept: application/sparql-results+xml' \
+        http://dydra.com/repositories/jhacker/foaf/status HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: application/sparql-results+xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <sparql xmlns="http://www.w3.org/2005/sparql-results#">
+      <head>
+        <variable name="uuid"/>
+        <variable name="status"/>
+        <variable name="working"/>
+        <variable name="time"/>
+        <variable name="message"/>
+        <variable name="percent"/>
+      </head>
+      <results ordered="false" distinct="false">
+        <result>
+          <binding name="uuid">
+            <literal>efa56560-5e18-012e-47b0-002332b96472</literal>
+          </binding>
+          <binding name="status">
+            <literal>completed</literal>
+          </binding>
+          <binding name="working">
+            <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">false</literal>
+          </binding>
+          <binding name="time">
+            <literal>2011-05-10 09:23:32 -0700</literal>
+          </binding>
+          <binding name="message">
+            <literal>Completed at 2011-05-10 09:24:37 -0700</literal>
+          </binding>
+          <binding name="percent">
+            <literal datatype="http://www.w3.org/2001/XMLSchema#integer">100</literal>
+          </binding>
+        </result>
+      </results>
+    </sparql>
+
+
