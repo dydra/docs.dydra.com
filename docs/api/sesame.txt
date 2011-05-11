@@ -684,9 +684,9 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
 **Sample Request**
 
-    PUT -H 'Accept: application/sparql-results+xml' \
-        http://dydra.com/repositories/jhacker/foaf/status HTTP/1.1
+    PUT /repositories/jhacker/foaf/status HTTP/1.1
     Host: dydra.com
+    Accept: application/sparql-results+xml
 
 **Sample Response**
 
@@ -727,4 +727,116 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
       </results>
     </sparql>
 
+## Current list of active jobs
 
+**Request path:**
+
+* `GET /jobs`
+  * Returns a list of active jobs for the authenticated account.
+
+**Curl Example, Obtaining a list of active jobs**
+
+    curl -H 'Accept: application/sparql-results+xml' \
+        http://dydra.com/jobs
+
+**Sample Request**
+
+    GET /jobs HTTP/1.1
+    Host: dydra.com
+    Accept: application/sparql-results+xml
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: application/sparql-results+xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <sparql xmlns="http://www.w3.org/2005/sparql-results#">
+      <head>
+        <variable name="uuid"/>
+        <variable name="status"/>
+        <variable name="working"/>
+        <variable name="time"/>
+        <variable name="message"/>
+        <variable name="percent"/>
+      </head>
+      <results ordered="false" distinct="false">
+        <result>
+          <binding name="uuid">
+            <literal>efa56560-5e18-012e-47b0-002332b96472</literal>
+          </binding>
+          <binding name="status">
+            <literal>completed</literal>
+          </binding>
+          <binding name="working">
+            <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">false</literal>
+          </binding>
+          <binding name="time">
+            <literal>2011-05-10 09:23:32 -0700</literal>
+          </binding>
+          <binding name="message">
+            <literal>Completed at 2011-05-10 09:24:37 -0700</literal>
+          </binding>
+          <binding name="percent">
+            <literal datatype="http://www.w3.org/2001/XMLSchema#integer">100</literal>
+          </binding>
+        </result>
+      </results>
+    </sparql>
+
+## Return the status of a single job
+
+**Request path:**
+
+* `GET /jobs/efa56560-5e18-012e-47b0-002332b96472`
+  * Returns status of a single job.
+
+**Curl Example, Obtaining the status of a single job**
+
+    curl -H 'Accept: application/sparql-results+xml' \
+        http://dydra.com/repositories/jobs/efa56560-5e18-012e-47b0-002332b96472
+
+**Sample Request**
+
+    GET /jobs/efa56560-5e18-012e-47b0-002332b96472 HTTP/1.1
+    Host: dydra.com
+    Accept: application/sparql-results+xml
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: application/sparql-results+xml
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <sparql xmlns="http://www.w3.org/2005/sparql-results#">
+      <head>
+        <variable name="uuid"/>
+        <variable name="status"/>
+        <variable name="working"/>
+        <variable name="time"/>
+        <variable name="message"/>
+        <variable name="percent"/>
+      </head>
+      <results ordered="false" distinct="false">
+        <result>
+          <binding name="uuid">
+            <literal>efa56560-5e18-012e-47b0-002332b96472</literal>
+          </binding>
+          <binding name="status">
+            <literal>completed</literal>
+          </binding>
+          <binding name="working">
+            <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">false</literal>
+          </binding>
+          <binding name="time">
+            <literal>2011-05-10 09:23:32 -0700</literal>
+          </binding>
+          <binding name="message">
+            <literal>Completed at 2011-05-10 09:24:37 -0700</literal>
+          </binding>
+          <binding name="percent">
+            <literal datatype="http://www.w3.org/2001/XMLSchema#integer">100</literal>
+          </binding>
+        </result>
+      </results>
+    </sparql>
