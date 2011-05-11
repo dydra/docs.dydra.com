@@ -58,14 +58,10 @@ get '/search' do
   erb :search, :locals => {:search => search, :query => params[:q], :prev_page => prev_page, :next_page => next_page}
 end
 
-get '/:topic/:subtopic' do |topic, subtopic|
+get '*' do
   cache_long
-  render_topic [topic, subtopic].join('/')
-end
-
-get '/:topic' do |topic|
-  cache_long
-  render_topic topic
+  params[:topic] = params[:splat].first[1..-1]
+  render_topic params[:topic]
 end
 
 helpers do
