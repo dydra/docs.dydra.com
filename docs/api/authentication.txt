@@ -1,12 +1,12 @@
 API Authentication
 ==================
 
-Authentication to Dydra's API can be accomplished several ways. We recommend using one
-of the API authentication key methods below.
+Authentication to all of Dydra's APIs can be accomplished several ways. We recommend using one
+of the API authentication key methods referenced below.
 
 ## Your API Authentication Key
 
-You API Authentication Key can be found by clicking on the `Your API Key` button in the upper
+You API Authentication Key can be found by clicking on the "`Your API Key`" button in the upper
 right hand corner of you account page. This button will show you your current authentication
 key and allow you to regenerate a new key should your current key become compromised.
 
