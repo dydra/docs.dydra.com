@@ -1,0 +1,46 @@
+API Authentication
+==================
+
+Authentication to Dydra's API can be accomplished several ways. We recommend using one
+of the API authentication key methods below.
+
+## Your API Authentication Key
+
+You API Authentication Key can be found by clicking on the `Your API Key` button in the upper
+right hand corner of you account page. This button will show you your current authentication
+key and allow you to regenerate a new key should your current key become compromised.
+
+## HTTP Authentication With an API Authentication Key
+
+The recommended authentication mechanism is using standard HTTP authentication in conjunction with
+your Dydra API authentication key. This can be accomplished by using your authentication key
+as the HTTP authentication username and leaving the password blank.
+
+**Example HTTP authentication using an API key**
+
+    curl http://XYZ123456@dydra.com/repositories
+
+Since some HTTP clients require a password when using HTTP authentication, you can use a capital
+letter `X` as the password.
+
+**Example HTTP authentication using an API key, with password**
+
+    curl http://XYZ123456:X@dydra.com/repositories
+
+## API Authentication Key as a Query String Parameter
+
+You can also authenticate to the API with your authentication key by passing the key as a query
+string parameter named `auth_token` with your request.
+
+**Example authenticating using the authentication key as a query string parameter**
+
+    curl http://dydra.com/repositories?auth_token=XYZ123456
+
+## Standard HTTP Authentication
+
+You can also authenticate to the Dydra API without your API key using your username and password
+over standard HTTP authentication.
+
+**Example standard HTTP authentication using account username and password**
+
+    curl http://jhacker:password@dydra.com/repositories

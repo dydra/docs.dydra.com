@@ -6,6 +6,11 @@ API](http://www.openrdf.org/doc/sesame2/system/ch08.html).
 There are some noteable changes and additions in the Dydra
 Sesame API implmentation that have been documented below.
 
+## Authentication
+
+Please see the [API Authentication](/api/authentication) documentation
+for a reference on authenticating to Dydra's Sesame API.
+
 ## Content Types
 
 The following RDF document formats are accepted:

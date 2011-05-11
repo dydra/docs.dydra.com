@@ -8,23 +8,10 @@ Your repository's SPARQL endpoint is found by appending `/sparql` to the
 repository's URL. So a user `jhacker` who created a repository named `foaf`
 would have a SPARQL endpoint located at `http://dydra.com/jhacker/foaf/sparql`.
 
-#### Authentication
+### Authentication
 
-During the beta period, you'll need to authenticate yourself for any SPARQL
-query. You can do this either with HTTP Basic Authentication, or by appending
-an [API token](/api/rest) to your URL.
-
-###### HTTP Basic Authentication
-
-To use HTTP basic authentication, simply use your username and password as
-normal. We'll also accept your API token in the password field.
-
-###### Query String
-
-You can append your API token to a query string to any SPARQL query to
-authenticate yourself. This method is not recommended, as it will log
-credentials in firewall logs, but may be easier for some legacy clients to
-support. 
+Please see the [API Authentication](/api/authentication) documentation
+for a reference on authenticating SPARQL request.
 
 ### Dydra's SPARQL Dialect
 

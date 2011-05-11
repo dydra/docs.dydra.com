@@ -4,14 +4,10 @@ REST API
 You can perform most account functions on Dydra.com via a standard [REST
 API.](http://en.wikipedia.org/wiki/Representational_State_Transfer)
 
-### API Token
+### Authentication
 
-You'll want your API token for most REST API operations. Your API token is very
-much like your password, except that it does not provide permissions to edit
-your password. You can use it most anywhere you can use your password. You can
-find your API token either on your account dashboard in your browser, or if you
-perform an authenticated request with your username and password for your
-account information via the REST API.
+Please see the [API Authentication](/api/authentication) documentation
+for a reference on authenticating to Dydra's REST API.
 
 ### Supported Formats
 
