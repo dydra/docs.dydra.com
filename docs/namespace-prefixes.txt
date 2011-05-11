@@ -3,34 +3,25 @@ Namespace Prefixes
 
 To help simplify SPARQL queries, Dydra provides several default namespace prefixes that you can use within your queries without having to explicitly define them at the top of each query. These defaults can be added to and overwritten as needed.
 
-Overriding the Defaults
------------------------
+A core set of namespace prefixes is automatically available to all accounts and repositories hosted on Dydra. These defaults can be overwritten and added to at two different levels within the system. Prefixes can be defined within your account profile, which are made available to all of your repositories, and individually on each repository. 
 
-A core set of prefixes is automatically available to all accounts and repositories hosted on Dydra.  These defaults can be overwritten and added to from two different places.  Prefixes can be defined with your profile and on each individual repository.  The order of precedence of these prefixes, starting with greatest precedence, is as such:
+## Account Prefixes
 
-1. Repository prefixes
-2. Repository owner's profile prefixes
-3. When querying a repository for another account, your own profile's defined prefixes
-4. Default prefixes
-
-### Profile Prefixes
-
-Default account prefixes can be set in your account profile under the `Prefixes` tab.  Prefixes should be defined using standard SPARQL prefix defition syntax with one prefix per line. For example:
+Account-wide prefixes can be set in your account profile under the `Prefixes` tab.  Prefixes should be defined using standard SPARQL prefix defition syntax with one prefix per line. For example:
 
     PREFIX cc: <http://creativecommons.org/ns#>
 
-Any prefixes defined here will add to or override the default prefixes and will be available to all of your repositories.  
+Any prefixes defined here will add to or override the default prefixes listed below and will be available to all of your repositories.
 
-Additionally, when querying repositories for another account, the prefixes defined in your profile will also override the defaults.  However, when querying repositories on another account, any prefixes defined on the account profile for which you are querying will override any preferences defined within your own profile.
+Account prefixes will also be used when querying the repositories of another account.  However, in that case, any prefixes defined by the other account will take precedence over any that have been defined in your own.  To override any prefixes they may have defined on another account or repository, you must include them in the query itself.
 
-### Repository Prefixes
+## Repository Prefixes
 
 Prefixes can also be defined at the repository level. These can be set in the `Prefixes` tab of the repository admin page.
 
 Prefixes defined at the repository level take precedence over those defined at the account profile level.
 
-Default Prefixes
-----------------
+## Default Prefixes
 
 This is a list of the default prefixes that you can use in Dydra SPARQL queries
 
