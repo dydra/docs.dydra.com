@@ -1,37 +1,580 @@
 REST API
 ========
 
-You can perform most account functions on Dydra.com via a standard [REST
+You can perform most account and repository functions on Dydra.com via a standard [REST
 API.](http://en.wikipedia.org/wiki/Representational_State_Transfer)
 
-### Authentication
+## Authentication
 
 Please see the [API Authentication](/api/authentication) documentation
-for a reference on authenticating to Dydra's REST API.
+for a reference on authenticating to Dydra's Sesame API.
 
-### Supported Formats
+## Content Types
 
-The dydra.com REST API supports `application/json` (for JSON requests) and
-`application/xml` (for XML requests) formats for both input and output. Simply
-set your client's 'Accept:' headers to the appropriate format.
+The following RDF document formats are accepted:
 
-#### Your Account
+* RDF/XML
+  * application/rdf+xml
+* N-Triples
+  * text/plain
+* Turtle
+  * application/x-turtle
+* N3
+  * text/rdf+n3
 
-You can read and update your account information by  accessing your account URL
-at `http://dydra.com/<your account>`. If you perform HTTP basic authentication,
-you can retrive your API token here.
+The following variable binding formats are accepted:
 
-#### Your Repositories
+* [SPARQL Query Results XML Format](http://www.w3.org/TR/rdf-sparql-XMLres/)
+  * Mime type: application/sparql-results+xml
+* [SPARQL Query Results JSON Format](http://www.w3.org/TR/rdf-sparql-json-res/)
+  * Mime type: application/sparql-results+json
 
-##### Creating
+The following boolean result formats are accepted:
 
-You can create a repository by performing an authenticated POST request to
-`http://dydra.com/<your account>/repositories`. You only need to include the
-repository name.
+* Plain text boolean result formats
+  * Mime type: text/boolean
 
-##### Managing
+## REST API URL Overview
 
-You'll download your repository in various RDF formats from your repository's
-URL, so your repositories' REST APIs are at `http://dydra.com/<your
-account>/<repository>/meta`. 
+Your repository ID, referred to here as `<REPO_ID>`, is a sanitized version of the repository
+name.  If your repository name contains special characters, capitalized letters,
+spaces, or punctuation, a slug will be automatically generated for your repository that
+sanitizes the name so it can be used in a URL.  This repository ID can be found using the
+repository list method described below._
 
+* Repository list
+  * `GET /<ACCOUNT_ID>/repositories`
+* Create a repository
+  * `POST /<ACCOUNT_ID>/repositories`
+* Delete a repository
+  * `DELETE /<ACCOUNT_ID>/<REPO_ID>`
+* Get repository Meta Data
+  * `GET /<ACCOUNT_ID>/<REPO_ID>/meta`
+* Update repository Meta Data
+  * `PUT /<ACCOUNT_ID>/<REPO_ID>/meta`
+* Repository Size
+  * `GET /<ACCOUNT_ID>/<REPO_ID>/size`
+* Repository statements
+  * `GET /<ACCOUNT_ID>/<REPO_ID>/statements`
+  * `POST /<ACCOUNT_ID>/<REPO_ID>/statements`
+  * `PUT /<ACCOUNT_ID>/<REPO_ID>/statements`
+  * `DELETE /<ACCOUNT_ID>/<REPO_ID>/statements`
+* Repository import status
+  * `GET /<ACCOUNT_ID>/<REPO_ID>/status`
+* Context lists
+  * `GET /<ACCOUNT_ID>/<REPO_ID>/contexts`
+* Namespace declaration lists
+  * `GET /<ACCOUNT_ID>/<REPO_ID>/namespaces`
+  * `DELETE /<ACCOUNT_ID>/<REPO_ID>/namespaces`
+* Namespace delcarations
+  * `GET /<ACCOUNT_ID>/<REPO_ID>/namespaces/<PREFIX>`
+  * `PUT /<ACCOUNT_ID>/<REPO_ID>/namespaces/<PREFIX>`
+  * `DELETE /<ACCOUNT_ID>/<REPO_ID>/namespaces/<PREFIX>`
+* Current list of active jobs
+  * `GET /jobs`
+* Status of a single job
+  * `GET /jobs/<JOB_ID>`
+
+## Repository List
+
+**Request path:**
+
+* `GET /<account>/repositories`
+
+Returns a list of all repositories for that acocunt.
+
+**Curl Example: Showing all account repositories**
+
+    curl -H 'Accept: application/json' \
+         http://dydra.com/jhacker/repositories
+
+**Sample Request**
+
+    GET /jhacker/repositories HTTP/1.1
+    Host: dydra.com
+    Accept: application/json
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: chunked
+    Content-Type: application/json; charset=utf-8
+
+    [{"repository_id":"jhuckabee/foaf",
+      "name":"foaf",
+      "summary":"",
+      "description":"",
+      "homepage":"http://dydra.com/jhuckabee/foaf",
+      "triple_count":14,
+      "byte_size":4224}]
+
+## Creating a Repository
+
+**Parameters:**
+
+* `repository[name]` (required): The name of the repository.
+* `repository[summary]` (optional): A summary of the data contained within the repository.
+* `repository[description]` (optional): A long form description the repository. This description can contain markdown formatting.
+* `repository[homepage]` (optional): A URL to the repository's home page.
+
+**Request path:**
+
+* `POST /<ACCOUNT_ID>/repositories`
+  * Creates a new repository
+
+**Curl Example: Creating a new repository**
+
+    curl -H 'Accept: application/json' \
+         -d "repository[name]=foaf&repository[summary]=A test summary." \
+         http://dydra.com/jhacker/repositories
+
+**Sample Request**
+
+    POST /jhacker/repositories HTTP/1.1
+    Accept: application/json
+    Host: dydra.com
+
+    repository[name]=foaf&repository[summary]=A%20test%20summary.
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"repository_id":"jhacker/foaf",
+     "name":"foaf",
+     "summary":"A test summary.",
+     "description":null,
+     "homepage":null,
+     "byte_size":0,
+     "triple_count":0}
+
+## Deleting a Repository
+
+**Request path:**
+
+* `DELETE /<ACCOUNT_ID>/<REPO_ID>`
+  * Deletes a repository
+
+**Curl Example: Deleting a repository**
+
+    curl -X DELETE -H 'Accept: application/json' \
+         http://dydra.com/jhacker/xyz_repository
+
+**Sample Request**
+
+    DELETE /jhacker/foaf HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+
+## Repository Meta Data
+
+**Request path:**
+
+* `GET /<ACCOUNT_ID>/<REPO_ID>/meta`
+  * Obtain repository meta data
+
+**Curl Example: Getting repository meta data**
+
+    curl -H 'Accept: application/json' \
+         http://dydra.com/jhacker/foaf/meta
+
+**Sample Request**
+
+    GET /jhacker/foaf/meta HTTP/1.1
+    Accept: application/json
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+
+    {"repository_id":"jhacker/foaf",
+     "name":"foaf",
+     "summary":"A test summary.",
+     "description":null,
+     "homepage":null,
+     "byte_size":0,
+     "triple_count":0}
+
+## Updating Repository Meta Data
+
+**Parameters:**
+
+* `repository[name]` (optional): The name of the repository.
+* `repository[summary]` (optional): A summary of the data contained within the repository.
+* `repository[homepage]` (optional): A URL to the repository's home page.
+* `repository[description]` (optional): A long form description the repository. This description can contain markdown formatting.
+
+**Request path:**
+
+* `PUT /<ACCOUNT_ID>/<REPO_ID>/meta`
+  * Updating repository meta data
+
+**Curl Example: Updating repository meta data**
+
+    curl -X PUT -d "repository[summary]=A test summary." \
+         http://dydra.com/jhacker/xyz_repository/meta
+
+**Sample Request**
+
+    PUT /jhacker/foaf/meta HTTP/1.1
+    Host: dydra.com
+
+    summary=A%20test%20summary.
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+
+## Repository Statements
+
+**Parameters:**
+
+* `subj` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded resource as subject.
+* `pred` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded URI as predicate.
+* `obj` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded value as object.
+* `context` (optional): If specified, restricts the operation to one or more specific contexts in the repository. The value of this parameter is either an N-Triples encoded URI or bnode ID, or the special value 'null' which represents all context-less statements. If multiple 'context' parameters are specified, the request will operate on the union of all specified contexts. The operation is executed on all statements that are in the repository if no context is specified.
+* `baseURI` (optional): Specifies the base URI to resolve any relative URIs found in uploaded data against. This parameter only applies to the PUT and POST method.
+* `url` (optional): Specifies the URL to import from. This parameter only applies to the PUT and POST method.
+* `file` (optional): An HTML multipart/form-data encoded file containing the triples to import into the repository. This parameter only applies to the PUT and POST method.
+
+**Request paths:**
+
+* `GET /<ACCOUNT_ID>/<REPO_ID>/statements`
+  * Fetches statements from the repository.
+* `POST /<ACCOUNT_ID>/<REPO_ID>/statements`
+  * Adds given triples to the repository.
+* `PUT /<ACCOUNT_ID>/<REPO_ID>/statements`
+  * Updates or adds the given triples to the repository.
+* `DELETE /<ACCOUNT_ID>/<REPO_ID>/statements`
+  * Removes statements from the repository.
+
+**Curl Example: Fetching all statements from a repository as N-Triples**
+
+    curl -H 'Accept: text/plain' \
+         http://dydra.com/jhacker/foaf/statements
+
+**Sample Request**
+
+    GET /jhacker/foaf/statements HTTP/1.1
+    Host: dydra.com
+    Accept: text/plain
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: chunked
+    Content-Type: text/plain; charset=utf-8
+
+    [N-TRIPLES RDF DOCUMENT]
+
+**Curl Example: Adding N-Triples statements to a repository**
+
+    curl -H 'Content-Type: text/plain' \
+         -d '<http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .' \
+         http://dydra.com/jhacker/foaf/statements
+
+**Sample Request**
+
+    POST /jhacker/foaf/statements HTTP/1.1
+    Host: dydra.com
+    Content-Type: text/plain
+
+    <http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
+**Curl Example: Adding N-Triples statements to a repository via file upload**
+
+    curl -F "file=@data.nt" \
+         http://dydra.com/jhacker/foaf/statements
+
+**Sample Request**
+
+    POST /jhacker/foaf/statements HTTP/1.1
+    Host: dydra.com
+    Content-Type: multipart/form-data; boundary=AaB03x
+
+    --AaB03x
+    Content-Disposition: form-data; name="file"; filename="data.nt"
+    Content-Type: text/plain
+
+    ... contents of data.nt ...
+    --AaB03x--
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
+**Curl Example: Adding N-Triples statements to a repository via URL**
+
+    curl -d "url=http://datagraph.org/jhacker/foaf.nt" \
+         http://dydra.com/jhacker/foaf/statements
+
+**Sample Request**
+
+    POST /jhacker/foaf/statements HTTP/1.1
+    Host: dydra.com
+    Content-Type: application/x-www-form-urlencoded
+
+    url=http%3A%2F%2Fdatagraph.org%2Fjhacker%2Ffoaf.nt
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
+## Context lists
+
+Context lists can be requested for any of the SPARQL variable binding result set
+formats.
+
+**Request path:**
+
+* `GET /<ACCOUNT_ID>/<REPO_ID>/contexts`
+  * List all contexts contained within the repository.
+
+**Curl Example: Obtaining all contexts in a repository**
+
+    curl -H 'Accept: application/sparql-results+xml' \
+         http://dydra.com/jhacker/foaf/contexts
+
+**Sample Request**
+
+    GET /jhacker/foaf/contexts HTTP/1.1
+    Host: dydra.com
+    Content-Type: application/sparql-results+json
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: cunked
+    Content-Type: application/sparql-results+json; charset=utf-8
+
+    { "head": { "vars": [ "contextID" ] },
+      "results": {
+      "bindings": [
+      { "contextID": {"type":"uri", "value":"http://example.org#"} } ] } }
+
+## Namespace declaration lists
+
+_**Please note:** In addition to repository level namespace definitions, Dydra
+also supports account level namespace definitions which apply across all repositories
+belonging to that account.  The namespace API methods mentioned here
+refer only to those namespaces declared on the repository.  See the
+[namespace prefixes](/namespace-prefixes) documentation for more details._
+
+**Request paths:**
+
+* `GET /<ACCOUNT_ID>/<REPO_ID>/namespaces`
+  * Get all namespaces defined for the given repository.
+* `DELETE /<ACCOUNT_ID>/<REPO_ID>/namespaces`
+  * Remove all namespaces from the given repository.
+
+**Curl Example, obtaining all namespaces defined for a given repository**
+
+    curl -H 'Accept: application/sparql-results+xml' \
+         http://dydra.com/jhacker/foaf/namespaces
+
+**Sample Request**
+
+    GET /jhacker/foaf/namespaces HTTP/1.1
+    Host: dydra.com
+    Content-Type: application/json
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Transfer-Encoding: cunked
+    Content-Type: application/json; charset=utf-8
+
+    {"rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#"}
+
+**Curl Example, clearing all namespaces in a repository**
+
+    curl -X DELETE http://dydra.com/jhacker/foaf/namespaces
+
+**Sample Request**
+
+    DELETE /jhacker/foaf/namespaces HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
+## Namespace delcarations
+
+**Request paths:**
+
+* `GET /<ACCOUNT_ID>/<REPO_ID>/namespaces/<PREFIX>`
+  * Returns the identifier for the given prefix.
+* `PUT /<ACCOUNT_ID>/<REPO_ID>/namespaces/<PREFIX>`
+  * Updates or adds the identified prefix.
+* `DELETE /<ACCOUNT_ID>/<REPO_ID>/namespaces/<PREFIX>`
+  * Remove the prefixes from the repository prefix list.
+
+**Curl Example: Obtaining the identifier for a specific namespace**
+
+    curl http://dydra.com/jhacker/foaf/namespaces/rdf
+
+**Sample Request**
+
+    GET /jhacker/foaf/namespaces/rdf HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: text/plain; charset=utf-8
+
+    http://www.w3.org/1999/02/22-rdf-syntax-ns# 
+
+**Curl Example: Updating or adding a namespace**
+
+    curl -X PUT -d 'http://example.org#' \
+         http://dydra.com/jhacker/foaf/namespaces/example
+
+**Sample Request**
+
+    PUT /jhacker/foaf/namespaces/example HTTP/1.1
+    Host: dydra.com
+
+    http://example.org#
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
+**Curl Example: Removing a namespace from a repository**
+
+    curl -X DELETE http://dydra.com/jhacker/foaf/namespaces/example
+
+**Sample Request**
+
+    DELETE /jhacker/foaf/namespaces/example HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 204 NO CONTENT
+
+## Repository Size
+
+Returns the total number of triples in the repository across all contexts.
+
+**Request path:**
+
+* `GET /<ACCOUNT_ID>/<REPO_ID>/size`
+  * Returns the total number of triples in the repository.
+
+**Curl Example, Obtaining the number of triples in a repository**
+
+    curl http://dydra.com/jhacker/foaf/size
+
+**Sample Request**
+
+    GET /jhacker/foaf/size HTTP/1.1
+    Host: dydra.com
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: text/plain
+
+    123456
+
+## Repository Import Status
+
+**Request path:**
+
+* `GET /<ACCOUNT_ID>/<REPO_ID>/status`
+  * Returns the import status for the given repository.
+
+**Curl Example, Obtaining the import status of a repository**
+
+    curl -H 'Accept: application/json' \
+         http://dydra.com/jhacker/foaf/status
+
+**Sample Request**
+
+    PUT /jhacker/foaf/status HTTP/1.1
+    Host: dydra.com
+    Accept: application/json
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"uuid":"e8fe3670-5e3b-012e-47b0-002332b96472",
+     "status":"running",
+     "working":true,
+     "time":"2011-05-11T13:33:53-07:00",
+     "message":"Fetching data (4194304/8080661 bytes)...",
+     "pct":51}
+
+## Current list of active operations
+
+**Request path:**
+
+* `GET /ops`
+  * Returns a list of active operations for the authenticated account.
+
+**Curl Example, Obtaining a list of active operations**
+
+    curl -H 'Accept: application/json' \
+        http://dydra.com/ops
+
+**Sample Request**
+
+    GET /ops HTTP/1.1
+    Host: dydra.com
+    Accept: application/json
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    [{"uuid":"01606000-5e69-012e-fbb2-002332b96472",
+      "status":"running",
+      "working":true,
+      "time":"2011-05-11T18:56:41-07:00",
+      "message":"Parsing data...",
+      "pct":0}]
+
+## Return the status of a single operation
+
+**Request path:**
+
+* `GET /jobs/efa56560-5e18-012e-47b0-002332b96472`
+  * Returns status of a single job.
+
+**Curl Example, Obtaining the status of a single job**
+
+    curl -H 'Accept: application/json' \
+        http://dydra.com/repositories/jobs/efa56560-5e18-012e-47b0-002332b96472
+
+**Sample Request**
+
+    GET /jobs/efa56560-5e18-012e-47b0-002332b96472 HTTP/1.1
+    Host: dydra.com
+    Accept: application/json
+
+**Sample Response**
+
+    HTTP/1.1 200 OK
+    Content-Type: application/json
+
+    {"uuid":"efa56560-5e18-012e-47b0-002332b96472",
+      "status":"running",
+      "working":true,
+      "time":"2011-05-11T18:56:41-07:00",
+      "message":"Parsing data...",
+      "pct":0}

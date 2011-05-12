@@ -35,9 +35,6 @@ _**Please note:** the binary RDF results table format is currently not supported
 
 The following boolean result formats are accepted:
 
-* [SPARQL Query Results XML Format](http://www.w3.org/TR/rdf-sparql-XMLres/)
-  * Mime type: application/sparql-results+xml
-  * Mime type: application/sparql-results+json
 * Plain text boolean result formats
   * Mime type: text/boolean
 
@@ -94,10 +91,10 @@ Additionally, Dydra implements several additional API methods as documented belo
   * `PUT /repositories/<REPO_ID>/meta`
 * Repository import status
   * `GET /repositories/<REPO_ID>/status`
-* Current list of active jobs
-  * `GET /jobs`
-* Status of a single job
-  * `GET /jobs/<JOB_ID>`
+* Current list of active operations
+  * `GET /ops`
+* Status of a single operation
+  * `GET /ops/<JOB_ID>`
 
 ## Protocol summary (8.2)
 
@@ -204,8 +201,8 @@ specified. (See repository permissions document)
 
 **Request paths:**
 
-* `GET /repositories/<account>/<repo>`
-* `POST /repositories/<account>/<repo>`
+* `GET /repositories/<REPO_ID>`
+* `POST /repositories/<REPO_ID>`
 
 _**Please note:** At this time, Dydra does not currently support the SeRQL query syntax. All
 queries will assume the SPARQL syntax._
@@ -256,13 +253,13 @@ documentation is not supported on Dydra.
 
 **Request paths:**
 
-* `GET /repositories/<account>/<repo>/statements`
+* `GET /repositories/<REPO_ID>/statements`
   * Fetches statements from the repository.
-* `POST /repositories/<account>/<repo>/statements`
+* `POST /repositories/<REPO_ID>/statements`
   * Adds given triples to the repository.
-* `PUT /repositories/<account>/<repo>/statements`
+* `PUT /repositories/<REPO_ID>/statements`
   * Updates or adds the given triples to the repository.
-* `DELETE /repositories/<account>/<repo>/statements`
+* `DELETE /repositories/<REPO_ID>/statements`
   * Removes statements from the repository.
 
 **Curl Example: Fetching all statements from a repository as N-Triples**
@@ -559,7 +556,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 **Request path:**
 
 * `DELETE /repositories/<REPO_ID>`
-  * Deletes a new repository
+  * Deletes a repository
 
 **Curl Example: Deleting a repository**
 
@@ -597,47 +594,47 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
     HTTP/1.1 200 OK
 
-  <jhuckabee?xml version="1.0" encoding="UTF-8"?>
-  <sparql xmlns="http://www.w3.org/2005/sparql-results#">
-    <head>
-      <variable name="uri"/>
-      <variable name="id"/>
-      <variable name="title"/>
-      <variable name="readable"/>
-      <variable name="writeable"/>
-      <variable name="summary"/>
-      <variable name="description"/>
-      <variable name="homepage"/>
-      <variable name="triple_count"/>
-      <variable name="byte_size"/>
-    </head>
-    <results ordered="false" distinct="false">
-      <result>
-        <binding name="uri">
-          <uri>http://dydra.com/jhacker/foaf</uri>
-        </binding>
-        <binding name="id">
-          <literal>jhacker/foaf</literal>
-        </binding>
-        <binding name="title">
-          <literal>foaf</literal>
-        </binding>
-        <binding name="readable">
-          <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">true</literal>
-        </binding>
-        <binding name="writeable">
-          <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">true</literal>
-        </binding>
-        <binding name="summary">
-          <literal></literal>
-        </binding>
-        <binding name="description">
-          <literal></literal>
-        </binding>
-        <binding name="homepage">
-          <uri>http://dydra.com/jhacker/foaf</uri>
-        </binding>
-        <binding name="triple_count">
+    <?xml version="1.0" encoding="UTF-8"?>
+    <sparql xmlns="http://www.w3.org/2005/sparql-results#">
+      <head>
+        <variable name="uri"/>
+        <variable name="id"/>
+        <variable name="title"/>
+        <variable name="readable"/>
+        <variable name="writeable"/>
+        <variable name="summary"/>
+        <variable name="description"/>
+        <variable name="homepage"/>
+        <variable name="triple_count"/>
+        <variable name="byte_size"/>
+      </head>
+      <results ordered="false" distinct="false">
+        <result>
+          <binding name="uri">
+            <uri>http://dydra.com/jhacker/foaf</uri>
+          </binding>
+          <binding name="id">
+            <literal>jhacker/foaf</literal>
+          </binding>
+          <binding name="title">
+            <literal>foaf</literal>
+          </binding>
+          <binding name="readable">
+            <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">true</literal>
+          </binding>
+          <binding name="writeable">
+            <literal datatype="http://www.w3.org/2001/XMLSchema#boolean">true</literal>
+          </binding>
+          <binding name="summary">
+            <literal></literal>
+          </binding>
+          <binding name="description">
+            <literal></literal>
+          </binding>
+          <binding name="homepage">
+            <uri>http://dydra.com/jhacker/foaf</uri>
+          </binding>
+          <binding name="triple_count">
             <literal>14</literal>
           </binding>
           <binding name="byte_size">
@@ -732,21 +729,21 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
       </results>
     </sparql>
 
-## Current list of active jobs
+## Current list of active operations
 
 **Request path:**
 
-* `GET /jobs`
-  * Returns a list of active jobs for the authenticated account.
+* `GET /ops`
+  * Returns a list of active operations for the authenticated account.
 
-**Curl Example, Obtaining a list of active jobs**
+**Curl Example, Obtaining a list of active operations**
 
     curl -H 'Accept: application/sparql-results+xml' \
-        http://dydra.com/jobs
+        http://dydra.com/ops
 
 **Sample Request**
 
-    GET /jobs HTTP/1.1
+    GET /ops HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
@@ -789,21 +786,21 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
       </results>
     </sparql>
 
-## Return the status of a single job
+## Return the status of a single operation
 
 **Request path:**
 
-* `GET /jobs/efa56560-5e18-012e-47b0-002332b96472`
-  * Returns status of a single job.
+* `GET /ops/<JOB_ID>`
+  * Returns status of a single operation.
 
-**Curl Example, Obtaining the status of a single job**
+**Curl Example, Obtaining the status of a single operation**
 
     curl -H 'Accept: application/sparql-results+xml' \
-        http://dydra.com/repositories/jobs/efa56560-5e18-012e-47b0-002332b96472
+        http://dydra.com/repositories/ops/efa56560-5e18-012e-47b0-002332b96472
 
 **Sample Request**
 
-    GET /jobs/efa56560-5e18-012e-47b0-002332b96472 HTTP/1.1
+    GET /ops/efa56560-5e18-012e-47b0-002332b96472 HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
