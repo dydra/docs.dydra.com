@@ -6,13 +6,13 @@ SPARQL is a powerful query language, and as such it is easy to write complex
 queries that require a great deal of computing power to execute. As both
 query execution time and billing directly depend on how much processing a
 query requires, it is useful to understand some of Dydra's key performance
-characteristics. With larger datasets, simple changes to a query can have a
-significant performance impact.
+characteristics. With larger datasets, simple changes to a query can result
+in a significant performance improvement.
 
-This section describes several key factors that strongly influence the
-execution time and cost of queries, and explains a number of tips and tricks
-that will help you tune your queries for optimal application performance and
-a reduced monthly bill.
+This section describes several factors that strongly influence the execution
+time and cost of queries, and explains a number of tips and tricks that will
+help you tune your queries for optimal application performance and a reduced
+monthly bill.
 
 Note that the following may contain too much detail if you are casually
 using Dydra for typical and straightforward use cases. You probably won't
@@ -46,13 +46,14 @@ SELECT ?b WHERE @{ ... @}
 @end group
 @end example
 
-The above has two benefits. Firstly, Dydra's query processing can apply more
-aggressive optimizations knowing that the values of the variables @code{?a}
-and @code{?c} will not actually be returned in the solution sequence.
-Secondly, the size of the solution sequence itself, and hence the network
-use necessary for your application to retrieve it, is reduced by not
+The above has two benefits. Firstly, Dydra's query processing will apply
+more aggressive optimizations knowing that the values of the variables
+@code{?a} and @code{?c} will not actually be returned in the solution
+sequence. Secondly, the size of the solution sequence itself, and hence the
+network use necessary for your application to retrieve it, is reduced by not
 including superfluous values. The combination of these two factors can make
-a big difference for complex queries returning large solution sequences.
+a big performance difference for complex queries returning large solution
+sequences.
 
 If you remember just one thing from this subsection, remember this:
 @code{SELECT *} is a useful shorthand when manually executing queries, but
@@ -114,8 +115,8 @@ specify a @code{LIMIT 100}. This puts an explicit upper bound on the amount
 of work to be performed in answering your query.
 
 Note, however, that if your query contains both @code{ORDER BY} and
-@code{LIMIT} clauses, query processing must inevitably construct and examine
-the full solution sequence in order to sort it. Therefore the amount of
+@code{LIMIT} clauses, query processing must always construct and examine the
+full solution sequence in order to sort it. Therefore the amount of
 processing needed is not actually reduced by a @code{LIMIT} clause in this
 case. Still, limiting the size of the ordered solution sequence with an
 explicit @code{LIMIT} improves performance by reducing network use.
