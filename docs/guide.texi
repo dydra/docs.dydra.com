@@ -56,8 +56,8 @@ Dydra, programming reference material, and a detailed API reference.
 @chapter Introduction to Dydra
 
 This chapter provides you with a high-level overview of the Dydra web
-service, aiming to give you a good idea of what it offers, how it works, and
-how you can utilize it in your business.
+service, to give you a good idea of what it offers, how it works, and how
+you can utilize it in your business.
 
 @node Understanding Dydra
 @chapter Understanding Dydra
