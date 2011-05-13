@@ -6,11 +6,11 @@
 Returns information regarding current service status and availability.
 @end deftypefn
 
-@subsubsection Request Parameters
+@subsubheading Request Parameters
 
 This operation requires no arguments.
 
-@subsubsection Response Result
+@subsubheading Response Result
 
 This operation returns a @code{struct} with the following keys and values:
 
@@ -40,7 +40,7 @@ write operations.
 @end table
 @end quotation
 
-@subsubsection Request Example
+@subsubheading Request Example
 
 @example
 @group
@@ -57,7 +57,7 @@ Content-Length: 75
 @end group
 @end example
 
-@subsubsection Response Example
+@subsubheading Response Example
 
 @example
 @group
@@ -77,10 +77,10 @@ Content-Length: 144
 @end group
 @end example
 
-@subsubsection Access Control
+@subsubheading Access Control
 
 This operation is unrestricted and requires no authentication.
 
-@subsubsection Billing Model
+@subsubheading Billing Model
 
 There is no charge attached to performing this operation.
