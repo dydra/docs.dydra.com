@@ -30,128 +30,128 @@ SDK Cross-Reference
 </tbody>
 </table>
 
-### Job Instantiation
+### Operation Instantiation
 
-<table id="job" width="100%">
+<table id="operation" width="100%">
 <thead>
   <tr>
     <td width="15%">&nbsp;</td>
-    <td width="85%"><code>Job.new</code></td>
+    <td width="85%"><code>Operation.new</code></td>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td><strong>Ruby</strong></td>
-    <td><code>job = Dydra::Job.new(uuid)</code></td>
+    <td><code>op = Dydra::Operation.new(uuid)</code></td>
   </tr>
   <tr>
     <td><strong>Python</strong></td>
-    <td><code>job = dydra.Job(uuid)</code></td>
+    <td><code>op = dydra.Operation(uuid)</code></td>
   </tr>
   <tr>
     <td><strong>PHP</strong></td>
-    <td><code>$job = new Dydra_Job(uuid);</code></td>
+    <td><code>$op = new Dydra_Operation(uuid);</code></td>
   </tr>
   <tr>
     <td><strong>Java</strong></td>
-    <td><code>Job job = new Job(uuid);</code></td>
+    <td><code>Operation op = new Operation(uuid);</code></td>
   </tr>
 </tbody>
 </table>
 
-### Job Attributes
+### Operation Attributes
 
-<table id="job-attr" width="100%">
+<table id="operation-attr" width="100%">
 <thead>
   <tr>
     <td width="15%">&nbsp;</td>
-    <td width="85%"><code>Job#uuid</code></td>
+    <td width="85%"><code>Operation#uuid</code></td>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td><strong>Ruby</strong></td>
-    <td><code>job.uuid</code></td>
+    <td><code>op.uuid</code></td>
   </tr>
   <tr>
     <td><strong>Python</strong></td>
-    <td><code>job.uuid</code></td>
+    <td><code>op.uuid</code></td>
   </tr>
   <tr>
     <td><strong>PHP</strong></td>
-    <td><code>$job->uuid</code></td>
+    <td><code>$op->uuid</code></td>
   </tr>
   <tr>
     <td><strong>Java</strong></td>
-    <td><code>job.uuid</code></td>
+    <td><code>op.uuid</code></td>
   </tr>
 </tbody>
 </table>
 
-### Job Status
+### Operation Status
 
-<table id="job-status" width="100%">
+<table id="operation-status" width="100%">
 <thead>
   <tr>
     <td width="15%">&nbsp;</td>
-    <td width="42%"><code>Job#status</code></td>
-    <td width="43%"><code>Job#done?</code></td>
+    <td width="42%"><code>Operation#status</code></td>
+    <td width="43%"><code>Operation#done?</code></td>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td><strong>Ruby</strong></td>
-    <td><code>job.status</code></td>
-    <td><code>job.done?</code></td>
+    <td><code>op.status</code></td>
+    <td><code>op.done?</code></td>
   </tr>
   <tr>
     <td><strong>Python</strong></td>
-    <td><code>job.status()</code></td>
-    <td><code>job.is_done()</code></td>
+    <td><code>op.status()</code></td>
+    <td><code>op.is_done()</code></td>
   </tr>
   <tr>
     <td><strong>PHP</strong></td>
-    <td><code>$job->getStatus()</code></td>
-    <td><code>$job->isDone()</code></td>
+    <td><code>$op->getStatus()</code></td>
+    <td><code>$op->isDone()</code></td>
   </tr>
   <tr>
     <td><strong>Java</strong></td>
-    <td><code>job.getStatus()</code></td>
-    <td><code>job.isDone()</code></td>
+    <td><code>op.getStatus()</code></td>
+    <td><code>op.isDone()</code></td>
   </tr>
 </tbody>
 </table>
 
-### Job Control
+### Operation Control
 
-<table id="job-control" width="100%">
+<table id="operation-control" width="100%">
 <thead>
   <tr>
     <td width="15%">&nbsp;</td>
-    <td width="42%"><code>Job#abort</code></td>
-    <td width="43%"><code>Job#wait</code></td>
+    <td width="42%"><code>Operation#wait</code></td>
+    <td width="43%"><code>Operation#abort</code></td>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td><strong>Ruby</strong></td>
-    <td><code>job.abort</code></td>
-    <td><code>job.wait</code></td>
+    <td><code>op.wait!</code></td>
+    <td><code>op.abort!</code></td>
   </tr>
   <tr>
     <td><strong>Python</strong></td>
-    <td><code>job.abort()</code></td>
-    <td><code>job.wait()</code></td>
+    <td><code>op.wait()</code></td>
+    <td><code>op.abort()</code></td>
   </tr>
   <tr>
     <td><strong>PHP</strong></td>
-    <td><code>$job->abort()</code></td>
-    <td><code>$job->wait()</code></td>
+    <td><code>$op->wait()</code></td>
+    <td><code>$op->abort()</code></td>
   </tr>
   <tr>
     <td><strong>Java</strong></td>
-    <td><code>job.abort()</code></td>
-    <td><code>job.waitUntilDone()</code></td>
+    <td><code>op.waitUntilDone()</code></td>
+    <td><code>op.abort()</code></td>
   </tr>
 </tbody>
 </table>
