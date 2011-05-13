@@ -76,3 +76,11 @@ def name_for(doc)
   File.basename(doc, '.txt')
 end
 
+namespace :build do
+  desc "Build the developer guide (requires texi2pdf)"
+  task :guide do
+    sh 'cd docs && texi2pdf guide.texi'
+  end
+end
+
+file 'docs/guide.pdf' => 'build:guide'
