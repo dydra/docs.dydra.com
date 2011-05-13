@@ -24,8 +24,49 @@ you may still find it interesting to at least glance over this material.
 @subsubsection @code{SELECT} Queries
 @cindex SELECT
 
-TODO: avoid unnecessary projection of variables you won't use anyway.
-remember that the @code{ASK} query form exists.
+A general tip for @code{SELECT} queries is to avoid unnecessarily projecting
+variables you won't actually use. That is, if your query's @code{WHERE}
+clause binds the variables @code{?a}, @code{?b}, and @code{?c}, but you
+actually only ever use @code{?b} when iterating over the solution sequence
+in your application, then you might want to avoid specifying the query in
+either of the following two forms:
+
+@example
+@group
+SELECT * WHERE @{ ... @}
+SELECT ?a, ?b, ?c WHERE @{ ... @}
+@end group
+@end example
+
+Rather, it is better to be explicit and project just the variables you
+actually intend to use:
+
+@example
+@group
+SELECT ?b WHERE @{ ... @}
+@end group
+@end example
+
+The above has two benefits. Firstly, Dydra's query processing can apply
+more aggressive optimizations knowing that the values of the variables
+@code{?a} and @code{?c} will not actually be returned in the solution
+sequence. Secondly, the size of the solution sequence itself, and hence the
+network bandwidth necessary for your application to retrieve it, is reduced
+by not including superfluous values. The combination of these two factors
+can make a big difference for complex queries returning large solution
+sequences.
+
+If you remember just one thing from this subsection, remember this:
+@code{SELECT *} is a useful shorthand when manually executing queries,
+but not something that you should much want to use in a production
+application dealing with complex queries on non-trivial amounts of data.
+
+Remember, also, that SPARQL provides an @code{ASK} query form. If all you
+need to know is whether a query matches something or not, use an @code{ASK}
+query instead of a @code{SELECT} query. This enables the query to be
+optimized more aggressively, and instead of a solution sequence you will get
+back a simple boolean value indicating whether the query matched or not,
+minimizing the data transferred in response to your query.
 
 @subsubsection The @code{ORDER BY} Clause
 @cindex ORDER BY
@@ -83,4 +124,4 @@ the full solution sequence in order to sort it. Therefore the amount of
 processing needed is not actually reduced by a @code{LIMIT} clause in this
 case. Still, limiting the size of the returned solution sequence with an
 explicit @code{LIMIT} does cut down on the network usage needed to receive
-the query results, and is therefore useful in any case.
+the query results, and is thus useful in any case.
