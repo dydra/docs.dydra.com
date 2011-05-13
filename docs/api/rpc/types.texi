@@ -51,7 +51,7 @@ A signed double-precision (64-bit) floating-point number.
 @tab  @code{float}
 @tab  @code{number}
 @tab  @code{double}
-@tab  @code{}
+@tab  @code{double}
 @end multitable
 @end deftp
 
@@ -71,7 +71,7 @@ A signed long (64-bit) integer.
 @tab  @code{integer}
 @tab  @code{number}
 @tab  @code{long}
-@tab  @code{}
+@tab  @code{integer}
 @end multitable
 @end deftp
 
@@ -109,7 +109,7 @@ A Unicode character string.
 @tab  @code{string}
 @tab  @code{string}
 @tab  @code{String}
-@tab  @code{}
+@tab  @code{string}
 @end multitable
 @end deftp
 
@@ -135,7 +135,7 @@ An ordered sequence of values. The values may be of any data type.
 @tab  @code{array}
 @tab  @code{array}
 @tab  @code{List}
-@tab  @code{}
+@tab  @code{vector}
 @end multitable
 @end deftp
 
@@ -166,6 +166,6 @@ values may be of any data type.
 @tab  @code{array}
 @tab  @code{object}
 @tab  @code{Map}
-@tab  @code{}
+@tab  @code{list}
 @end multitable
 @end deftp
