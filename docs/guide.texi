@@ -73,6 +73,9 @@ It shows you how to execute API operations, how to authenticate those
 operations using your Dydra account credentials, and more concretely how
 to work with and query repositories.
 
+@section Querying Repositories
+@include guide/develop/query-tuning.texi
+
 @node API Reference
 @chapter API Reference
 @cindex API, reference

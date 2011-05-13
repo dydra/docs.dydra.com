@@ -1,0 +1,86 @@
+@subsection Tuning Queries
+@cindex query, tuning
+@cindex performance
+
+SPARQL is a powerful query language, and as such it is possible to write
+complex queries that require a great deal of computing power while
+executing. Since the run time as well as the billable cost of a query
+directly depend on how much processing it requires, it is useful to
+understand some of the key performance characteristics that factor into
+these measurements. With larger datasets, often a simple change to a query
+can reduce the run time from several seconds to being for all intents and
+purposes instantaneous.
+
+This section describes several key factors that can strongly influence the
+run time and cost of queries, explaining how to tune your queries for
+optimal performance and a reduced monthly bill.
+
+Note that the following may contain too much detail if you are a casual user
+using Dydra for typical and straightforward use cases. You do not ordinarily
+need to think about query performance on the level described in this section
+unless you are dealing with large datasets or complex queries. Nonetheless,
+you may still find it interesting to at least glance over this material.
+
+@subsubsection @code{SELECT} Queries
+@cindex SELECT
+
+TODO: avoid unnecessary projection of variables you won't use anyway.
+remember that the @code{ASK} query form exists.
+
+@subsubsection The @code{ORDER BY} Clause
+@cindex ORDER BY
+
+The @code{ORDER BY} clause can be very useful when you want the solution
+sequence to be sorted by one variable or another. It is important to
+realize, though, that @code{ORDER BY} is a relatively heavy operation, as it
+requires the query processing to materialize and sort a full intermediate
+solution sequence, which reduces the prospects for returning initial
+solutions to you as quickly as possible.
+
+This does not mean that you should avoid using @code{ORDER BY} when it
+serves a purpose. If you need your query results sorted by particular
+criteria, it is most often best to let the database system do that for you
+rather than manually sorting the data in your application. After all, that's
+what @code{ORDER BY} is there for. However, if you are dealing with
+potentially large solution sequences (containing hundreds of thousands of
+solutions or more), and if the latency for obtaining the initial solutions
+is important (sometimes known as the "time-to-first-solution" factor, or by
+other similar terms), you may wish to carefully consider whether you in fact
+need an @code{ORDER BY} clause or not.
+
+@subsubsection The @code{OFFSET} Clause
+@cindex OFFSET
+
+Dydra's query processing guarantees that a query solution sequence has a
+consistent and deterministic ordering even in the absence of an @code{ORDER
+BY} clause. This has an important and useful consequence: it is always safe
+to use an @code{OFFSET} clause in a query, despite the query perhaps not
+having an @code{ORDER BY} clause.
+
+Concretely, this means that if you have a query containing an @code{OFFSET}
+clause, and you execute that query multiple times in succession, you will
+get the same solution sequence in the same order each time. This is not a
+universal property of SPARQL implementations, but you can rely on it with
+Dydra.
+
+This feature facilitates, for example, paging through a large solution
+sequence using an @code{OFFSET} and @code{LIMIT} clause combination, without
+needing @code{ORDER BY}. So, again, don't use an @code{ORDER BY} clause
+unnecessarily if you merely want to page through the solution sequence (say)
+a hundred solutions at a time.
+
+@subsubsection The @code{LIMIT} Clause
+@cindex LIMIT
+
+Last but certainly not least, do ensure that your queries include a
+@code{LIMIT} clause whenever appropriate. If you in fact only need the first
+100 query solutions, specify a @code{LIMIT 100}. This puts an explicit
+upper bound on the amount of work to be performed in answering your query.
+
+Do note, however, that if your query contains both @code{ORDER BY} and
+@code{LIMIT} clauses, query processing must inevitably construct and examine
+the full solution sequence in order to sort it. Therefore the amount of
+processing needed is not actually reduced by a @code{LIMIT} clause in this
+case. Still, limiting the size of the returned solution sequence with an
+explicit @code{LIMIT} does cut down on the network usage needed to receive
+the query results, and is therefore useful in any case.
