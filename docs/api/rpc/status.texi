@@ -1,0 +1,86 @@
+@page
+
+@subsection dydra.status
+
+@deftypefn {Operation} @emph{struct} dydra.status ()
+Returns information regarding current service status and availability.
+@end deftypefn
+
+@subsubsection Request Parameters
+
+This operation requires no arguments.
+
+@subsubsection Response Result
+
+This operation returns a @code{struct} with the following keys and values:
+
+@quotation
+@table @samp
+@item status
+The current service status; one of the following strings:
+@table @samp
+@item nominal
+The service is operating normally.
+@item degraded
+The service is operating at degraded availability, with some data
+momentarily inaccessible.
+@item offline
+The service is currently offline for maintenance.
+@end table
+@item availability
+The current service availability, as a percentage represented as a
+@code{float} ranging from @code{0.0} (status @samp{offline}) to @code{1.0}
+(status @samp{nominal}).
+@item readable
+A @code{bool} indicating whether the service is currently servicing
+read-only operations.
+@item writable
+A @code{bool} indicating whether the service is currently servicing
+write operations.
+@end table
+@end quotation
+
+@subsubsection Request Example
+
+@example
+@group
+POST /rpc HTTP/1.1
+Host: api.dydra.com
+Content-Type: application/json
+Content-Length: 75
+
+@{
+  "jsonrpc": "2.0", "id": 1,
+  "method": "dydra.status",
+  "params": []
+@}
+@end group
+@end example
+
+@subsubsection Response Example
+
+@example
+@group
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 144
+
+@{
+  "jsonrpc": "2.0", "id": 1,
+  "result": @{
+    "status": "nominal",
+    "availability": 1.0,
+    "readable": true,
+    "writable": true
+  @}
+@}
+@end group
+@end example
+
+@subsubsection Access Control
+
+This operation is unrestricted and requires no authentication.
+
+@subsubsection Billing Model
+
+There is no charge attached to performing this operation.

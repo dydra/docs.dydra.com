@@ -82,7 +82,23 @@ their request parameters, and their responses and error conditions. It also
 contains concrete on-the-wire examples of requests and responses for each
 operation.
 
+@page
 @include api/rpc/types.texi
+
+@page
+@section Operations
+
+This section describes the RPC methods supported by the Dydra API.
+
+@sp 1
+@quotation Note
+The example requests and responses in this section are shown using the
+JSON-RPC protocol over HTTP as the transport. The API endpoint supports
+both the XML-RPC and JSON-RPC protocols, with the latter being strongly
+preferred due to its relative efficiency, simplicity, and brevity.
+@end quotation
+
+@include api/rpc/status.texi
 
 @node API Error Conditions
 @chapter API Error Conditions
