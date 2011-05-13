@@ -1,0 +1,132 @@
+@node Glossary
+@unnumbered Glossary
+@table @dfn
+
+@item account
+@cindex account
+Dydra user account belonging to a particular developer.
+
+@item blank node
+@cindex blank node
+@cindex BNode
+@url{http://en.wikipedia.org/wiki/Blank_node, ...}
+
+@item API token
+...
+
+@item DBA
+database administrator
+
+@item DC
+@cindex Dublin Core
+@url{http://en.wikipedia.org/wiki/Dublin_Core, Dublin Core}
+
+@item CURIE
+@cindex CURIE
+@url{http://en.wikipedia.org/wiki/CURIE, Compact URI}
+
+@item DOAP
+@cindex DOAP
+@url{http://en.wikipedia.org/wiki/Description_of_a_Project, Description of a Project}
+
+@item entity
+@cindex entity
+see @emph{resource}.
+
+@item HTTP
+@cindex HTTP
+@url{http://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol, HyperText Transport Protocol}
+
+@item JSON
+@cindex JSON
+@url{http://en.wikipedia.org/wiki/JSON, JavaScript Object Notation}
+
+@item JSON-RPC
+@cindex JSON-RPC
+a remote procedure call (RPC) protocol that uses a JSON encoding over an
+HTTP transport mechanism.
+
+@item named query
+@cindex query, named
+...
+
+@item OWL
+@cindex OWL
+@url{http://en.wikipedia.org/wiki/Web_Ontology_Language, Web Ontology Language}
+
+@item qualified name
+@cindex qualified name
+@cindex QName
+@url{http://en.wikipedia.org/wiki/QName, QName}
+
+@item quad
+@cindex quad
+...
+
+@item query
+@cindex query
+...
+
+@item repository
+@cindex repository
+...
+
+@item resource
+@cindex resource
+...
+
+@item RDF
+@cindex RDF
+@url{http://en.wikipedia.org/wiki/Resource_Description_Framework, Resource Description Framework}
+
+@item RDFS
+@cindex RDFS
+@url{http://en.wikipedia.org/wiki/RDF_Schema, RDF Schema}
+
+@item RPC
+@cindex RPC
+@url{http://en.wikipedia.org/wiki/Remote_procedure_call, remote procedure call}
+
+@item SIOC
+@cindex SIOC
+@url{http://sioc-project.org/, Semantically-Interlinked Online Communities}
+
+@item SKOS
+@cindex SKOS
+@url{http://en.wikipedia.org/wiki/Simple_Knowledge_Organization_System, Simple Knowledge Organization System}
+
+@item SPARQL
+@cindex SPARQL
+@url{http://en.wikipedia.org/wiki/SPARQL, SPARQL Protocol and RDF Query Language}
+
+@item statement
+@cindex statement
+...
+
+@item triple
+@cindex triple
+...
+
+@item URI
+@cindex URI
+@url{http://en.wikipedia.org/wiki/Uniform_Resource_Identifier, Uniform Resource Identifier}
+
+@item UUID
+@cindex UUID
+@url{http://en.wikipedia.org/wiki/Universally_unique_identifier, universally unique identifier}
+
+@item W3C
+@cindex W3C
+@url{http://en.wikipedia.org/wiki/World_Wide_Web_Consortium, World Wide Web Consortium}
+
+@item XML
+@cindex XML
+@url{http://en.wikipedia.org/wiki/XML, Extensible Markup Language}, a W3C standard for
+encoding structured documents in machine-readable form.
+
+@item XML-RPC
+@cindex XML-RPC
+a remote procedure call (RPC) protocol that uses an XML encoding over an
+HTTP transport mechanism.
+
+@end table
