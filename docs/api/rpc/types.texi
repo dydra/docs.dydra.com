@@ -1,7 +1,7 @@
 @section Data Types
 
 This section describes the RPC data types for values provided as arguments
-to operations and returned as the results from operations.
+to operations and returned as the results of operations.
 
 The available data types are the intersection of the data types supported by
 both the JSON-RPC and XML-RPC protocols.
@@ -81,7 +81,7 @@ The canonical @code{null} value.
 @headitem JSON-RPC @tab XML-RPC
 @item @code{null}
 @tab  @code{<nil/>}
-      @footnote{XML-RPC extension.}
+      @footnote{XML-RPC extension: @url{http://ontosys.com/xml-rpc/extensions.php}}
 @end multitable
 @multitable @columnfractions .15 .15 .15 .15 .15 .15
 @headitem Ruby @tab Python @tab PHP @tab JavaScript @tab Java @tab Lisp
@@ -105,7 +105,7 @@ A Unicode character string.
 @headitem Ruby @tab Python @tab PHP @tab JavaScript @tab Java @tab Lisp
 @item @code{String}
 @tab  @code{str}
-      @footnote{@code{unicode} before Python 3.0}
+      @footnote{@code{unicode} before Python 3.0.}
 @tab  @code{string}
 @tab  @code{string}
 @tab  @code{String}
