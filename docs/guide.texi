@@ -55,11 +55,23 @@ Dydra, programming reference material, and a detailed API reference.
 @node Introduction to Dydra
 @chapter Introduction to Dydra
 
+This chapter provides you with a high-level overview of the Dydra web
+service, aiming to give you a good idea of what it offers, how it works, and
+how you can utilize it in your business.
+
 @node Understanding Dydra
 @chapter Understanding Dydra
 
+This chapter delves deeper into a number of key concepts that you should
+have an understanding of before moving on to subsequent chapters.
+
 @node Developing with Dydra
 @chapter Developing with Dydra
+
+This chapter explains how to use Dydra to store data for your application.
+It shows you how to execute API operations, how to authenticate those
+operations using your Dydra account credentials, and more concretely how
+to work with and query repositories.
 
 @node API Reference
 @chapter API Reference
@@ -76,8 +88,8 @@ operation.
 @chapter API Error Conditions
 @cindex API, error codes
 
-This chapter describes the various error conditions raised by Dydra API
-operations.
+This chapter describes the various error conditions that can be raised when
+performing Dydra API operations.
 
 @include api/rpc/errors.texi
 
