@@ -1,0 +1,54 @@
+There are two kinds of error conditions: client and server.
+
+@section Client Errors
+
+Client errors indicate that the server found a problem with the request
+issued by the client. You should @emph{not} retry the request until the
+problem has been corrected in your application.
+
+When using HTTP as a transport, client errors are indicated by a @code{4xx}
+HTTP response code.
+
+The following table lists all client error conditions:
+
+@multitable @columnfractions .30 .20 .50
+@headitem Error @tab {HTTP Code} @tab Description
+@item @code{invalid-argument}
+@tab 400
+@tab ...
+@item @code{unknown-account}
+@tab 404
+@tab ...
+@item @code{unknown-repository}
+@tab 404
+@tab ...
+@item @code{unknown-query}
+@tab 404
+@tab ...
+@item @code{unknown-operation}
+@tab 404
+@tab ...
+@item @code{malformed-query}
+@tab 400
+@tab ...
+@end multitable
+
+@section Server Errors
+
+Server errors indicate a transient problem of some kind on the server end.
+Requests should be retried at a later time.
+
+When using HTTP as a transport, server errors are indicated by a @code{5xx}
+HTTP response code.
+
+The following table lists all server error conditions:
+
+@multitable @columnfractions .30 .20 .50
+@headitem Error @tab {HTTP Code} @tab Description
+@item @code{internal-error}
+@tab 500
+@tab ...
+@item @code{service-unavailable}
+@tab 503
+@tab ...
+@end multitable
