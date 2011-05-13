@@ -20,6 +20,8 @@ means.
 @titlepage
 @title Dydra Developer Guide
 @subtitle @value{UPDATED}
+@sp 12
+@center @image{guide/logo,2.5in,,Dydra,pdf}
 @author @url{http://dydra.com}
 @page
 @vskip 0pt plus 1filll
