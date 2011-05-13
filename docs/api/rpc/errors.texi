@@ -37,7 +37,7 @@ The following table lists all client error conditions:
 
 @section Server Errors
 
-Server errors indicate a transient problem of some kind on the server end.
+Server errors indicate a transient problem of some kind within the server.
 The request should be retried at a later time.
 
 When using HTTP as the transport, server errors are indicated by a
