@@ -1,0 +1,171 @@
+@section Data Types
+
+This section describes the RPC data types for values provided as arguments
+to operations and returned as the results from operations.
+
+The available data types are the intersection of the data types supported by
+both the JSON-RPC and XML-RPC protocols.
+
+@subsection Scalar Types
+
+The RPC API supports five basic scalar data types, available in practically
+all commonly-used programming languages:
+
+@deftp {Data type} bool
+The boolean @code{true} or @code{false} truth values.
+@multitable @columnfractions .15 .60
+@headitem JSON-RPC @tab XML-RPC
+@item @code{true}
+@tab  @code{<boolean>1</boolean>}
+@item @code{false}
+@tab  @code{<boolean>0</boolean>}
+@end multitable
+@multitable @columnfractions .15 .15 .15 .15 .15 .15
+@headitem Ruby @tab Python @tab PHP @tab JavaScript @tab Java @tab Lisp
+@item @code{true}
+@tab  @code{True}
+@tab  @code{TRUE}
+@tab  @code{true}
+@tab  @code{true}
+@tab  @code{t}
+@item @code{false}
+@tab  @code{False}
+@tab  @code{FALSE}
+@tab  @code{false}
+@tab  @code{false}
+@tab  @code{nil}
+@end multitable
+@end deftp
+
+@deftp {Data type} float
+A signed double-precision (64-bit) floating-point number.
+@multitable @columnfractions .15 .60
+@headitem JSON-RPC @tab XML-RPC
+@item @code{3.1415}
+@tab  @code{<double>3.1415</double>}
+@end multitable
+@multitable @columnfractions .15 .15 .15 .15 .15 .15
+@headitem Ruby @tab Python @tab PHP @tab JavaScript @tab Java @tab Lisp
+@item @code{Float}
+@tab  @code{float}
+@tab  @code{float}
+@tab  @code{number}
+@tab  @code{double}
+@tab  @code{}
+@end multitable
+@end deftp
+
+@deftp {Data type} int
+A signed long (64-bit) integer.
+@multitable @columnfractions .15 .60
+@headitem JSON-RPC @tab XML-RPC
+@item @code{42}
+@tab  @code{<int>42</int>}
+      @footnote{XML-RPC nominally specifies only a 32-bit range for
+               integers.}
+@end multitable
+@multitable @columnfractions .15 .15 .15 .15 .15 .15
+@headitem Ruby @tab Python @tab PHP @tab JavaScript @tab Java @tab Lisp
+@item @code{Integer}
+@tab  @code{int}
+@tab  @code{integer}
+@tab  @code{number}
+@tab  @code{long}
+@tab  @code{}
+@end multitable
+@end deftp
+
+@deftp {Data type} null
+The canonical @code{null} value.
+@multitable @columnfractions .15 .60
+@headitem JSON-RPC @tab XML-RPC
+@item @code{null}
+@tab  @code{<nil/>}
+      @footnote{XML-RPC extension.}
+@end multitable
+@multitable @columnfractions .15 .15 .15 .15 .15 .15
+@headitem Ruby @tab Python @tab PHP @tab JavaScript @tab Java @tab Lisp
+@item @code{nil}
+@tab  @code{None}
+@tab  @code{NULL}
+@tab  @code{null}
+@tab  @code{null}
+@tab  @code{nil}
+@end multitable
+@end deftp
+
+@deftp {Data type} string
+A Unicode character string.
+@multitable @columnfractions .15 .60
+@headitem JSON-RPC @tab XML-RPC
+@item @code{"foobar"}
+@tab  @code{<string>foobar</string>}
+@end multitable
+@multitable @columnfractions .15 .15 .15 .15 .15 .15
+@headitem Ruby @tab Python @tab PHP @tab JavaScript @tab Java @tab Lisp
+@item @code{String}
+@tab  @code{str}
+      @footnote{@code{unicode} before Python 3.0}
+@tab  @code{string}
+@tab  @code{string}
+@tab  @code{String}
+@tab  @code{}
+@end multitable
+@end deftp
+
+@subsection Composite Types
+
+@deftp {Data type} array
+An ordered sequence of values. The values may be of any data type.
+@multitable @columnfractions .15 .60
+@headitem JSON-RPC @tab XML-RPC
+@item @code{[1, 2, 3]}
+@tab  @code{<array>@*
+@ @ <data>@*
+@ @ @ @ <value><int>1</int></value>@*
+@ @ @ @ <value><int>2</int></value>@*
+@ @ @ @ <value><int>3</int></value>@*
+@ @ </data>@*
+</array>}
+@end multitable
+@multitable @columnfractions .15 .15 .15 .15 .15 .15
+@headitem Ruby @tab Python @tab PHP @tab JavaScript @tab Java @tab Lisp
+@item @code{Array}
+@tab  @code{list}
+@tab  @code{array}
+@tab  @code{array}
+@tab  @code{List}
+@tab  @code{}
+@end multitable
+@end deftp
+
+@deftp {Data type} struct
+An unordered set of key-value mappings. The keys are always strings, and the
+values may be of any data type.
+@multitable @columnfractions .15 .60
+@headitem JSON-RPC @tab XML-RPC
+@item @code{@{@*
+@ @ "a": 1,@*
+@ @ "b": 2@*
+@}}
+@tab  @code{<struct>@*
+@ @ <member>@*
+@ @ @ @ <name>a</name>@*
+@ @ @ @ <value><int>1</int></value>@*
+@ @ </member>@*
+@ @ <member>@*
+@ @ @ @ <name>b</name>@*
+@ @ @ @ <value><int>2</int></value>@*
+@ @ </member>@*
+</struct>}
+@end multitable
+@multitable @columnfractions .15 .15 .15 .15 .15 .15
+@headitem Ruby @tab Python @tab PHP @tab JavaScript @tab Java @tab Lisp
+@item @code{Hash}
+@tab  @code{dict}
+@tab  @code{array}
+@tab  @code{object}
+@tab  @code{Map}
+@tab  @code{}
+@end multitable
+@end deftp
