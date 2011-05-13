@@ -1,13 +1,15 @@
-There are two kinds of error conditions: client and server.
+There are two kinds of error conditions that can be raised by API
+operations: client errors and server errors.
 
 @section Client Errors
 
 Client errors indicate that the server found a problem with the request
-issued by the client. You should @emph{not} retry the request until the
-problem has been corrected in your application.
+issued by the client, and therefore declined to process the request. You
+should @emph{not} retry the request until the problem has been corrected in
+your application.
 
-When using HTTP as a transport, client errors are indicated by a @code{4xx}
-HTTP response code.
+When using HTTP as the transport, client errors are indicated by a
+@code{4xx} HTTP response code.
 
 The following table lists all client error conditions:
 
@@ -22,10 +24,10 @@ The following table lists all client error conditions:
 @item @code{unknown-repository}
 @tab 404
 @tab ...
-@item @code{unknown-query}
+@item @code{unknown-operation}
 @tab 404
 @tab ...
-@item @code{unknown-operation}
+@item @code{unknown-query}
 @tab 404
 @tab ...
 @item @code{malformed-query}
@@ -36,10 +38,10 @@ The following table lists all client error conditions:
 @section Server Errors
 
 Server errors indicate a transient problem of some kind on the server end.
-Requests should be retried at a later time.
+The request should be retried at a later time.
 
-When using HTTP as a transport, server errors are indicated by a @code{5xx}
-HTTP response code.
+When using HTTP as the transport, server errors are indicated by a
+@code{5xx} HTTP response code.
 
 The following table lists all server error conditions:
 
