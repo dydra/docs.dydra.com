@@ -1,0 +1,144 @@
+@section Making RPC Requests
+
+Dydra provides a web service with an @acronym{RPC, Remote Procedure Call}
+interface.
+
+To perform an API operation, you must encode a @emph{request message} in
+either @url{http://www.json.org/,JSON} or @url{http://www.w3.org/XML/,XML}
+form, send the message (together with your authentication credentials) to
+the RPC endpoint using HTTP as the transport, and read back a @emph{response
+message}. This interaction can be thought of as a remote procedure call,
+with the request message containing a method name and arguments for any
+parameters required by the method, and with the response message containing
+a result value or an error condition.
+
+Dydra's RPC service endpoint is at @code{http://api.dydra.com/rpc}.
+
+This endpoint supports both the @url{http://www.xmlrpc.com/spec,XML-RPC} and
+@url{http://groups.google.com/group/json-rpc/web/json-rpc-2-0,JSON-RPC}
+protocols, with the latter being strongly preferred due to its relative
+simplicity and efficiency. Tooling for XML-RPC is still at present more
+ubiquitous than JSON-RPC tooling, but XML-RPC messages are many times larger
+on the wire than the equivalent JSON-RPC messages. JSON-RPC also provides
+improved support for advanced features such as asynchronous batch
+operations. New applications should therefore prefer JSON-RPC over XML-RPC
+whenever possible.
+
+@subsection HTTP Request Headers
+
+The HTTP protocol version used is @code{HTTP/1.1}.
+
+The @code{Host} header must be present and must contain the value
+@samp{api.dydra.com}.
+
+The @code{User-Agent} header should be present and should contain the name
+and version of the client application issuing the request, in the
+commonly-used @samp{MyApp/x.y.z} format. API requests that lack a proper
+@code{User-Agent} header may be subject to lower quality of service (for
+instance, stricter rate limits).
+
+The @code{Content-Length} and @code{Content-Type} headers must be present,
+and must contain correct values. The value of the @code{Content-Length}
+header is an integer that specifies the exact octet length (that is, the
+byte size) of the request body. The value of the @code{Content-Type} header
+is an Internet media type, and varies based on the RPC protocol used; the
+correct values to use are described in the following subsections.
+
+@subsection Making JSON-RPC Requests
+
+JSON-RPC operations are HTTP @code{POST} requests that use the
+@code{application/json} media type. They require no additional HTTP headers
+beyond those described in the previous subsection.
+
+The body of the request is a JSON-encoded key-value map that must include
+the following keys unless otherwise specified:
+
+@table @samp
+@item jsonrpc
+A string that specifies the JSON-RPC protocol version to use. At present,
+this must be specified as @samp{2.0} to indicate the JSON-RPC 2.0 protocol
+@footnote{JSON-RPC 1.x is not supported by the API endpoint.}.
+@item id
+A number or string identifier that identifies the request. Used for batch
+operations (see Advanced Topics). In ordinary synchronous request-response
+use, you may specify @code{null} as the request identifier.
+@item method
+A case-sensitive string that specifies the name of the RPC method to invoke.
+The method names for API operations all begin with the string @samp{dydra.}.
+@item params
+An array that contains the arguments (if any) to pass the RPC method.
+The array may be empty, in which case this key may be omitted from the
+request.
+@end table
+
+The request body must use the UTF-8 character encoding.
+
+@subsubheading Request Example
+
+The following is an example of performing the @code{dydra.status} API
+operation using a JSON-RPC request:
+
+@example
+@group
+POST /rpc HTTP/1.1
+Host: api.dydra.com
+User-Agent: MyDydraApp/1.0 (http://example.org)
+Content-Type: application/json
+Content-Length: 79
+
+@{
+  "jsonrpc": "2.0", "id": null,
+  "method": "dydra.status",
+  "params": []
+@}
+@end group
+@end example
+
+This is a useful API operation for simple testing, since it doesn't specify
+any required parameters and requires no authentication.
+
+@subsection Making XML-RPC Requests
+
+XML-RPC operations are HTTP @code{POST} requests that use either the the
+@code{application/xml} or @code{text/xml} media type. Both media types are
+equivalently supported by the Dydra API endpoint, and the server response
+will use the same media type that the client specified in its request.
+
+The body of the request is an XML document with a root element of
+@code{<methodCall>}. The root element must be preceded by an
+@code{<?xml...?>} declaration that should specify the character encoding of
+the body. If no encoding is explicitly specified, UTF-8 is assumed.
+
+The @code{<methodCall>} element must contain the following two elements:
+
+@table @code
+@item <methodName>
+A case-sensitive string that specifies the name of the RPC method to invoke.
+The method names for API operations all begin with the string @samp{dydra.}.
+@item <params>
+...
+@end table
+
+@subsubheading Request Example
+
+The following is an example of performing the @code{dydra.status} API
+operation using an XML-RPC request:
+
+@example
+@group
+POST /rpc HTTP/1.1
+Host: api.dydra.com
+User-Agent: MyDydraApp/1.0 (http://example.org)
+Content-Type: application/xml
+Content-Length: ...
+
+<?xml version="1.0" encoding="UTF-8"?>
+<methodCall>
+  <methodName>dydra.status</methodName>
+  <params/>
+</methodCall>
+@end group
+@end example
+
+This is a useful API operation for simple testing, since it doesn't specify
+any required parameters and requires no authentication.
