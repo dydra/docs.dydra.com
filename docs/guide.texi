@@ -2,10 +2,10 @@
 @comment %**start of header
 @setfilename dydra.info
 @finalout
-@set UPDATED 13 May 2011
+@set UPDATED 14 May 2011
 @set UPDATED-MONTH May 2011
-@set EDITION 2011.05.13
-@set VERSION 2011.05.13
+@set EDITION 2011.05.14
+@set VERSION 2011.05.14
 @settitle Dydra Developer Guide @value{UPDATED}
 @documentencoding UTF-8
 @comment %**end of header
@@ -72,6 +72,9 @@ This chapter explains how to use Dydra to store data for your application.
 It shows you how to execute API operations, how to authenticate those
 operations using your Dydra account credentials, and more concretely how
 to work with and query repositories.
+
+@comment Making RPC Requests
+@include guide/develop/rpc.texi
 
 @section Querying Repositories
 @include guide/develop/query-tuning.texi
