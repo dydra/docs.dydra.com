@@ -7,7 +7,7 @@ API.](http://en.wikipedia.org/wiki/Representational_State_Transfer)
 ## Authentication
 
 Please see the [API Authentication](/api/authentication) documentation
-for a reference on authenticating to Dydra's Sesame API.
+for a reference on authenticating to Dydra's REST API.
 
 ## Content Types
 
