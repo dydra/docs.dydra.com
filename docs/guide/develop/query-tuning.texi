@@ -33,7 +33,7 @@ either of the following two forms:
 @example
 @group
 SELECT * WHERE @{ ... @}
-SELECT ?a, ?b, ?c WHERE @{ ... @}
+SELECT ?a ?b ?c WHERE @{ ... @}
 @end group
 @end example
 
@@ -120,3 +120,55 @@ full solution sequence in order to sort it. Therefore the amount of
 processing needed is not actually reduced by a @code{LIMIT} clause in this
 case. Still, limiting the size of the ordered solution sequence with an
 explicit @code{LIMIT} improves performance by reducing network use.
+
+@subsubsection @code{FILTER} Expressions
+@cindex FILTER
+
+An effective way to constrain query execution time is to include one or more
+@code{FILTER} expressions in the query.
+
+@subsubsection The @code{sameTerm} Function
+@cindex sameTerm
+
+It is common for @code{FILTER} expressions to contain an equality or
+inequality comparison:
+
+@example
+@group
+SELECT ?a ?b WHERE @{ ... FILTER(?a = ?b) @}
+SELECT ?a ?b WHERE @{ ... FILTER(?a != ?b) @}
+@end group
+@end example
+
+Queries like the preceding can often be optimized by substituting the
+standard @code{sameTerm} function
+@footnote{@url{http://www.w3.org/TR/rdf-sparql-query/#func-sameTerm}}
+in place of the equality or inequality operator
+@footnote{@url{http://www.w3.org/TR/rdf-sparql-query/#func-RDFterm-equal}},
+as follows:
+
+@example
+@group
+SELECT ?a ?b WHERE @{ ... FILTER(sameTerm(?a, ?b)) @}
+SELECT ?a ?b WHERE @{ ... FILTER(!sameTerm(?a, ?b)) @}
+@end group
+@end example
+
+@code{sameTerm} is always faster than equality comparison, as it has simpler
+semantics that enable query processing to perform less work. In the case of
+complex queries, a @code{sameTerm} comparison can sometimes enable the query
+to execute significantly faster than a corresponding query using equality
+comparison.
+@footnote{For example, query Q5a from the SP@math{^2}Bench benchmark suite
+executes some 500% faster after substituting @code{sameTerm(?name, ?name2)}
+in place of the @code{?name = ?name2} equality comparison in its
+@code{FILTER} expression.}
+
+However, since its semantics @emph{are} subtly different, @code{sameTerm}
+isn't appropriate for every use case; in particular for numeric comparisons
+it is best to stick with the equality and inequality operators, as
+@code{sameTerm} would give surprising results when comparing two otherwise
+equal literals that represent the same numeric value but differ in their
+exact datatypes. For more details on the particular semantics of
+@code{sameTerm} and equality comparison, refer to the official SPARQL
+specification.
