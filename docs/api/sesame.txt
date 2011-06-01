@@ -4,7 +4,7 @@ Sesame API
 Dydra supports Version 2 of the [Sesame HTTP
 API](http://www.openrdf.org/doc/sesame2/system/ch08.html).
 There are some noteable changes and additions in the Dydra
-Sesame API implmentation that have been documented below.
+Sesame API implementation that have been documented below.
 
 ## Authentication
 
@@ -27,21 +27,21 @@ The following RDF document formats are accepted:
 The following variable binding formats are accepted:
 
 * [SPARQL Query Results XML Format](http://www.w3.org/TR/rdf-sparql-XMLres/)
-  * Mime type: application/sparql-results+xml
+  * MIME type: application/sparql-results+xml
 * [SPARQL Query Results JSON Format](http://www.w3.org/TR/rdf-sparql-json-res/)
-  * Mime type: application/sparql-results+json
+  * MIME type: application/sparql-results+json
 
 _**Please note:** the binary RDF results table format is currently not supported._
 
 The following boolean result formats are accepted:
 
 * Plain text boolean result formats
-  * Mime type: text/boolean
+  * MIME type: text/boolean
 
 ## Sesame API URL Overview
 
 The root API URL (`http://api.dydra.com`) serves as the base Sesame API
-url.  This is referred to as the `<SESAME_URL>` in the original OpenRDF Sesame
+URL.  This is referred to as the `<SESAME_URL>` in the original OpenRDF Sesame
 API documentation as well as this documentation page.
 
 Your repository ID, referred to here as `<REPO_ID>`, is a combination of your
@@ -85,9 +85,9 @@ Additionally, Dydra implements several additional API methods as documented belo
   * `PUT /repositories/<REPO_ID>`
 * Delete a repository
   * `DELETE /repositories/<REPO_ID>`
-* Get repository Meta Data
+* Get repository metadata
   * `GET /repositories/<REPO_ID>/meta`
-* Update repository Meta Data
+* Update repository metadata
   * `PUT /repositories/<REPO_ID>/meta`
 * Repository import status
   * `GET /repositories/<REPO_ID>/status`
@@ -107,12 +107,12 @@ Additionally, Dydra implements several additional API methods as documented belo
 
     curl http://api.dydra.com/protocol
 
-**Sample Request**
+**Example Request**
 
     GET /protocol HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: text/plain; charset=utf-8
@@ -136,13 +136,13 @@ specified. (See repository permissions document)
     curl -H 'Accept: application/sparql-results+xml' \
          http://api.dydra.com/repositories
 
-**Sample Request**
+**Example Request**
 
     GET /repositories HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: chunked
@@ -183,13 +183,13 @@ specified. (See repository permissions document)
     curl -H 'Accept: application/sparql-results+xml' \
          http://api.dydra.com/repositories/jhacker
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: chunked
@@ -216,7 +216,7 @@ this method._
          -d 'query=select * where {?s ?p ?o}' \
          http://api.dydra.com/repositories/jhacker/foaf
 
-**Sample Request**
+**Example Request**
 
     POST /repositories/jhacker/foaf HTTP/1.1
     Host: dydra.com
@@ -224,7 +224,7 @@ this method._
 
     query=select%20*%20where%20%7B%3Fs%20%3Fp%20%3Fo%7D
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: chunked
@@ -267,13 +267,13 @@ documentation is not supported on Dydra.
     curl -H 'Accept: text/plain' \
          http://api.dydra.com/repositories/jhacker/foaf/statements
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/statements HTTP/1.1
     Host: dydra.com
     Accept: text/plain
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: chunked
@@ -287,7 +287,7 @@ documentation is not supported on Dydra.
          -d '<http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .' \
          http://api.dydra.com/repositories/jhacker/foaf/statements
 
-**Sample Request**
+**Example Request**
 
     POST /repositories/jhacker/foaf/statements HTTP/1.1
     Host: dydra.com
@@ -295,7 +295,7 @@ documentation is not supported on Dydra.
 
     <http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
@@ -304,7 +304,7 @@ documentation is not supported on Dydra.
     curl -F "file=@data.nt" \
          http://api.dydra.com/repositories/jhacker/foaf/statements
 
-**Sample Request**
+**Example Request**
 
     POST /repositories/jhacker/foaf/statements HTTP/1.1
     Host: dydra.com
@@ -317,7 +317,7 @@ documentation is not supported on Dydra.
     ... contents of data.nt ...
     --AaB03x--
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
@@ -326,7 +326,7 @@ documentation is not supported on Dydra.
     curl -d "url=http://datagraph.org/jhacker/foaf.nt" \
          http://api.dydra.com/repositories/jhacker/foaf/statements
 
-**Sample Request**
+**Example Request**
 
     POST /repositories/jhacker/foaf/statements HTTP/1.1
     Host: dydra.com
@@ -334,7 +334,7 @@ documentation is not supported on Dydra.
 
     url=http%3A%2F%2Fdatagraph.org%2Fjhacker%2Ffoaf.nt
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
@@ -350,13 +350,13 @@ documentation is not supported on Dydra.
     curl -H 'Accept: application/sparql-results+xml' \
          http://api.dydra.com/repositories/jhacker/foaf/contexts
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/contexts HTTP/1.1
     Host: dydra.com
     Content-Type: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: cunked
@@ -379,7 +379,7 @@ documentation is not supported on Dydra.
 ## Namespace declaration lists (8.7)
 
 _**Please note:** In addition to repository level namespace definitions, Dydra
-also supports account level namespace definitions which apply across all repositories
+also supports account-level namespace definitions which apply across all repositories
 belonging to that account.  The namespace API methods mentioned here and in section 8.8
 refer only to those namespaces declared on the repository.  See the
 [namespace prefixes](/namespace-prefixes) documentation for more details._
@@ -396,13 +396,13 @@ refer only to those namespaces declared on the repository.  See the
     curl -H 'Accept: application/sparql-results+xml' \
          http://api.dydra.com/repositories/jhacker/foaf/namespaces
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/namespaces HTTP/1.1
     Host: dydra.com
     Content-Type: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: cunked
@@ -431,12 +431,12 @@ refer only to those namespaces declared on the repository.  See the
     curl -X DELETE -H 'Accept: application/sparql-results+xml' \
          http://api.dydra.com/repositories/jhacker/foaf/namespaces
 
-**Sample Request**
+**Example Request**
 
     DELETE /repositories/jhacker/foaf/namespaces HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
@@ -455,12 +455,12 @@ refer only to those namespaces declared on the repository.  See the
 
     curl http://api.dydra.com/repositories/jhacker/foaf/namespaces/rdf
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/namespaces/rdf HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: text/plain; charset=utf-8
@@ -472,14 +472,14 @@ refer only to those namespaces declared on the repository.  See the
     curl -X PUT -d 'http://example.org#' \
          http://api.dydra.com/repositories/jhacker/foaf/namespaces/example
 
-**Sample Request**
+**Example Request**
 
     PUT /repositories/jhacker/foaf/namespaces/example HTTP/1.1
     Host: dydra.com
 
     http://example.org#
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
@@ -487,12 +487,12 @@ refer only to those namespaces declared on the repository.  See the
 
     curl -X DELETE http://api.dydra.com/repositories/jhacker/foaf/namespaces/example
 
-**Sample Request**
+**Example Request**
 
     DELETE /repositories/jhacker/foaf/namespaces/example HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
@@ -509,12 +509,12 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
     curl http://api.dydra.com/repositories/jhacker/foaf/size
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/size HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: text/plain
@@ -527,7 +527,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
 * `summary` (optional): A summary of the data contained within the repository.
 * `homepage` (optional): A URL to the repository's home page.
-* `description` (optional): A long form description the repository. This description can contain markdown formatting.
+* `description` (optional): A long form description the repository. This description can contain Markdown formatting.
 
 **Request path:**
 
@@ -540,14 +540,14 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
          -d "summary=A test summary." \
          http://api.dydra.com/repositories/jhacker/foaf
 
-**Sample Request**
+**Example Request**
 
     PUT /repositories/jhacker/foaf HTTP/1.1
     Host: dydra.com
 
     summary=A%20test%20summary.
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
@@ -563,34 +563,34 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
     curl -X DELETE -H 'Accept: text/plain' \
          http://api.dydra.com/repositories/jhacker/xyz_repository
 
-**Sample Request**
+**Example Request**
 
     DELETE /repositories/jhacker/foaf HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
-## Repository Meta Data
+## Repository Metadata
 
 **Request path:**
 
 * `GET /repositories/<REPO_ID>/meta`
-  * Obtain repository meta data
+  * Obtain repository metadata
 
-**Curl Example: Getting repository meta data**
+**Curl Example: Getting repository metadata**
 
     curl -H 'Accept: application/sparql-results+xml' \
          http://api.dydra.com/repositories/jhacker/xyz_repository/meta
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/meta HTTP/1.1
     Accept: application/sparql-results+xml
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
 
@@ -644,7 +644,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
       </results>
     </sparql>
 
-## Updating Repository Meta Data
+## Updating Repository Metadata
 
 **Parameters:**
 
@@ -655,21 +655,21 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 **Request path:**
 
 * `PUT /repositories/<REPO_ID>/meta`
-  * Updating repository meta data
+  * Updating repository metadata
 
-**Curl Example: Updating repository meta data**
+**Curl Example: Updating repository metadata**
 
     curl -X PUT -d "summary=A test summary." \
          http://api.dydra.com/repositories/jhacker/xyz_repository/meta
 
-**Sample Request**
+**Example Request**
 
     PUT /repositories/jhacker/foaf/meta HTTP/1.1
     Host: dydra.com
 
     summary=A%20test%20summary.
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
@@ -684,13 +684,13 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
     curl http://api.dydra.com/repositories/jhacker/foaf/status
 
-**Sample Request**
+**Example Request**
 
     PUT /repositories/jhacker/foaf/status HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: application/sparql-results+xml
@@ -741,13 +741,13 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
     curl -H 'Accept: application/sparql-results+xml' \
         http://api.dydra.com/ops
 
-**Sample Request**
+**Example Request**
 
     GET /ops HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: application/sparql-results+xml
@@ -798,13 +798,13 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
     curl -H 'Accept: application/sparql-results+xml' \
         http://api.dydra.com/repositories/ops/efa56560-5e18-012e-47b0-002332b96472
 
-**Sample Request**
+**Example Request**
 
     GET /ops/efa56560-5e18-012e-47b0-002332b96472 HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: application/sparql-results+xml
