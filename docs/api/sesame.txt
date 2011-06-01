@@ -40,7 +40,7 @@ The following boolean result formats are accepted:
 
 ## Sesame API URL Overview
 
-The root dydra.com URL (`http://dydra.com`) serves as the base Sesame API
+The root API URL (`http://api.dydra.com`) serves as the base Sesame API
 url.  This is referred to as the `<SESAME_URL>` in the original OpenRDF Sesame
 API documentation as well as this documentation page.
 
@@ -105,7 +105,7 @@ Additionally, Dydra implements several additional API methods as documented belo
 
 **Curl Example: Obtaining the current protocol version**
 
-    curl http://dydra.com/protocol
+    curl http://api.dydra.com/protocol
 
 **Sample Request**
 
@@ -134,7 +134,7 @@ specified. (See repository permissions document)
 **Curl Example: Showing all repositories**
 
     curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories
+         http://api.dydra.com/repositories
 
 **Sample Request**
 
@@ -160,7 +160,7 @@ specified. (See repository permissions document)
       <results ordered='false' distinct='false'>
         <result>
           <binding name='uri'>
-            <uri>http://dydra.com/jhacker/foaf</uri>
+            <uri>http://api.dydra.com/jhacker/foaf</uri>
           </binding>
           <binding name='id'>
             <literal>jhacker/foaf</literal>
@@ -181,7 +181,7 @@ specified. (See repository permissions document)
 **Curl Example: Showing repositories for one account**
 
     curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker
+         http://api.dydra.com/repositories/jhacker
 
 **Sample Request**
 
@@ -214,7 +214,7 @@ this method._
 
     curl -H 'Accept: application/sparql-results+xml' \
          -d 'query=select * where {?s ?p ?o}' \
-         http://dydra.com/repositories/jhacker/foaf
+         http://api.dydra.com/repositories/jhacker/foaf
 
 **Sample Request**
 
@@ -265,7 +265,7 @@ documentation is not supported on Dydra.
 **Curl Example: Fetching all statements from a repository as N-Triples**
 
     curl -H 'Accept: text/plain' \
-         http://dydra.com/repositories/jhacker/foaf/statements
+         http://api.dydra.com/repositories/jhacker/foaf/statements
 
 **Sample Request**
 
@@ -285,7 +285,7 @@ documentation is not supported on Dydra.
 
     curl -H 'Content-Type: text/plain' \
          -d '<http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .' \
-         http://dydra.com/repositories/jhacker/foaf/statements
+         http://api.dydra.com/repositories/jhacker/foaf/statements
 
 **Sample Request**
 
@@ -302,7 +302,7 @@ documentation is not supported on Dydra.
 **Curl Example: Adding N-Triples statements to a repository via file upload**
 
     curl -F "file=@data.nt" \
-         http://dydra.com/repositories/jhacker/foaf/statements
+         http://api.dydra.com/repositories/jhacker/foaf/statements
 
 **Sample Request**
 
@@ -324,7 +324,7 @@ documentation is not supported on Dydra.
 **Curl Example: Adding N-Triples statements to a repository via URL**
 
     curl -d "url=http://datagraph.org/jhacker/foaf.nt" \
-         http://dydra.com/repositories/jhacker/foaf/statements
+         http://api.dydra.com/repositories/jhacker/foaf/statements
 
 **Sample Request**
 
@@ -348,7 +348,7 @@ documentation is not supported on Dydra.
 **Curl Example: Obtaining all contexts in a repository**
 
     curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker/foaf/contexts
+         http://api.dydra.com/repositories/jhacker/foaf/contexts
 
 **Sample Request**
 
@@ -394,7 +394,7 @@ refer only to those namespaces declared on the repository.  See the
 **Curl Example, obtaining all namespaces defined for a given repository**
 
     curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker/foaf/namespaces
+         http://api.dydra.com/repositories/jhacker/foaf/namespaces
 
 **Sample Request**
 
@@ -429,7 +429,7 @@ refer only to those namespaces declared on the repository.  See the
 **Curl Example, clearing all namespaces in a repository**
 
     curl -X DELETE -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker/foaf/namespaces
+         http://api.dydra.com/repositories/jhacker/foaf/namespaces
 
 **Sample Request**
 
@@ -453,7 +453,7 @@ refer only to those namespaces declared on the repository.  See the
 
 **Curl Example: Obtaining the identifier for a specific namespace**
 
-    curl http://dydra.com/repositories/jhacker/foaf/namespaces/rdf
+    curl http://api.dydra.com/repositories/jhacker/foaf/namespaces/rdf
 
 **Sample Request**
 
@@ -470,7 +470,7 @@ refer only to those namespaces declared on the repository.  See the
 **Curl Example: Updating or adding a namespace**
 
     curl -X PUT -d 'http://example.org#' \
-         http://dydra.com/repositories/jhacker/foaf/namespaces/example
+         http://api.dydra.com/repositories/jhacker/foaf/namespaces/example
 
 **Sample Request**
 
@@ -485,7 +485,7 @@ refer only to those namespaces declared on the repository.  See the
 
 **Curl Example: Removing a namespace from a repository**
 
-    curl -X DELETE http://dydra.com/repositories/jhacker/foaf/namespaces/example
+    curl -X DELETE http://api.dydra.com/repositories/jhacker/foaf/namespaces/example
 
 **Sample Request**
 
@@ -507,7 +507,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
 **Curl Example, Obtaining the number of triples in a repository**
 
-    curl http://dydra.com/repositories/jhacker/foaf/size
+    curl http://api.dydra.com/repositories/jhacker/foaf/size
 
 **Sample Request**
 
@@ -538,7 +538,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
     curl -X PUT -H 'Accept: application/sparql-results+json' \
          -d "summary=A test summary." \
-         http://dydra.com/repositories/jhacker/foaf
+         http://api.dydra.com/repositories/jhacker/foaf
 
 **Sample Request**
 
@@ -561,7 +561,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 **Curl Example: Deleting a repository**
 
     curl -X DELETE -H 'Accept: text/plain' \
-         http://dydra.com/repositories/jhacker/xyz_repository
+         http://api.dydra.com/repositories/jhacker/xyz_repository
 
 **Sample Request**
 
@@ -582,7 +582,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 **Curl Example: Getting repository meta data**
 
     curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker/xyz_repository/meta
+         http://api.dydra.com/repositories/jhacker/xyz_repository/meta
 
 **Sample Request**
 
@@ -611,7 +611,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
       <results ordered="false" distinct="false">
         <result>
           <binding name="uri">
-            <uri>http://dydra.com/jhacker/foaf</uri>
+            <uri>http://api.dydra.com/jhacker/foaf</uri>
           </binding>
           <binding name="id">
             <literal>jhacker/foaf</literal>
@@ -632,7 +632,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
             <literal></literal>
           </binding>
           <binding name="homepage">
-            <uri>http://dydra.com/jhacker/foaf</uri>
+            <uri>http://api.dydra.com/jhacker/foaf</uri>
           </binding>
           <binding name="triple_count">
             <literal>14</literal>
@@ -660,7 +660,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 **Curl Example: Updating repository meta data**
 
     curl -X PUT -d "summary=A test summary." \
-         http://dydra.com/repositories/jhacker/xyz_repository/meta
+         http://api.dydra.com/repositories/jhacker/xyz_repository/meta
 
 **Sample Request**
 
@@ -682,7 +682,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 
 **Curl Example, Obtaining the import status of a repository**
 
-    curl http://dydra.com/repositories/jhacker/foaf/status
+    curl http://api.dydra.com/repositories/jhacker/foaf/status
 
 **Sample Request**
 
@@ -739,7 +739,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 **Curl Example, Obtaining a list of active operations**
 
     curl -H 'Accept: application/sparql-results+xml' \
-        http://dydra.com/ops
+        http://api.dydra.com/ops
 
 **Sample Request**
 
@@ -796,7 +796,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 **Curl Example, Obtaining the status of a single operation**
 
     curl -H 'Accept: application/sparql-results+xml' \
-        http://dydra.com/repositories/ops/efa56560-5e18-012e-47b0-002332b96472
+        http://api.dydra.com/repositories/ops/efa56560-5e18-012e-47b0-002332b96472
 
 **Sample Request**
 
