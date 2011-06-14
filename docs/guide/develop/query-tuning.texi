@@ -160,9 +160,10 @@ complex queries, a @code{sameTerm} comparison can sometimes enable the query
 to execute significantly faster than a corresponding query using equality
 comparison.
 @footnote{For example, query Q5a from the SP@math{^2}Bench benchmark suite
-executes some 500% faster after substituting @code{sameTerm(?name, ?name2)}
+executes up to 20x faster after substituting @code{sameTerm(?name, ?name2)}
 in place of the @code{?name = ?name2} equality comparison in its
-@code{FILTER} expression.}
+@code{FILTER} condition:
+@url{http://blog.dydra.com/2011/05/27/sp2b-benchmarks}}
 
 However, since its semantics @emph{are} subtly different, @code{sameTerm}
 isn't appropriate for every use case; in particular for numeric comparisons

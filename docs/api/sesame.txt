@@ -1,59 +1,62 @@
 Sesame API
 ==========
 
-Dydra supports Version 2 of the [Sesame HTTP
-API](http://www.openrdf.org/doc/sesame2/system/ch08.html).
-There are some noteable changes and additions in the Dydra
-Sesame API implmentation that have been documented below.
+Dydra supports the [Sesame 2.0 HTTP API][]. There are some notable additions
+in our Sesame API implementation that are documented below.
 
-## Authentication
+Authentication
+--------------
 
-Please see the [API Authentication](/api/authentication) documentation
-for a reference on authenticating to Dydra's Sesame API.
+Please see the [API Authentication](/api/authentication) documentation for a
+reference on authenticating to Dydra's Sesame API.
 
-## Content Types
+Content Types
+-------------
 
-The following RDF document formats are accepted:
+The following RDF graph serializations are supported by the Sesame API
+implementation:
 
 * RDF/XML
-  * application/rdf+xml
+  * MIME type: `application/rdf+xml`
 * N-Triples
-  * text/plain
+  * MIME type: `text/plain`
 * Turtle
-  * application/x-turtle
-* N3
-  * text/rdf+n3
+  * MIME type: `application/x-turtle`
+* Notation3
+  * MIME type: `text/rdf+n3`
 
-The following variable binding formats are accepted:
+The following SPARQL tuple resultset formats are accepted:
 
 * [SPARQL Query Results XML Format](http://www.w3.org/TR/rdf-sparql-XMLres/)
-  * Mime type: application/sparql-results+xml
+  * MIME type: `application/sparql-results+xml`
 * [SPARQL Query Results JSON Format](http://www.w3.org/TR/rdf-sparql-json-res/)
-  * Mime type: application/sparql-results+json
+  * MIME type: `application/sparql-results+json`
 
-_**Please note:** the binary RDF results table format is currently not supported._
+_**Please note:** Sesame's binary RDF results table format is currently not
+supported._
 
 The following boolean result formats are accepted:
 
-* Plain text boolean result formats
-  * Mime type: text/boolean
+* Plain-text boolean result formats
+  * MIME type: `text/boolean`
 
-## Sesame API URL Overview
+Sesame API URL Overview
+-----------------------
 
-The root dydra.com URL (`http://dydra.com`) serves as the base Sesame API
-url.  This is referred to as the `<SESAME_URL>` in the original OpenRDF Sesame
-API documentation as well as this documentation page.
+The root API URL (`http://api.dydra.com/`) serves as the base Sesame API
+endpoint URL. This is referred to as the `<SESAME_URL>` in the original Sesame API
+documentation as well as this documentation page.
 
 Your repository ID, referred to here as `<REPO_ID>`, is a combination of your
 account name and the repository name separated by a forward slash ("`/`").  For example,
-the repository ID for jhacker's foaf repository is `jhacker/foaf`.
+the repository ID for jhacker's FOAF repository is `jhacker/foaf`.
 
 _**Please note:** If your repository name contains special characters, capitalized letters,
 spaces, or punctuation, a slug will be automatically generated for your repository that
 sanitizes the name so it can be used in a URL.  This full repository ID can be found using the
 repository list method (8.3) described below._
 
-Dydra currently supports the following Sesame API methods.
+Dydra currently supports the following Sesame API methods:
 
 * 8.2 Protocol summary
   * `GET /protocol`
@@ -72,22 +75,22 @@ Dydra currently supports the following Sesame API methods.
 * 8.7 Namespace declaration lists
   * `GET /repositories/<REPO_ID>/namespaces`
   * `DELETE /repositories/<REPO_ID>/namespaces`
-* 8.8 Namespace delcarations
+* 8.8 Namespace declarations
   * `GET /repositories/<REPO_ID>/namespaces/<PREFIX>`
   * `PUT /repositories/<REPO_ID>/namespaces/<PREFIX>`
   * `DELETE /repositories/<REPO_ID>/namespaces/<PREFIX>`
 * 8.9 Repository Size
   * `GET /repositories/<REPO_ID>/size`
 
-Additionally, Dydra implements several additional API methods as documented below.
+Dydra also implements several additional API methods as documented below:
 
 * Create a repository
   * `PUT /repositories/<REPO_ID>`
 * Delete a repository
   * `DELETE /repositories/<REPO_ID>`
-* Get repository Meta Data
+* Get repository metadata
   * `GET /repositories/<REPO_ID>/meta`
-* Update repository Meta Data
+* Update repository metadata
   * `PUT /repositories/<REPO_ID>/meta`
 * Repository import status
   * `GET /repositories/<REPO_ID>/status`
@@ -96,23 +99,24 @@ Additionally, Dydra implements several additional API methods as documented belo
 * Status of a single operation
   * `GET /ops/<JOB_ID>`
 
-## Protocol summary (8.2)
+Protocol Summary (8.2)
+----------------------
 
-**Request path:**
+**Request Path:**
 
 * `GET /protocol`
   * Returns the current protocol version implemented by Dydra.
 
 **Curl Example: Obtaining the current protocol version**
 
-    curl http://dydra.com/protocol
+    $ curl http://api.dydra.com/protocol
 
-**Sample Request**
+**Example Request**
 
     GET /protocol HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: text/plain; charset=utf-8
@@ -120,9 +124,10 @@ Additionally, Dydra implements several additional API methods as documented belo
 
     4
 
-## Repository List (8.3)
+Repository List (8.3)
+---------------------
 
-**Request paths:**
+**Request Paths:**
 
 * `GET /repositories`
 * `GET /repositories/<account>`
@@ -133,16 +138,16 @@ specified. (See repository permissions document)
 
 **Curl Example: Showing all repositories**
 
-    curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories
+    $ curl -H 'Accept: application/sparql-results+xml' \
+           http://api.dydra.com/repositories
 
-**Sample Request**
+**Example Request**
 
     GET /repositories HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: chunked
@@ -160,7 +165,7 @@ specified. (See repository permissions document)
       <results ordered='false' distinct='false'>
         <result>
           <binding name='uri'>
-            <uri>http://dydra.com/jhacker/foaf</uri>
+            <uri>http://api.dydra.com/jhacker/foaf</uri>
           </binding>
           <binding name='id'>
             <literal>jhacker/foaf</literal>
@@ -180,16 +185,16 @@ specified. (See repository permissions document)
 
 **Curl Example: Showing repositories for one account**
 
-    curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker
+    $ curl -H 'Accept: application/sparql-results+xml' \
+           http://api.dydra.com/repositories/jhacker
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: chunked
@@ -197,9 +202,10 @@ specified. (See repository permissions document)
 
     [SPARQL XML BINDINGS]
 
-## Repository Queries (8.4)
+Repository Queries (8.4)
+------------------------
 
-**Request paths:**
+**Request Paths:**
 
 * `GET /repositories/<REPO_ID>`
 * `POST /repositories/<REPO_ID>`
@@ -212,11 +218,11 @@ this method._
 
 **Curl Example: Querying a repository**
 
-    curl -H 'Accept: application/sparql-results+xml' \
-         -d 'query=select * where {?s ?p ?o}' \
-         http://dydra.com/repositories/jhacker/foaf
+    $ curl -H 'Accept: application/sparql-results+xml' \
+           -d 'query=select * where {?s ?p ?o}' \
+           http://api.dydra.com/repositories/jhacker/foaf
 
-**Sample Request**
+**Example Request**
 
     POST /repositories/jhacker/foaf HTTP/1.1
     Host: dydra.com
@@ -224,7 +230,7 @@ this method._
 
     query=select%20*%20where%20%7B%3Fs%20%3Fp%20%3Fo%7D
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: chunked
@@ -232,7 +238,8 @@ this method._
 
     [SPARQL XML BINDINGS]
 
-## Repository Statements (8.5)
+Repository Statements (8.5)
+---------------------------
 
 **Parameters:**
 
@@ -246,12 +253,11 @@ this method._
 
 _**Please note:**_
 
-* The `infer` parameter specified in the OpenRDF Sesame API
-documentation is not supported on Dydra.
+* The `infer` parameter specified in the Sesame API documentation is not presently supported.
 * Transaction documents are currently not supported.
 * As an extension to the standard Sesame API, Dydra also supports importing data into a repository using the `file` or `url` parameters mentioned above. Only one import method can be used at a time.
 
-**Request paths:**
+**Request Paths:**
 
 * `GET /repositories/<REPO_ID>/statements`
   * Fetches statements from the repository.
@@ -264,16 +270,16 @@ documentation is not supported on Dydra.
 
 **Curl Example: Fetching all statements from a repository as N-Triples**
 
-    curl -H 'Accept: text/plain' \
-         http://dydra.com/repositories/jhacker/foaf/statements
+    $ curl -H 'Accept: text/plain' \
+           http://api.dydra.com/repositories/jhacker/foaf/statements
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/statements HTTP/1.1
     Host: dydra.com
     Accept: text/plain
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: chunked
@@ -283,11 +289,11 @@ documentation is not supported on Dydra.
 
 **Curl Example: Adding N-Triples statements to a repository**
 
-    curl -H 'Content-Type: text/plain' \
-         -d '<http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .' \
-         http://dydra.com/repositories/jhacker/foaf/statements
+    $ curl -H 'Content-Type: text/plain' \
+           -d '<http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .' \
+           http://api.dydra.com/repositories/jhacker/foaf/statements
 
-**Sample Request**
+**Example Request**
 
     POST /repositories/jhacker/foaf/statements HTTP/1.1
     Host: dydra.com
@@ -295,16 +301,16 @@ documentation is not supported on Dydra.
 
     <http://example.org#jhacker> <http://xmlns.com/foaf/0.1/nick> "jhuckabee" .
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
 **Curl Example: Adding N-Triples statements to a repository via file upload**
 
-    curl -F "file=@data.nt" \
-         http://dydra.com/repositories/jhacker/foaf/statements
+    $ curl -F "file=@data.nt" \
+           http://api.dydra.com/repositories/jhacker/foaf/statements
 
-**Sample Request**
+**Example Request**
 
     POST /repositories/jhacker/foaf/statements HTTP/1.1
     Host: dydra.com
@@ -317,16 +323,16 @@ documentation is not supported on Dydra.
     ... contents of data.nt ...
     --AaB03x--
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
 **Curl Example: Adding N-Triples statements to a repository via URL**
 
-    curl -d "url=http://datagraph.org/jhacker/foaf.nt" \
-         http://dydra.com/repositories/jhacker/foaf/statements
+    $ curl -d "url=http://datagraph.org/jhacker/foaf.nt" \
+           http://api.dydra.com/repositories/jhacker/foaf/statements
 
-**Sample Request**
+**Example Request**
 
     POST /repositories/jhacker/foaf/statements HTTP/1.1
     Host: dydra.com
@@ -334,29 +340,30 @@ documentation is not supported on Dydra.
 
     url=http%3A%2F%2Fdatagraph.org%2Fjhacker%2Ffoaf.nt
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
-## Context lists (8.6)
+Context Lists (8.6)
+-------------------
 
-**Request path:**
+**Request Path:**
 
 * `GET /repositories/<REPO_ID>/contexts`
   * List all contexts contained within the repository.
 
 **Curl Example: Obtaining all contexts in a repository**
 
-    curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker/foaf/contexts
+    $ curl -H 'Accept: application/sparql-results+xml' \
+           http://api.dydra.com/repositories/jhacker/foaf/contexts
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/contexts HTTP/1.1
     Host: dydra.com
     Content-Type: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: cunked
@@ -376,15 +383,16 @@ documentation is not supported on Dydra.
       </results>
     </sparql>
 
-## Namespace declaration lists (8.7)
+Namespace Declaration Lists (8.7)
+---------------------------------
 
 _**Please note:** In addition to repository level namespace definitions, Dydra
-also supports account level namespace definitions which apply across all repositories
+also supports account-level namespace definitions which apply across all repositories
 belonging to that account.  The namespace API methods mentioned here and in section 8.8
 refer only to those namespaces declared on the repository.  See the
 [namespace prefixes](/namespace-prefixes) documentation for more details._
 
-**Request paths:**
+**Request Paths:**
 
 * `GET /repositories/<REPO_ID>/namespaces`
   * Get all namespaces defined for the given repository.
@@ -393,16 +401,16 @@ refer only to those namespaces declared on the repository.  See the
 
 **Curl Example, obtaining all namespaces defined for a given repository**
 
-    curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker/foaf/namespaces
+    $ curl -H 'Accept: application/sparql-results+xml' \
+           http://api.dydra.com/repositories/jhacker/foaf/namespaces
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/namespaces HTTP/1.1
     Host: dydra.com
     Content-Type: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Transfer-Encoding: cunked
@@ -428,21 +436,22 @@ refer only to those namespaces declared on the repository.  See the
 
 **Curl Example, clearing all namespaces in a repository**
 
-    curl -X DELETE -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker/foaf/namespaces
+    $ curl -X DELETE -H 'Accept: application/sparql-results+xml' \
+           http://api.dydra.com/repositories/jhacker/foaf/namespaces
 
-**Sample Request**
+**Example Request**
 
     DELETE /repositories/jhacker/foaf/namespaces HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
-## Namespace delcarations (8.8)
+Namespace Declarations (8.8)
+----------------------------
 
-**Request paths:**
+**Request Paths:**
 
 * `GET /repositories/<REPO_ID>/namespaces/<PREFIX>`
   * Returns the identifier for the given prefix.
@@ -453,144 +462,148 @@ refer only to those namespaces declared on the repository.  See the
 
 **Curl Example: Obtaining the identifier for a specific namespace**
 
-    curl http://dydra.com/repositories/jhacker/foaf/namespaces/rdf
+    $ curl http://api.dydra.com/repositories/jhacker/foaf/namespaces/rdf
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/namespaces/rdf HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: text/plain; charset=utf-8
 
-    http://www.w3.org/1999/02/22-rdf-syntax-ns# 
+    http://www.w3.org/1999/02/22-rdf-syntax-ns#
 
 **Curl Example: Updating or adding a namespace**
 
-    curl -X PUT -d 'http://example.org#' \
-         http://dydra.com/repositories/jhacker/foaf/namespaces/example
+    $ curl -X PUT -d 'http://example.org#' \
+           http://api.dydra.com/repositories/jhacker/foaf/namespaces/example
 
-**Sample Request**
+**Example Request**
 
     PUT /repositories/jhacker/foaf/namespaces/example HTTP/1.1
     Host: dydra.com
 
     http://example.org#
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
 **Curl Example: Removing a namespace from a repository**
 
-    curl -X DELETE http://dydra.com/repositories/jhacker/foaf/namespaces/example
+    $ curl -X DELETE http://api.dydra.com/repositories/jhacker/foaf/namespaces/example
 
-**Sample Request**
+**Example Request**
 
     DELETE /repositories/jhacker/foaf/namespaces/example HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
-## Repository Size (8.9)
+Repository Size (8.9)
+---------------------
 
-**Request path:**
+**Request Path:**
 
 * `GET /repositories/<REPO_ID>/size`
   * Returns the total number of triples in the repository.
 
-_**Please note:** Dydra's implementation of this method currently does not support the `context` parameter specified in the OpenRDF Sesame API spec._
+_**Please note:** Dydra's implementation of this method currently does not support the `context` parameter specified in the Sesame API spec._
 
 **Curl Example, Obtaining the number of triples in a repository**
 
-    curl http://dydra.com/repositories/jhacker/foaf/size
+    $ curl http://api.dydra.com/repositories/jhacker/foaf/size
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/size HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: text/plain
 
     123456
 
-## Creating a Repository
+Creating a Repository
+---------------------
 
 **Parameters:**
 
 * `summary` (optional): A summary of the data contained within the repository.
 * `homepage` (optional): A URL to the repository's home page.
-* `description` (optional): A long form description the repository. This description can contain markdown formatting.
+* `description` (optional): A long form description the repository. This description can contain Markdown formatting.
 
-**Request path:**
+**Request Path:**
 
 * `PUT /repositories/<REPO_ID>`
   * Creates a new repository
 
 **Curl Example: Creating a new repository**
 
-    curl -X PUT -H 'Accept: application/sparql-results+json' \
-         -d "summary=A test summary." \
-         http://dydra.com/repositories/jhacker/foaf
+    $ curl -X PUT -H 'Accept: application/sparql-results+json' \
+           -d "summary=A test summary." \
+           http://api.dydra.com/repositories/jhacker/foaf
 
-**Sample Request**
+**Example Request**
 
     PUT /repositories/jhacker/foaf HTTP/1.1
     Host: dydra.com
 
     summary=A%20test%20summary.
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
-## Deleting a Repository
+Deleting a Repository
+---------------------
 
-**Request path:**
+**Request Path:**
 
 * `DELETE /repositories/<REPO_ID>`
   * Deletes a repository
 
 **Curl Example: Deleting a repository**
 
-    curl -X DELETE -H 'Accept: text/plain' \
-         http://dydra.com/repositories/jhacker/xyz_repository
+    $ curl -X DELETE -H 'Accept: text/plain' \
+           http://api.dydra.com/repositories/jhacker/xyz_repository
 
-**Sample Request**
+**Example Request**
 
     DELETE /repositories/jhacker/foaf HTTP/1.1
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
-## Repository Meta Data
+Repository Metadata
+-------------------
 
-**Request path:**
+**Request Path:**
 
 * `GET /repositories/<REPO_ID>/meta`
-  * Obtain repository meta data
+  * Obtain repository metadata
 
-**Curl Example: Getting repository meta data**
+**Curl Example: Getting repository metadata**
 
-    curl -H 'Accept: application/sparql-results+xml' \
-         http://dydra.com/repositories/jhacker/xyz_repository/meta
+    $ curl -H 'Accept: application/sparql-results+xml' \
+           http://api.dydra.com/repositories/jhacker/xyz_repository/meta
 
-**Sample Request**
+**Example Request**
 
     GET /repositories/jhacker/foaf/meta HTTP/1.1
     Accept: application/sparql-results+xml
     Host: dydra.com
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
 
@@ -611,7 +624,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
       <results ordered="false" distinct="false">
         <result>
           <binding name="uri">
-            <uri>http://dydra.com/jhacker/foaf</uri>
+            <uri>http://api.dydra.com/jhacker/foaf</uri>
           </binding>
           <binding name="id">
             <literal>jhacker/foaf</literal>
@@ -632,7 +645,7 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
             <literal></literal>
           </binding>
           <binding name="homepage">
-            <uri>http://dydra.com/jhacker/foaf</uri>
+            <uri>http://api.dydra.com/jhacker/foaf</uri>
           </binding>
           <binding name="triple_count">
             <literal>14</literal>
@@ -644,7 +657,8 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
       </results>
     </sparql>
 
-## Updating Repository Meta Data
+Updating Repository Metadata
+----------------------------
 
 **Parameters:**
 
@@ -652,45 +666,46 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
 * `homepage` (optional): A URL to the repository's home page.
 * `description` (optional): A long form description the repository. This description can contain markdown formatting.
 
-**Request path:**
+**Request Path:**
 
 * `PUT /repositories/<REPO_ID>/meta`
-  * Updating repository meta data
+  * Updating repository metadata
 
-**Curl Example: Updating repository meta data**
+**Curl Example: Updating repository metadata**
 
-    curl -X PUT -d "summary=A test summary." \
-         http://dydra.com/repositories/jhacker/xyz_repository/meta
+    $ curl -X PUT -d "summary=A test summary." \
+           http://api.dydra.com/repositories/jhacker/xyz_repository/meta
 
-**Sample Request**
+**Example Request**
 
     PUT /repositories/jhacker/foaf/meta HTTP/1.1
     Host: dydra.com
 
     summary=A%20test%20summary.
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 204 NO CONTENT
 
-## Repository Import Status
+Repository Import Status
+------------------------
 
-**Request path:**
+**Request Path:**
 
 * `GET /repositories/<REPO_ID>/status`
   * Returns the import status for the given repository.
 
 **Curl Example, Obtaining the import status of a repository**
 
-    curl http://dydra.com/repositories/jhacker/foaf/status
+    $ curl http://api.dydra.com/repositories/jhacker/foaf/status
 
-**Sample Request**
+**Example Request**
 
     PUT /repositories/jhacker/foaf/status HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: application/sparql-results+xml
@@ -729,25 +744,26 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
       </results>
     </sparql>
 
-## Current list of active operations
+Operations List
+---------------
 
-**Request path:**
+**Request Path:**
 
 * `GET /ops`
   * Returns a list of active operations for the authenticated account.
 
 **Curl Example, Obtaining a list of active operations**
 
-    curl -H 'Accept: application/sparql-results+xml' \
-        http://dydra.com/ops
+    $ curl -H 'Accept: application/sparql-results+xml' \
+           http://api.dydra.com/ops
 
-**Sample Request**
+**Example Request**
 
     GET /ops HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: application/sparql-results+xml
@@ -786,25 +802,26 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
       </results>
     </sparql>
 
-## Return the status of a single operation
+Operation Status
+----------------
 
-**Request path:**
+**Request Path:**
 
 * `GET /ops/<JOB_ID>`
   * Returns status of a single operation.
 
 **Curl Example, Obtaining the status of a single operation**
 
-    curl -H 'Accept: application/sparql-results+xml' \
-        http://dydra.com/repositories/ops/efa56560-5e18-012e-47b0-002332b96472
+    $ curl -H 'Accept: application/sparql-results+xml' \
+           http://api.dydra.com/ops/efa56560-5e18-012e-47b0-002332b96472
 
-**Sample Request**
+**Example Request**
 
     GET /ops/efa56560-5e18-012e-47b0-002332b96472 HTTP/1.1
     Host: dydra.com
     Accept: application/sparql-results+xml
 
-**Sample Response**
+**Example Response**
 
     HTTP/1.1 200 OK
     Content-Type: application/sparql-results+xml
@@ -842,3 +859,5 @@ _**Please note:** Dydra's implementation of this method currently does not suppo
         </result>
       </results>
     </sparql>
+
+[Sesame 2.0 HTTP API]: http://www.openrdf.org/doc/sesame2/system/ch08.html
