@@ -237,8 +237,8 @@ Returns a list of all repositories for that acocunt.
 * `subj` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded resource as subject.
 * `pred` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded URI as predicate.
 * `obj` (optional): Restricts a GET or DELETE operation to statements with the specified N-Triples encoded value as object.
-* `context` (optional): If specified, restricts the operation to one or more specific contexts in the repository. The value of this parameter is either an N-Triples encoded URI or bnode ID, or the special value 'null' which represents all context-less statements. If multiple 'context' parameters are specified, the request will operate on the union of all specified contexts. The operation is executed on all statements that are in the repository if no context is specified.
-* `baseURI` (optional): Specifies the base URI to resolve any relative URIs found in uploaded data against. This parameter only applies to the PUT and POST method.
+* `context` (optional): If specified, restricts the operation to a specific context in the repository. The value of this parameter is either a valid URI or an N-Triples encoded URI.
+* `baseURI` (optional): Specifies the base URI to resolve any relative URIs found in uploaded data against. This parameter only applies to the PUT and POST method. Must be a valid URI.
 * `url` (optional): Specifies the URL to import from. This parameter only applies to the PUT and POST method.
 * `file` (optional): An HTML multipart/form-data encoded file containing the triples to import into the repository. This parameter only applies to the PUT and POST method.
 
