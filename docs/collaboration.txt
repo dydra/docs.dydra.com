@@ -1,0 +1,35 @@
+Repository Collaboration
+========================
+
+Dydra allows you to add multiple collaborators to your repository. Collaborators
+can be given read and/or write access to each of your repositories.
+
+A collaborator with read access will be able to view the contents of the 
+repository and any saved queries that exist for that repository.
+
+Collaborators with write access to a repository will be able to manipulate
+the data in the repository as well as any saved queries contained within
+the repository.
+
+A collaborator with write access cannot delete a repository or modify the
+metadata of the repository. These operations are still restricted
+to the repository owner.
+
+Please note that collaborator permissions take precendence over repository
+level permissions settings. This means that collaborators can view
+repositories that you mark as "private" or otherwise restrict using the
+permissions setting on the permissions tab of the repository edit page.
+
+To manage your repository's collaborators, click on the "Edit" link in the
+"Admin" dropdown located on the main repository page. The edit page will contain a
+"Collaborators" tab that will list all collaborators for that repository. You can add
+a collaborator by entering in an account name or the email address
+of an existing account into the form at the bottom of the list. At a minimum, you
+must specify at least read-level access.
+
+Once a collaborator has been added to a repository, you can update their 
+permissions by clicking on the pertinent "read" or "write" permissions 
+checkboxes located next to that account.
+
+Permission updates are instantaneous. Once you have added, removed, or updated a 
+collaborator they will be able to begin accessing the repository immediately.
