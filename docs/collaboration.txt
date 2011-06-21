@@ -16,9 +16,9 @@ metadata of the repository. These operations are still restricted
 to the repository owner.
 
 Please note that collaborator permissions take precendence over repository
-level permissions settings. This means that collaborators can view
+level privacy settings. This means that collaborators can view
 repositories that you mark as "private" or otherwise restrict using the
-permissions setting on the permissions tab of the repository edit page.
+permissions setting on the privacy tab of the repository edit page.
 
 To manage your repository's collaborators, click on the "Edit" link in the
 "Admin" dropdown located on the main repository page. The edit page will contain a
