@@ -1,29 +1,70 @@
 What is Dydra?
 =========================
 
-Dydra is a cloud-based [RDF](/rdf) store, a database-as-a-service. Just import your
-data and a SPARQL endpoint will be available for your application to use. 
+### Dydra
 
-### Transparent Scaling
+Dydra is a cloud-based graph database. Whether you're using existing social
+network APIs or want to build your own, Dydra treats your customers' social
+graph as exactly that.
+
+<img src="/images/graph.png"
+Caption: Handle any of this lately? Of course you have.
+
+With Dydra, your data is natively stored as a **property graph,** directly
+representing the relationships in the underlying data.
+
+### Expressive
+
+With Dydra, you access and update your data via an industry-standard query
+language specifically designed for graph processing, SPARQL. It's easy to use
+and we provide a handy in-browser query editor to help you learn.
+
+code sample:
+# find all of bob's friends of friends
+SELECT ?friend, ?friend_of_friend WHERE {
+  :bob :has_friend ?friend .
+  :friend :has_friend ?friend_of_friend .
+}
+
+### Fast
+
+Dydra is built from the ground up to be performant for use cases built on
+graphs, like social networking. The performance benefits can be impressive.
+
+performance log.
+
+### Flexible
+
+You can use Dydra for lots of use cases, not just social networking. Lots of
+problems translate well to graphs; we have customers exploring everything from
+movie relationships to transaction logs.
+
+
+### The Cloud
+
+In addition to a powerful new addition to your toolbox, Dydra comes with the
+benefits of a cloud service you've come to love:
+
+#### Transparent Scaling
 
 Dydra is a multi-tenant data store and query engine. You don't need to
 estimate your data size, worry about clusters, nodes, resource use, or make big
 licensing commitments up front. And you'll always be running the latest version
 of the platform.
 
-### Fully Managed
+#### Fully Managed
 
 We manage every piece of the data store, including versioning, disaster
 recovery, performance, and more. You just use it.
 
-### No Lock-in
+#### No Lock-in
 
 Dydra uses open standards recommended by the W3C. You can use Dydra from any
 programming language running on any platform on any device. All you need is an
 internet connection. And you own your data: it's always yours to take with you
 in a number of formats.
 
-### Easy
+#### Easy
 
 It's easy to get started on Dydra.  There's no licensing, setup, or fees to
 start--just click and go.  Go ahead, check out the [quickstart.](/quickstart)
