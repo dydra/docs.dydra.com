@@ -3,12 +3,15 @@ What is Dydra?
 
 ### Dydra
 
+<div style="float: right; width: 300px; padding-left: 28px">
+<img src="/images/graph.png">
+<strong>Handle any of this lately? Of course you have.</strong>
+</div>
+
 Dydra is a cloud-based graph database. Whether you're using existing social
 network APIs or want to build your own, Dydra treats your customers' social
 graph as exactly that.
 
-<img src="/images/graph.png"
-Caption: Handle any of this lately? Of course you have.
 
 With Dydra, your data is natively stored as a **property graph,** directly
 representing the relationships in the underlying data.
@@ -19,19 +22,18 @@ With Dydra, you access and update your data via an industry-standard query
 language specifically designed for graph processing, SPARQL. It's easy to use
 and we provide a handy in-browser query editor to help you learn.
 
-code sample:
+<pre ><code>
 # find all of bob's friends of friends
 SELECT ?friend, ?friend_of_friend WHERE {
   :bob :has_friend ?friend .
   :friend :has_friend ?friend_of_friend .
 }
+</code></pre>
 
 ### Fast
 
 Dydra is built from the ground up to be performant for use cases built on
-graphs, like social networking. The performance benefits can be impressive.
-
-performance log.
+graphs, like social networking. The performance benefits are impressive.
 
 ### Flexible
 
