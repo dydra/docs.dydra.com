@@ -17,6 +17,6 @@ Here's a very [thorough overview of SPARQL.](http://www.cambridgesemantics.com/2
 
 Every Dydra repository has a standard SPARQL endpoint at
 
-    `/your/repository/sparql`.
+    /your/repository/sparql
 
 We have [more information](/api/sparql) about our SPARQL dialect and supported features.
