@@ -1,8 +1,11 @@
 SPARQL
 ======
 
-SPARQL is the standard query language for RDF.  Like SQL for relational
-databases, the [varying
+SPARQL is the standard query language for RDF.
+Dydra supports SPARQL 1.1
+[query](http://www.w3.org/TR/sparql11-query/) and
+[update](http://www.w3.org/TR/sparql11-update/).
+Like SQL for relational databases, the [varying
 implementations](http://esw.w3.org/SparqlImplementations) often differ
 slightly, or have a few extensions, but the basics are the same.
 
