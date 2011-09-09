@@ -66,10 +66,12 @@ We'll share more details in upcoming [blog][] posts, but the website is
 built with [Ruby][] and [Ruby on Rails][Rails], relying heavily on the
 [RDF.rb][] framework. Our back-end infrastructure is based on core
 messaging technologies such as [AMQP][] and [Redis][]. Our proprietary
-distributed SPARQL query engine, called SPOCQ, is built in [Lisp][]. Our
-distributed RDF storage system is built in Ruby and [C][], relying on
-[Raptor][] and [Rasqal][] in particular. Our stack as a whole is hosted on
-[Amazon Web Services][AWS].
+distributed SPARQL query engine, called [SPOCQ][], is built in [Lisp][] and
+compiles SPARQL queries to native [x86][] machine code. Our distributed RDF
+storage system is built in [C][],
+[relying](http://lists.usefulinc.com/pipermail/redland-dev/2011-September/002342.html)
+on [Raptor][] at the interfaces.
+Our stack as a whole is hosted on [Amazon Web Services][AWS].
 
 [about]:  http://dydra.com/about
 [blog]:   http://blog.dydra.com/
@@ -79,9 +81,10 @@ distributed RDF storage system is built in Ruby and [C][], relying on
 [Rails]:  http://rubyonrails.org/
 [RDF.rb]: http://rdf.rubyforge.org/
 [Redis]:  http://redis.io/
-[ZeroMQ]: http://www.zeromq.org/
 [AMQP]:   http://www.rabbitmq.com/
+[SPOCQ]:  http://blog.dydra.com/2011/05/27/sp2b-benchmarks
 [Lisp]:   http://lispers.org/
+[x86]:    http://en.wikipedia.org/wiki/X86-64
 [C]:      http://en.wikipedia.org/wiki/C_(programming_language)
 [Raptor]: http://librdf.org/raptor/
 [Rasqal]: http://librdf.org/rasqal/
