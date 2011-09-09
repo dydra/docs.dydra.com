@@ -52,8 +52,8 @@ What are the quality of service goals during the beta period?
 -------------------------------------------------------------
 
 We aim to provide continuous service, save for a brief weekly scheduled
-maintenance window on Fridays at [23:00 UTC](http://everytimezone.com/) when
-5-15 minutes of downtime can be expected.
+maintenance window on Saturday mornings at [08:00 UTC](http://everytimezone.com/)
+when 5-15 minutes of downtime can be expected.
 
 There may be occasional brief unscheduled downtime now and then to address
 more urgent matters or to deploy additional capacity. Follow
