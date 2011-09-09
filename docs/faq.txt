@@ -43,7 +43,8 @@ During our beta period, we enforce various soft and hard resource limits to
 help with our capacity planning:
 
 * As a baseline, we currently rate limit beta users to 5 queries per second.
-  If you need a higher burst rate, please contact support@dydra.com.
+  If you need a higher burst rate, please contact
+  [support@dydra.com](mailto:support@dydra.com).
 * We ask that you keep repository sizes at or below 1 million statements.
   Again, if you need a higher limit, please contact us.
 
@@ -51,8 +52,8 @@ What are the quality of service goals during the beta period?
 -------------------------------------------------------------
 
 We aim to provide continuous service, save for a brief weekly scheduled
-maintenance window on Fridays at 23:00 UTC when 5-15 minutes of downtime can
-be expected.
+maintenance window on Fridays at [23:00 UTC](http://everytimezone.com/) when
+5-15 minutes of downtime can be expected.
 
 There may be occasional brief unscheduled downtime now and then to address
 more urgent matters or to deploy additional capacity. Follow
